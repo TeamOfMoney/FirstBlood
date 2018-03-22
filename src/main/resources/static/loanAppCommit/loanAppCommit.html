@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="" />
+  <meta name="author" content="ThemeBucket" />
+
+  <title>贷款申请提交</title>
+  
+  <script>
+		var webPath = "..";
+  </script>
+  <script src="../UI/common/loadCommonCss.js"></script>
+  <style>
+  		.cross,.tick{margin-top:1px; margin-right:132px;}
+  </style>
+</head>
+
+<body>
+	<div class="page-main">
+		<div class="row page-heading" >
+			<div class="row page-heading-inner" >
+				<div class="col-xs-6 " id="nav_header" style="margin-left:10px;">
+					<ol class="list-inline" id="navContent">
+						<li><a href="javascript:void(0);" onclick="window.parent.backMain();">主页</a></li> <span>/</span>
+						<li><a id="parentNavName">###</a></li><span>/</span>
+						<li><a id="thisNavName">###</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		
+        <div class="row page-body" >
+        	<div class="col-sm-12">
+        		<div class="panel-heading">
+				   <strong style="line-height:30px;">贷款申请列表</strong> 
+		           <div class="panel-heading-button pull-right">
+				       	<button type="button" class="btn" id="addBtn" title="新增"><i class="glyphicon glyphicon-plus" ></i></button>
+			       		<!-- <button type="button" class="btn" id="removeOfNumbersBtn" title="批量删除"><i class="glyphicon glyphicon-trash" ></i></button> -->
+				       	<button type="button" class="btn" id="updownarea"><i class="glyphicon glyphicon-chevron-down"></i></button>
+			 		</div>
+        		<hr/>
+        		</div>
+        	</div>
+        	
+        	<div class="col-sm-12" id="queryForm">
+        		<form id="queryGridForm">
+			        <div class="row queryFrom-body">
+		          	  	<div class="form-group text-center">
+	              			
+				            <label class="col-sm-3 control-label text-right">贷款申请编号:&nbsp;</label> 
+				              	<input class="col-sm-2 " id="query_loanId" placeholder=" 请输入贷款申请编号" />
+				            <!-- <label class="col-sm-3 control-label text-right">贷款申请名称:&nbsp;</label> 
+				              	<input class="col-sm-2 " id="query_firmName" placeholder=" 请输入贷款申请名称" /> -->
+		              	</div>
+		          	</div>
+	          	</form>
+	          	
+	          	<div class="row queryForm-footer" style="margin-top:20px">
+	          	  	 <button type="button" class="btn" data-dismiss="modal" id="resetQueryForm"><i class="glyphicon glyphicon-repeat"></i>&nbsp;清空</button>
+	                 &nbsp;&nbsp;&nbsp;
+	                 <button type="button" class="btn" id="queryGridBtn"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
+	          	</div>
+	          	<hr/>
+          	</div>
+	        
+	        <div class="col-sm-12">
+				<div class="row table-content">
+					<div class="fixed-table-content">
+						<table  class="table table-bordered" id="table">
+							<thead class="fixed-thead">
+								<tr>
+									<th><div>id</div></th>
+									<th><div>贷款申请编号</div></th>
+									<th><div>步骤名称</div></th>
+									<th><div>步骤标识</div></th>
+									<th><div>步骤结果</div></th>
+									<th><div>操作人员</div></th>
+									<th><div>步骤状态</div></th>
+									<th><div>初始化时间</div></th>
+									<th><div>完成时间</div></th>
+									<th><div>操作</div></th>
+								</tr>
+							</thead>
+							<tbody id="dataList">
+								
+							</tbody>
+					    </table>
+					</div>
+					<div class="row table-foot">
+						<div class="goto">
+							<a href="javascript:;" id="gotopage" >确定</a>
+							<select id ="setRownum">
+								<option value="10" >10</option>
+								<option value="20">20</option>
+								<option value="50">50</option>
+							</select>
+						</div>
+						<div id="Pagination" class="pagination" ></div>
+					</div>
+	    		</div>
+   		 </div>
+  </div>
+  
+  
+  
+    <!-- 增加 -->
+	<div class="modal fade inmodal" id="addOrEditModal" tabindex="-1" role="dialog" aria-hidden="true"  >
+		<div class="modal-dialog" style="width: 900px;">
+			<div class="modal-content animated bounceInRight">
+			     <div class="modal-header nt-model-head">
+			          <h5 id="action"></h5>	                                         
+			     </div>
+			     <div class="modal-body" style="height:350px;overflow-y:auto;">
+		     		<form role="form" id="addOrEditForm">
+     					<div class="row">
+							 <div class="col-sm-12" >
+								<div class="col-sm-6">
+									<div class="form-group" >
+										<label class="col-sm-6 control-label text-right" >贷款人姓名<span style="color:red">*</span>：</label>
+										 <div class="col-sm-6">
+										<input check="required EnOrChinese"  name="borrowerName" id="addBorrowerName" maxlength="32" />	
+										</div>
+									</div>	
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group" >
+										<label class="col-sm-6 control-label text-right" >配偶姓名<span style="color:red">*</span>： </label>
+										 <div class="col-sm-6">
+										<input check="required EnOrChinese"  name="spouseName" id="addSpouseName" maxlength="32" />
+										</div>
+									</div>		
+								</div>
+								
+							 </div>
+							 <div class="col-sm-12" style="padding-top:10px">
+							 	<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-6 control-label text-right" >性别<span style="color:red">*</span>：</label>
+										<!-- <input check="Sex"  name="sex" id="addSex" maxlength="1" /> -->
+										<div class="col-sm-6">
+										 	<select  id="addSex" name="sex" >
+			                                                <option class="opt" value="0">--请选择--</option>
+															<option class="opt" value="男">男</option>
+															<option class="opt" value="女">女</option>
+										 	</select>
+			                           </div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group" >
+										<label class="col-sm-6 control-label text-right" >证件号码<span style="color:red">*</span> ：</label>
+										 <div class="col-sm-6">
+										<input  check="required" name="credentialNo" id="addCredentialNo" maxlength="20" />
+										
+										</div>
+									</div>	
+								</div>
+							 </div>
+							 <div class="col-sm-12" style="padding-top:10px">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label class="col-sm-3 control-label text-right" >业务类型 <span style="color:red">*</span>：</label>
+										 <div class="col-sm-9">
+										<!-- <input check=""  name="businessTypes" id="addBusinessTypes" maxlength="11" /> -->	
+										<div id="addBusinessTypes" class="btn-group" data-toggle="buttons">
+									        <label  class="btn btn-info">
+									            <input  type="radio" name="businessTypes" value="1">商用房
+									        </label>
+									        <label  class="btn btn-info">
+									            <input  type="radio" name="businessTypes" value="2">消费贷款
+									        </label>
+									        <label  class="btn btn-info">
+									            <input  type="radio" name="businessTypes" value="3">经营贷款
+									        </label>
+									        <label  class="btn btn-info">
+									            <input  type="radio" name="businessTypes" value="4">农户小额信用贷款
+									        </label>
+									        <label  class="btn btn-info">
+									            <input  type="radio" name="businessTypes" value="5">二手房按揭
+									        </label>
+									    </div>
+										</div>
+									</div>	
+								</div>
+							 </div>
+							 <div class="col-sm-12" style="padding-top:10px;display:none" id="syfRe" >
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-6 control-label text-right" >备注1：</label>
+										 <div class="col-sm-6">
+											<!--  <input check=""  name="syfRemark1" id="addSyfRemark1" maxlength="13" />-->	
+											<select  id="addSyfRemark1" name="syfRemark1" >
+			                                                <option class="opt" value="0">--请选择--</option>
+															<option class="opt" value="1">商业房按揭-商铺、写字楼</option>
+															<option class="opt" value="2">商业房按揭-车位</option>
+										 	</select>
+										</div>
+									</div>	
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-6 control-label text-right" >备注2：</label>
+										 <div class="col-sm-6">
+											<input check=""  name="syfRemark2" id="addSyfRemark2" placeholder=" 请输入楼盘名称" maxlength="32" />	
+										</div>
+									</div>	
+								</div>
+							 </div>
+							 <div class="col-sm-12" style="padding-top:10px;display:none" id="xfkdRe">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-6 control-label text-right" >备注：</label>
+										 <div class="col-sm-6">
+											<!--  <input check=""  name="syfRemark1" id="addSyfRemark1" maxlength="13" />-->	
+											<select  id="addXfdkRemark" name="xfdkRemark" >
+			                                                <option class="opt" value="0">--请选择--</option>
+															<option class="opt" value="1">消费-普通</option>
+															<option class="opt" value="2">消费-公喜贷</option>
+										 	</select>
+										</div>
+									</div>	
+								</div>
+							 </div>
+							 <div class="col-sm-12" style="padding-top:10px;display:none" id="jydkRe">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-6 control-label text-right" >备注1：</label>
+										 <div class="col-sm-6">
+											<!--  <input check=""  name="syfRemark1" id="addSyfRemark1" maxlength="13" />-->	
+											<select  id="addJydkRemark1" name="jydkRemark1" >
+			                                                <option class="opt" value="0">--请选择--</option>
+															<option class="opt" value="1">经营-普通</option>
+															<option class="opt" value="2">经营-创业小额贷款</option>
+															<option class="opt" value="3">经营-工会失业人员小额担保贷款</option>
+															<option class="opt" value="4">经营-妇联失业人员小额担保贷款</option>
+															<option class="opt" value="5">经营-红色信贷</option>
+										 	</select>
+										</div>
+									</div>	
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-6 control-label text-right" >备注2：</label>
+										 <div class="col-sm-6">
+											<input check=""  name="jydkRemark2" id="addJydkRemark2" placeholder=" 请输入推荐机构" maxlength="32" />	
+										</div>
+									</div>	
+								</div>
+							 </div>
+							 <div class="col-sm-12" style="padding-top:10px;display:none" id="nhxexydkRe">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-6 control-label text-right" >备注：</label>
+										 <div class="col-sm-6">
+											<!--  <input check=""  name="syfRemark1" id="addSyfRemark1" maxlength="13" />-->	
+											<select  id="addNhxexydkRemark" name="nhxexydkRemark" >
+			                                                <option class="opt" value="0">--请选择--</option>
+															<option class="opt" value="1">消费</option>
+															<option class="opt" value="2">经营</option>
+										 	</select>
+										</div>
+									</div>	
+								</div>
+							 </div>
+							 <div class="col-sm-12" style="padding-top:10px;display:none" id="esfajRe">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-6 control-label text-right" >备注：</label>
+										 <div class="col-sm-6">
+											<!--  <input check=""  name="syfRemark1" id="addSyfRemark1" maxlength="13" />-->	
+											<select  id="addEsfajRemark" name="esfajRemark" >
+			                                                <option class="opt" value="0">--请选择中介机构--</option>
+															<option class="opt" value="1">尊园</option>
+															<option class="opt" value="2">其他中介</option>
+										 	</select>
+										</div>
+									</div>	
+								</div>
+							 </div>
+							 <div class="col-sm-12" style="padding-top:10px">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-6 control-label text-right" >申贷金额（万元）<span style="color:red">*</span>：</label>
+										 <div class="col-sm-6">
+										<input check="required"  name="amount" id="addAmount" maxlength="13" />
+										</div>
+									</div>	
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-6 control-label text-right" >申贷期限（月）<span style="color:red">*</span>：</label>
+										 <div class="col-sm-6">
+										<input check="required "  name="term" id="addTerm" maxlength="30" />
+										</div>
+										
+									</div>	
+								</div>
+							 </div>
+							
+							 <div class="col-sm-12" style="padding-top:10px">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label class="col-sm-3 control-label text-right" >担保方式<span style="color:red">*</span>： </label>
+										 <div class="col-sm-9">
+										<!-- <input check="" name="guaranteeMethod" id="addGuaranteeMethod" maxlength="32" /> -->
+										<div id="addGuaranteeMethod" class="btn-group" data-toggle="buttons">
+									        <label  class="btn btn-info">
+									            <input  type="radio" name="guaranteeMethod" value="1">信用
+									        </label>
+									        <label  class="btn btn-info">
+									            <input  type="radio" name="guaranteeMethod" value="2">保证
+									        </label>
+									        <label  class="btn btn-info">
+									            <input  type="radio" name="guaranteeMethod" value="3">抵押
+									        </label>
+									        <label  class="btn btn-info">
+									            <input  type="radio" name="guaranteeMethod" value="4">质押
+									        </label>
+									    </div>
+										</div>
+									</div>		
+								</div>
+							 </div>
+							 <div class="col-sm-12" style="padding-top:10px">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label class="col-sm-3 control-label text-right" >是否续贷<span style="color:red">*</span>：</label>
+										<div class="col-sm-9">
+										 <div id="addIsRenew" class="btn-group" data-toggle="buttons">
+									        <label  class="btn btn-info">
+									            <input  type="radio" name="isRenew" value="1">新增
+									        </label>
+									        <label  class="btn btn-info">
+									            <input  type="radio" name="isRenew" value="2">续贷
+									        </label>
+									        <label  class="btn btn-info">
+									            <input  type="radio" name="isRenew" value="3">追加
+									        </label>
+									        <label  class="btn btn-info">
+									            <input  type="radio" name="isRenew" value="4">借新还旧
+									        </label>
+									        <label  class="btn btn-info">
+									            <input  type="radio" name="isRenew" value="5">展期
+									        </label>
+									        <label  class="btn btn-info">
+									            <input  type="radio" name="isRenew" value="6">重组贷款
+									        </label>
+									    </div>
+			                           </div>
+									</div>
+								</div>
+								
+							 </div>
+							 <div class="col-sm-12" style="padding-top:10px">
+								
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-6 control-label text-right" >营销人姓名<span style="color:red">*</span>： </label>
+										 <div class="col-sm-6">
+										<input check="required" name="marketer" id="addMarketer" maxlength="32" />
+										</div>
+									</div>		
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-6 control-label text-right" >营销人岗位<span style="color:red">*</span>：</label>
+										<!-- <input check="Sex"  name="sex" id="addSex" maxlength="1" /> -->
+										<div class="col-sm-6">
+										 	<select  id="addMarketerPost" name="marketerPost" >
+			                                                <option class="opt" value="0">--请选择营销人岗位--</option>
+															<option class="opt" value="1">白龙基社</option>
+															<option class="opt" value="2">龙头街基社</option>
+															<option class="opt" value="3">茨坝基社</option>
+															<option class="opt" value="4">联盟基社</option>
+															<option class="opt" value="5">东华基社</option>
+															<option class="opt" value="6">龙泉基社</option>
+															<option class="opt" value="7">营业部基社</option>
+															<option class="opt" value="8">二手房按揭岗</option>
+															<option class="opt" value="9">联社机关</option>
+															<option class="opt" value="10">个金部员工</option>
+															<option class="opt" value="11">小微中心员工</option>
+										 	</select>
+			                           </div>
+									</div>
+								</div>
+							 </div>
+							 
+							 <!-- <div class="col-sm-12" style="padding-top:10px">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label class="col-sm-2 control-label text-right" >营销人岗位：</label>
+										 <div class="col-sm-10">
+										<input check=""  name="marketerPost" id="addMarketerPost" maxlength="32" />
+											<div id="addMarketerPost" class="btn-group" data-toggle="buttons">
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="marketerPost" value="1">白龙基社
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="marketerPost" value="2">龙头街基社
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="marketerPost" value="3">茨坝基社
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="marketerPost" value="4">联盟基社
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="marketerPost" value="5">东华基社
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="marketerPost" value="6">龙泉基社
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="marketerPost" value="7">营业部基社
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="marketerPost" value="8">二手房按揭岗
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="marketerPost" value="9">联社机关
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="marketerPost" value="10">个金部员工
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="marketerPost" value="11">小微中心员工
+										        </label>
+										    </div>
+										</div>
+										
+									</div>	
+								</div>
+								
+							 </div> -->
+							 <div class="col-sm-12" style="padding-top:10px">
+								
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-6 control-label text-right" >经办人姓名<span style="color:red">*</span>： </label>
+										 <div class="col-sm-6">
+										<input check="required" name="operator" id="addOperator" maxlength="32" />
+										</div>
+									</div>		
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-6 control-label text-right" >经办人岗位<span style="color:red">*</span>：</label>
+										<!-- <input check="Sex"  name="sex" id="addSex" maxlength="1" /> -->
+										<div class="col-sm-6">
+										 	<select  id="addOperatorPost" name="operatorPost" >
+			                                                <option class="opt" value="0">--请选择经办人岗位--</option>
+															<option class="opt" value="1">白龙基社</option>
+															<option class="opt" value="2">龙头街基社</option>
+															<option class="opt" value="3">茨坝基社</option>
+															<option class="opt" value="4">联盟基社</option>
+															<option class="opt" value="5">东华基社</option>
+															<option class="opt" value="6">龙泉基社</option>
+															<option class="opt" value="7">营业部基社</option>
+															<option class="opt" value="8">二手房按揭岗</option>
+															<option class="opt" value="9">联社机关</option>
+															<option class="opt" value="10">个金部员工</option>
+															<option class="opt" value="11">小微中心员工</option>
+										 	</select>
+			                           </div>
+									</div>
+								</div>
+							 </div>
+							 
+							 <!-- <div class="col-sm-12" style="padding-top:10px">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label class="col-sm-2 control-label text-right" >经办人岗位：</label>
+										 <div class="col-sm-10">
+										<input check=""  name="operatorPost" id="addOperatorPost" maxlength="32" />
+											<div id="addOperatorPost" class="btn-group" data-toggle="buttons">
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="operatorPost" value="1">白龙基社
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="operatorPost" value="2">龙头街基社
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="operatorPost" value="3">茨坝基社
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="operatorPost" value="4">联盟基社
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="operatorPost" value="5">东华基社
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="operatorPost" value="6">龙泉基社
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="operatorPost" value="7">营业部基社
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="operatorPost" value="8">二手房按揭岗
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="operatorPost" value="9">联社机关
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="operatorPost" value="10">个金部员工
+										        </label>
+										        <label  class="btn btn-primary">
+										            <input  type="radio" name="operatorPost" value="11">小微中心员工
+										        </label>
+										    </div>
+										    
+										</div>
+									</div>	
+								</div>
+							 </div> -->
+						</div>
+					 </form>
+			     </div>
+			     <div class="modal-footer text-center" >
+			          <button type="button" class="btn btn-white btn-sm" data-dismiss="modal"><i></i>&nbsp;取消</button>
+			          <button type="button" class="btn btn-primary btn-sm" id="addOrEditSaveBtn"><i class="fa fa-check"></i>&nbsp;提交</button>
+			     </div>
+			 </div>
+		</div>
+	</div>
+	
+	<!-- 增加 END-->
+    
+	<script src="../UI/common/loadCommonJs.js"></script>
+	
+	<script src="./loanAppCommit.js"></script>
+	
+</body>
+</html>

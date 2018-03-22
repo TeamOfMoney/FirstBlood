@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="" />
+  <meta name="author" content="ThemeBucket" />
+
+  <title>贷款申请审核人员</title>
+  
+  <script>
+		var webPath = "..";
+  </script>
+  <script src="../UI/common/loadCommonCss.js"></script>
+  <style>
+  		.cross,.tick{margin-top:1px; margin-right:132px;}
+  </style>
+</head>
+
+<body>
+	<div class="page-main">
+		<div class="row page-heading" >
+			<div class="row page-heading-inner" >
+				<div class="col-xs-6 " id="nav_header" style="margin-left:10px;">
+					<ol class="list-inline" id="navContent">
+						<li><a href="javascript:void(0);" onclick="window.parent.backMain();">主页</a></li> <span>/</span>
+						<li><a id="parentNavName">###</a></li><span>/</span>
+						<li><a id="thisNavName">###</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		
+        <div class="row page-body" >
+        	<div class="col-sm-12">
+        		<div class="panel-heading">
+				   <strong style="line-height:30px;">审核人员列表</strong> 
+		           <div class="panel-heading-button pull-right">
+				       	<!-- <button type="button" class="btn" id="addBtn" title="新增"><i class="glyphicon glyphicon-plus" ></i></button>
+			       		<button type="button" class="btn" id="removeOfNumbersBtn" title="批量删除"><i class="glyphicon glyphicon-trash" ></i></button> -->
+				       	<button type="button" class="btn" id="updownarea"><i class="glyphicon glyphicon-chevron-down"></i></button>
+			 		</div>
+        		<hr/>
+        		</div>
+        	</div>
+        	
+        	<div class="col-sm-12" id="queryForm">
+        		<form id="queryGridForm">
+			        <div class="row queryFrom-body">
+		          	  	<div class="form-group text-center">
+	          	  			<label >机构:</label>&nbsp; <input class="queryOrgNameClass" placeholder=" 请选择机构" />  &nbsp;&nbsp;&nbsp; &nbsp;
+              				<input class="queryOrgPathClass" id="queryOrgPath" type="hidden" />
+	          	  			
+	              			<label>用户名:</label> &nbsp;<input id="query_userName" placeholder=" 请输入用户名" >  &nbsp;&nbsp;&nbsp;
+	              			<label >姓名:</label>&nbsp; <input  id="query_realName" placeholder=" 请输入姓名">  &nbsp;&nbsp;
+	             
+	              			 
+		              	</div>
+		          	</div>
+	          	</form>
+	          	
+	          	<div class="row queryForm-footer" style="margin-top:20px">
+	          	  	 <button type="button" class="btn" data-dismiss="modal" id="resetQueryFormInfo"><i class="glyphicon glyphicon-repeat"></i>&nbsp;清空</button>
+	                 &nbsp;&nbsp;&nbsp;
+	                 <button type="button" class="btn" id="queryGridBtn"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
+	          	</div>
+	          	<hr/>
+          	</div>
+	        
+	        <div class="col-sm-12">
+				<div class="row table-content">
+					<div class="fixed-table-content">
+						<table  class="table table-bordered" id="table">
+							<thead class="fixed-thead">
+								<tr>
+									<th><div>机构名称</div></th>
+									<th><div>用户名</div></th>
+									<th><div>姓名</div></th>
+									<!-- <th><div>角色</div></th> -->
+									<th><div>性别</div></th>
+									<th><div>电话</div></th>
+									<th><div>邮箱</div></th>
+									<th><div>用户类型</div></th>
+									<th><div>注册时间</div></th>
+									<th><div>操作</div></th>
+								</tr>
+							</thead>
+							<tbody id="dataList">
+								
+							</tbody>
+					    </table>
+					</div>
+					<div class="row table-foot">
+						<div class="goto">
+							<a href="javascript:;" id="gotopage" >确定</a>
+							<select id ="setRownum">
+								<option value="10" >10</option>
+								<option value="20">20</option>
+								<option value="50">50</option>
+							</select>
+						</div>
+						<div id="Pagination" class="pagination" ></div>
+					</div>
+	    		</div>
+   		 </div>
+  </div>
+  
+  
+    
+	<script src="../UI/common/loadCommonJs.js"></script>
+	<script src="../UI/orgTree/orgTree.js"></script>
+	<script src="./loanAppDistributeUsers.js"></script>
+	
+</body>
+</html>

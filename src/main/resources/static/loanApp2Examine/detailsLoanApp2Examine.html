@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+
+  <title>贷款申请二审</title>
+  
+  <script>
+		var webPath = "..";
+  </script>
+  <script src="../UI/common/loadCommonCss.js"></script>
+ <style>
+ 	.propertyName{font-weight:bold;width:50px}
+ </style>
+</head>
+
+<body>
+	<div class="page-main">
+		<div class="row page-heading" >
+			<div class="row page-heading-inner" >
+				<div class="col-xs-6 " id="nav_header" style="margin-left:10px;">
+					<ol class="list-inline" id="navContent">
+						<li><a href="javascript:void(0);"onclick="window.parent.backMain(); ">主页</a></li> <span>/</span>
+						<li><a id="parentNavName">###</a></li><span>/</span>
+						<li><a id="thisNavName">###</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		
+        <div class="row page-body" >
+        
+        	<div class="col-sm-12">
+        		<div class="panel-heading">
+				   <strong style="line-height:30px;">贷款申请详情</strong> 
+		           <div class="panel-heading-button pull-right">
+		           <button type="button" class="btn" id="addBtn" onclick="javascript:history.back();" title="返回"><i class="glyphicon glyphicon-share-alt" ></i></button>
+                    </div>
+			 	</div>
+        		<hr/>
+        	</div>
+        	<div class="row"  style="margin-left:25px;margin-right:20px">
+				<table class="table table-bordered noneSelect"  style=" margin:0 auto;position:relative;word-break: keep-all !important;width:100%;">
+					<tbody>
+						<tr>
+							<td class="propertyName">贷款人姓名:</td>
+							<td ><span id="borrowerName"></span></td>
+							<td class="propertyName">配偶姓名：</td>
+							<td ><span id="spouseName"></span></td>
+						</tr>
+						
+						<tr>
+							<td class="propertyName">性别：</td>
+							<td><span id="sex"></span></td>
+						   <td class="propertyName">证件号码:</td>
+						    <td ><span id="credentialNo"></span></td>
+						</tr>
+						<tr>
+							<td class="propertyName">业务类型：</td>
+							<td><span id="businessTypes"></span></td>
+						</tr>
+						<tr>
+						<td class="propertyName">备注1：</td>
+							<td><span id="remark1"></span></td>
+							<td class="propertyName">备注2：</td>
+							<td><span id="remark2"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">申贷金额（万元）:</td>
+						    <td ><span id="amount"></span></td>
+						    <td class="propertyName">申贷期限（月）:</td>
+						    <td ><span id="term"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">担保方式:</td>
+						    <td ><span id="guaranteeMethod"></span></td>
+						    <td class="propertyName">是否续贷:</td>
+						    <td ><span id="isRenew"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">营销人姓名:</td>
+						    <td ><span id="marketer"></span></td>
+						    <td class="propertyName">营销人岗位:</td>
+						    <td ><span id="marketerPost"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">经办人姓名:</td>
+						    <td ><span id="operator"></span></td>
+						    <td class="propertyName">经办人岗位:</td>
+						    <td ><span id="operatorPost"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer text-center">
+			     		<form role="form" id="approvalOpinion">
+			     			<div class="row" style="margin-bottom:20px">
+							  <div class="form-group">
+								  <label class="col-sm-3 control-label" >审批意见：<span style="color:red">*</span>：</label>
+							   <div class="col-sm-9">
+							     <textarea  type="text" class="form-control" style="margin-left:-30px;width:100%;height:50px" id="remove_opinion" placeholder="请输入审批意见！"></textarea>
+							   </div>
+							  </div>
+							</div>
+					  </form>
+			          
+			          <button type="button" class="btn btn-danger btn-sm" onclick="approve('REFUSE')">&nbsp;退件</button>
+			          <button type="button" class="btn btn-info btn-sm" onclick="approve('RESUBMIT')">&nbsp;补件</button>
+			          <button type="button" class="btn btn-primary btn-sm" onclick="approve('REVIEW')">&nbsp;通过</button>
+			     </div>
+   		</div>
+  	</div>
+  
+	<script src="../UI/common/loadCommonJs.js"></script>
+	<script src="./detailsLoanApp2Examine.js"></script>
+	
+</body>
+</html>
