@@ -49,8 +49,24 @@ $(function(){
 		refreshAuthDesc();
 	});
 	
+var stepIndex = 0;
 	
+	$("#addInstallStep").click(function(){
+		stepIndex++;
+		var index = stepIndex;
+		var installStepHtml = '<tr><td></td>'+
+								'<td><input type="text"    class="updateDis" id="report" name="report" value="" style="width:150px"/></td>'+
+								'<td><input type="text"   class="updateDis" id="add" name="add" value="" style="width:300px"/></td>'+
+								'<td><button check="" onclick="deletetr(this.parentNode)" type="button" class="btn btn-sucess btn-sm" name="removeStepBtn" title="删除权限"><i class="glyphicon glyphicon-minus" ></i></button></td>'+
+								'<td><input type="text"  disabled="disabled"  class="updateDis" id="addId" name="addId" value="" style="display:none;" /></td> </tr>';
+		$("#grid1").append(installStepHtml);
+	});
 });
+
+function deletetr(tdobject){  
+    var td=$(tdobject);  
+    td.parents("tr").remove();  
+} 
 
 function loadTree(){
 	$.ajax( {    
@@ -159,6 +175,7 @@ function treeOnRightClick(event, treeId, treeNode) {
 	$("#orgName").attr("disabled","disabled");
 	$("#cd-imge").attr("disabled","disabled");
 	$("#nodeType").attr("disabled","disabled");
+	$("#addInstallStep").attr("disabled","disabled");
 	
  	$("#bj-child").css("display","none");
  	$("#query").val("");
@@ -169,93 +186,30 @@ function treeOnRightClick(event, treeId, treeNode) {
  	
  	
  	var xx=treeNode.xx;
- 			/*xx =str2Json(xx);*/
- 	var queryPath="";
- 	var addPath="";
- 	var updatePath="";
- 	var deletePath="";
- 	var reportPath="";
- 	var queryId="";
- 	var addId="";
- 	var updateId="";
- 	var deleteId="";
- 	var reportId="";
-		for(var i=0;i<xx.length;i++){
-			//getFlag(xx[i]);
-			
-			if(xx[i].authCn=="查询")
-	 		{
-				queryPath+=xx[i].serverPath+";";
-				queryId+=xx[i].authId+";";
-	 		}
-	 		else if(xx[i].authCn=="添加")
-	 		{
-	 			addPath+=xx[i].serverPath+";";
-	 			addId+=xx[i].authId+";";
-	 		}
-	 		else if(xx[i].authCn=="修改")
-	 		{
-	 			updatePath+=xx[i].serverPath+";";
-	 			updateId+=xx[i].authId+";";
-	 		}
-	 		else if(xx[i].authCn=="删除")
-	 		{
-	 			deletePath+=xx[i].serverPath+";";
-	 			deleteId+=xx[i].authId+";";
-	 		}
-	 		else if(xx[i].authCn=="报表")
-	 		{
-	 			reportPath+=xx[i].serverPath+";";
-	 			reportId+=xx[i].authId+";";
-		 		
-	 		}
-		}
-		
-		$("#query").val(queryPath);
-		$("#add").val(addPath);
-		$("#update").val(updatePath);
-		$("#delete").val(deletePath);
-		$("#report").val(reportPath);
-		$("#queryId").val(queryId);
-		$("#addId").val(addId);
-		$("#updateId").val(updateId);
-		$("#deleteId").val(deleteId);
-		$("#reportId").val(reportId);
  	
- 	/*if(!isparent){
- 		if(ntype!="0"){
- 			//$("#qx-area").css("display","block");
- 			$(".updateDis").attr("disabled","disabled");
-			var xx=treeNode.xx;
-	 		for(var i=0;i<xx.length;i++){
-	 			if(xx[i].authCn=="查询")
-		 		{
-			 		$("#query").val(xx[i].serverPath);
-			 		
-		 		}
-		 		else if(xx[i].authCn=="添加")
-		 		{
-			 		$("#add").val(xx[i].serverPath);
-		 		}
-		 		else if(xx[i].authCn=="修改")
-		 		{
-			 		$("#update").val(xx[i].serverPath);
-		 		}
-		 		else if(xx[i].authCn=="删除")
-		 		{
-			 		$("#delete").val(xx[i].serverPath);
-		 		}
-		 		else if(xx[i].authCn=="报表")
-		 		{
-			 		$("#report").val(xx[i].serverPath);
-		 		}
-	 		}
- 		}else{
- 			//$("#qx-area").css("display","none");
- 		}
- 	}else{
- 		//$("#qx-area").css("display","none");
- 	}*/
+		var stepnum=0;
+		//$("#grid1").remove();
+		$("#grid1").html("");  
+		for(var i =0;i<xx.length;i++)
+		{
+			stepnum=i+1;
+			var installStepHtml = '<tr><td>'+stepnum+'</td>'+
+			'<td><input type="text"  disabled="disabled"  class="updateDis" id="authCn'+i+'" name="report" value="'+xx[i].authCn+'" style="width:150px"/></td>'+
+			'<td><input type="text"  disabled="disabled"  class="updateDis" id="authPath'+i+'" name="add" value="'+xx[i].serverPath+'" style="width:300px"/></td>'+
+			'<td><button  check="" onclick="deletetr(this.parentNode)" disabled="disabled" type="button" class="btn btn-sucess btn-sm" name="removeStepBtn" title="删除权限"><i class="glyphicon glyphicon-minus" ></i></button></td>'+
+			'<td><input type="text"  disabled="disabled"  class="updateDis" id="authId'+i+'" name="" value="'+xx[i].authId+'" style="display:none;" /></td> </tr>';
+			$("#grid1").append(installStepHtml);
+		}
+		/*stepIndex++;
+		var index = stepIndex;
+		var installStepHtml = '<tr><td>'+stepIndex+'</td>'+
+								'<td><input type="text"  disabled="disabled"  class="updateDis" id="report" name="report" value="" style="width:150px"/></td>'+
+								'<td><input type="text"  disabled="disabled"  class="updateDis" id="add" name="add" value="" style="width:300px"/></td>'+
+								'<td onclick="deletetr(this)"><button  check=""  type="button" class="btn btn-sucess btn-sm" name="removeStepBtn" title="删除权限"><i class="glyphicon glyphicon-minus" ></i></button></td>'+
+								'<td><input type="text"  disabled="disabled"  class="updateDis" id="addId" name="addId" value="" style="display:none;" /></td> </tr>';
+		$("#grid1").append(installStepHtml);*/
+ 	
+ 	
 }
  
  var setting = {
@@ -334,22 +288,7 @@ function treeOnRightClick(event, treeId, treeNode) {
 		var isParent =treeData.isparent;
 		var param={"menuTreeNode.id":treeData.id};
 		updateShow(treeData,treeData.getParentNode().name,treeData.isParent);
-		/*$.ajax( {    
-			    url:'./menu/findMenuById.action',      
-			    type:'post',    
-			    cache:false,
-			    data:param,    
-			    dataType:'text',    
-			    success:function(data) { 
-			    	var temp='{"data":{"authorityCoreInfos":[{"authorityClass":"","authorityCn":"查看","authorityId":101,"extendFlag":false,"servletPath":"/menu/menuTreeByUser.action","subAuthority":"query"}],"children":[],"expanded":false,"iconText":"","id":"3","leaf":false,"nodeType":1,"parentId":2,"text":"菜单管理","urlText":"menumanage/menu"},"extData":null,"mapData":null,"number":0,"page":0,"promptMsg":"","rowNum":0,"success":"","totalPage":0}';
-			    	var menuObj = str2Json(temp).data;
-			    	updateShow(menuObj,treeData.getParentNode().name,treeData.isParent);
-			    	//loadSx(menuObj);
-			     },
-			     error : function() {      
-			          util.sysAlert("异常！");    
-			     }    
-			});*/
+		
 	}
 	
 	
@@ -364,16 +303,7 @@ function treeOnRightClick(event, treeId, treeNode) {
 	 	$("#nodeType").val("4");
 	 	//$(".add-input").val("");
 		//$(".add-check").prop("checked",false);
-	 	$("#query").val("");
-		$("#add").val("");
-		$("#update").val("");
-		$("#delete").val("");
-		$("#report").val("");
-		$("#queryId").val("");
-		$("#addId").val("");
-		$("#updateId").val("");
-		$("#deleteId").val("");
-		$("#reportId").val("");
+	 	
 	 	
 		if(isparent){
 			//$("#qx-area").css("display","none");
@@ -403,8 +333,30 @@ function treeOnRightClick(event, treeId, treeNode) {
 			 	$("#bc-button").attr("diaplay","block");
 			}else{
 				//$("#qx-area").css("display","block");
+				
+			 	var xx=data.xx;
+			 	
+			 	
+			 	$("#bc-button").attr("diaplay","block");
+			 	
+			 	$("#grid1").html("");  
+				for(var i =0;i<xx.length;i++)
+				{
+					stepnum=i+1;
+					var installStepHtml = '<tr><td>'+stepnum+'</td>'+
+					'<td><input type="text"  disabled="disabled"  class="updateDis" id="authCn'+i+'" name="report" value="'+xx[i].authCn+'" style="width:150px"/></td>'+
+					'<td><input type="text"  disabled="disabled"  class="updateDis" id="authPath'+i+'" name="add" value="'+xx[i].serverPath+'" style="width:300px"/></td>'+
+					'<td ><button  check="" onclick="deletetr(this.parentNode)" id="deleteBtn'+i+'" disabled="disabled" type="button" class="btn btn-sucess btn-sm" name="removeStepBtn" title="删除权限"><i class="glyphicon glyphicon-minus" ></i></button></td>'+
+					'<td><input type="text"  disabled="disabled"  class="updateDis" id="authId'+i+'" name="" value="'+xx[i].authId+'" style="display:none;" /></td> </tr>';
+					$("#grid1").append(installStepHtml);
+					
+					$("#deleteBtn"+i).removeAttr("disabled");
+				}
+				
 				$(".updateDis").removeAttr("disabled");
+				
 				$("#orgName").removeAttr("disabled");
+				$("#addInstallStep").removeAttr("disabled");
 				$("#cd-imge").removeAttr("disabled");
 				//$("#nodeType").removeAttr("disabled");
 				$("#url").removeAttr("disabled");
@@ -414,60 +366,6 @@ function treeOnRightClick(event, treeId, treeNode) {
 			 	$("#url").val(data.durl);
 			 	var ntype=data.nodeType;
 			 	$("#nodeType").val(ntype);
-			 	var xx=data.xx;
-			 	
-			 	var queryPath="";
-			 	var addPath="";
-			 	var updatePath="";
-			 	var deletePath="";
-			 	var reportPath="";
-			 	var queryId="";
-			 	var addId="";
-			 	var updateId="";
-			 	var deleteId="";
-			 	var reportId="";
-					for(var i=0;i<xx.length;i++){
-						//getFlag(xx[i]);
-						
-						if(xx[i].authCn=="查询")
-				 		{
-							queryPath+=xx[i].serverPath+";";
-							queryId+=xx[i].authId+";";
-				 		}
-				 		else if(xx[i].authCn=="添加")
-				 		{
-				 			addPath+=xx[i].serverPath+";";
-				 			addId+=xx[i].authId+";";
-				 		}
-				 		else if(xx[i].authCn=="修改")
-				 		{
-				 			updatePath+=xx[i].serverPath+";";
-				 			updateId+=xx[i].authId+";";
-				 		}
-				 		else if(xx[i].authCn=="删除")
-				 		{
-				 			deletePath+=xx[i].serverPath+";";
-				 			deleteId+=xx[i].authId+";";
-				 		}
-				 		else if(xx[i].authCn=="报表")
-				 		{
-				 			reportPath+=xx[i].serverPath+";";
-				 			reportId+=xx[i].authId+";";
-					 		
-				 		}
-					}
-					
-					$("#query").val(queryPath);
-					$("#add").val(addPath);
-					$("#update").val(updatePath);
-					$("#delete").val(deletePath);
-					$("#report").val(reportPath);
-					$("#queryId").val(queryId);
-					$("#addId").val(addId);
-					$("#updateId").val(updateId);
-					$("#deleteId").val(deleteId);
-					$("#reportId").val(reportId);
-			 	$("#bc-button").attr("diaplay","block");
 			}
 		}
 	}
@@ -479,6 +377,7 @@ function treeOnRightClick(event, treeId, treeNode) {
 		$("#bizMenu").hide();
 		$(".cdmc").removeAttr("disabled");
 		$("#parentOrgName").attr("disabled","disabled");
+		$("#addInstallStep").removeAttr("disabled");
 		$("#parentOrgName").val(treeData.name);
 		$("#orgName").val("");
 		$("#cd-imge").val("");
@@ -526,6 +425,7 @@ function treeOnRightClick(event, treeId, treeNode) {
 				param=param+('\"urlText\":\"'+$("#url").val()+ '\",');
 				param = param.substring(0, param.length - 1);
 				param += '}';
+				//alert(param);
 				param=str2Json(param);
 				}
 				
@@ -574,6 +474,7 @@ function treeOnRightClick(event, treeId, treeNode) {
 				param=param+('\"urlText\":\"'+$("#url").val()+ '\",');
 				param = param.substring(0, param.length - 1);
 				param += '}';
+				//alert(param);
 				param=str2Json(param);
 				}
 				
@@ -644,410 +545,42 @@ function treeOnRightClick(event, treeId, treeNode) {
 	function getParam(){
 		var param="{";
 		var f=0;
-		/*$(".add-check").each(function(i){
-				if(this.checked){
-					if(this.id!="all-box2"||this.id!="all-box1"){
-						var id=this.id;
-					//	var pid=
-						var val=$("#"+$("#"+id).attr("pid")).val();
-						param=param+('\"authInfos['+f+'].authCn\":\"'+ $("#"+id).attr("pnm") + '\",');
-						param=param+('\"authInfos['+f+'].servletPath\":\"'+ val + '\",');
-						param=param+('\"authInfos['+f+'].subAuthority\":\"'+ $("#"+id).attr("pem") + '\",');
-						f=f+1;
-					}
-				}
-			});*/
-		var queryIds=$("#queryId").val();
-		
-		var addIds=$("#addId").val();
-		var deleteIds=$("#deleteId").val();
-		var updateIds=$("#updateId").val();
-		var reportIds=$("#reportId").val();
-		var queryPaths=$("#query").val();
-		var addPaths=$("#add").val();
-		var deletePaths=$("#delete").val();
-		var updatePaths=$("#update").val();
-		var reportPaths=$("#report").val();
-		
-		//查询权限
-		var queryPathStr =null;
-		if(queryPaths!="")
-		{
-			queryPathStr = queryPaths.split(";");	
-		}
-		var queryIdStr=null;
-		if(queryIds!="")
-		{
-			queryIdStr = queryIds.split(";");
-		}
-		
-		//添加权限
-		var addPathStr =null;
-		if(addPaths!="")
-		{
-			addPathStr = addPaths.split(";");	
-		}
-		var addIdStr=null;
-		if(addIds!="")
-		{
-			addIdStr = addIds.split(";");
-		}
-		
-		//修改权限
-		var updatePathStr =null;
-		if(updatePaths!="")
-		{
-			updatePathStr = updatePaths.split(";");	
-		}
-		var updateIdStr=null;
-		if(updateIds!="")
-		{
-			updateIdStr = updateIds.split(";");
-		}
-	    //删除
-		var deletePathStr =null;
-		if(deletePaths!="")
-		{
-			deletePathStr = deletePaths.split(";");	
-		}
-		var deleteIdStr=null;
-		if(deleteIds!="")
-		{
-			deleteIdStr = deleteIds.split(";");
-		}
-		
-		//报表权限
-		var reportPathStr =null;
-		if(reportPaths!="")
-		{
-			reportPathStr = reportPaths.split(";");	
-		}
-		var reportIdStr=null;
-		if(reportIds!="")
-		{
-			reportIdStr = reportIds.split(";");
-		}
 		
 		var authClass = treeData.name;
 		var allIndex=0;
-		if(queryPathStr==null&&queryIdStr!=null)
-		{
-			var max=queryIdStr.length-1;
-			for(var i=0;i<max;i++)
+		var trList = $("#grid1").children("tr")
+		  for (var i=0;i<trList.length;i++) {
+		    var tdArr = trList.eq(i).find("td");
+		    var authName = tdArr.eq(1).find("input").val();//authName
+		    var serverPath = tdArr.eq(2).find("input").val();//serverPath
+		    var authId = tdArr.eq(4).find("input").val();//authId
+		     
+		    //alert(authName);
+		    //alert(serverPath);
+		    //alert(authId);
+		    if(serverPath==""&&authId!="")
 			{
-				if(queryIdStr[i]!=null||queryIdStr[i]!="")
-				{
-					param=param+('\"authInfos['+allIndex+'].authId\":\"'+queryIdStr[i]+ '\",');
-				}
-				param=param+('\"authInfos['+allIndex+'].authCn\":\"查询\",');
+				param=param+('\"authInfos['+allIndex+'].authId\":\"'+authId+ '\",');
+				param=param+('\"authInfos['+allIndex+'].authCn\":\"'+authName+'\",');
 				param=param+('\"authInfos['+allIndex+'].authClass\":\"'+authClass+'\",');
 				allIndex++;
 			}
-			
-		}
-		else if(queryPathStr!=null&&queryIdStr==null)
-		{
-			var max=queryPathStr.length-1;
-			for(var i=0;i<max;i++)
+			else if(serverPath!=""&&authId=="")
 			{
-				if(queryPathStr[i]!=null||queryPathStr[i]!="")
-				{
-					param=param+('\"authInfos['+allIndex+'].serverPath\":\"'+queryPathStr[i]+ '\",');
-				}
-				param=param+('\"authInfos['+allIndex+'].authCn\":\"查询\",');
+				param=param+('\"authInfos['+allIndex+'].serverPath\":\"'+serverPath+ '\",');
+				param=param+('\"authInfos['+allIndex+'].authCn\":\"'+authName+'\",');
 				param=param+('\"authInfos['+allIndex+'].authClass\":\"'+authClass+'\",');
 				allIndex++;
 			}
-			
-		}
-		else if(queryPathStr!=null&&queryIdStr!=null)
-		{
-			var max=queryPathStr.length-1;
-			if(queryPathStr.length<queryIdStr.length)
+			else if(serverPath!=""&&authId!="")
 			{
-				max=queryIdStr.length-1;
-			}
-			for(var i=0;i<max;i++)
-			{
-				if(queryPathStr[i]!=null&&queryPathStr[i]!=""&&typeof(queryPathStr[i]) != "undefined")
-					{
-						param=param+('\"authInfos['+allIndex+'].serverPath\":\"'+queryPathStr[i]+ '\",');
-					}
-				if(queryIdStr[i]!=null&&queryIdStr[i]!=""&&typeof(queryIdStr[i]) != "undefined")
-					{
-						param=param+('\"authInfos['+allIndex+'].authId\":\"'+queryIdStr[i]+ '\",');
-					}
-				param=param+('\"authInfos['+allIndex+'].authCn\":\"查询\",');
+				param=param+('\"authInfos['+allIndex+'].serverPath\":\"'+serverPath+ '\",');
+				param=param+('\"authInfos['+allIndex+'].authId\":\"'+authId+ '\",');
+				param=param+('\"authInfos['+allIndex+'].authCn\":\"'+authName+'\",');
 				param=param+('\"authInfos['+allIndex+'].authClass\":\"'+authClass+'\",');
 				allIndex++;
 			}
-		
-		}
-		
-		
-		//添加权限
-		/*var addPathStr =null;
-		if(addPaths!="")
-		{
-			addPathStr = addPaths.split(";");	
-		}
-		var addIdStr=null;
-		if(addIds!="")
-		{
-			addIdStr = addIds.split(";");
-		}
-		var authClass = treeData.name;*/
-		if(addPathStr==null&&addIdStr!=null)
-		{
-			var max=addIdStr.length-1;
-			for(var i=0;i<max;i++)
-			{
-				if(addIdStr[i]!=null||addIdStr[i]!="")
-				{
-					param=param+('\"authInfos['+allIndex+'].authId\":\"'+addIdStr[i]+ '\",');
-				}
-				param=param+('\"authInfos['+allIndex+'].authCn\":\"添加\",');
-				param=param+('\"authInfos['+allIndex+'].authClass\":\"'+authClass+'\",');
-				allIndex++;
-			}
-			
-		}
-		else if(addPathStr!=null&&addIdStr==null)
-		{
-			var max=addPathStr.length-1;
-			for(var i=0;i<max;i++)
-			{
-				if(addPathStr[i]!=null||addPathStr[i]!="")
-				{
-					param=param+('\"authInfos['+allIndex+'].serverPath\":\"'+addPathStr[i]+ '\",');
-				}
-				param=param+('\"authInfos['+allIndex+'].authCn\":\"添加\",');
-				param=param+('\"authInfos['+allIndex+'].authClass\":\"'+authClass+'\",');
-				allIndex++;
-			}
-			
-		}
-		else if(addPathStr!=null&&addIdStr!=null)
-		{
-			var max=addPathStr.length-1;
-			if(addPathStr.length<addIdStr.length)
-			{
-				max=addIdStr.length-1;
-			}
-			for(var i=0;i<max;i++)
-			{
-				if(addPathStr[i]!=null&&addPathStr[i]!=""&&typeof(addPathStr[i]) != "undefined")
-					{
-						param=param+('\"authInfos['+allIndex+'].serverPath\":\"'+addPathStr[i]+ '\",');
-					}
-				if(addIdStr[i]!=null&&addIdStr[i]!=""&&typeof(addIdStr[i]) != "undefined")
-					{
-						param=param+('\"authInfos['+allIndex+'].authId\":\"'+addIdStr[i]+ '\",');
-					}
-				param=param+('\"authInfos['+allIndex+'].authCn\":\"添加\",');
-				param=param+('\"authInfos['+allIndex+'].authClass\":\"'+authClass+'\",');
-				allIndex++;
-			}
-		}
-		
-		//修改权限
-		/*var updatePathStr =null;
-		if(updatePaths!="")
-		{
-			updatePathStr = updatePaths.split(";");	
-		}
-		var updateIdStr=null;
-		if(updateIds!="")
-		{
-			updateIdStr = updateIds.split(";");
-		}
-		var authClass = treeData.name;*/
-		if(updatePathStr==null&&updateIdStr!=null)
-		{
-			var max=updateIdStr.length-1;
-			treeData;
-			for(var i=0;i<max;i++)
-			{
-				if(updateIdStr[i]!=null||updateIdStr[i]!="")
-				{
-					param=param+('\"authInfos['+allIndex+'].authId\":\"'+updateIdStr[i]+ '\",');
-				}
-				param=param+('\"authInfos['+allIndex+'].authCn\":\"修改\",');
-				param=param+('\"authInfos['+allIndex+'].authClass\":\"'+authClass+'\",');
-				allIndex++;
-			}
-		}
-		else if(updatePathStr!=null&&updateIdStr==null)
-		{
-			var max=updatePathStr.length-1;
-			for(var i=0;i<max;i++)
-			{
-				if(updatePathStr[i]!=null||updatePathStr[i]!="")
-				{
-					param=param+('\"authInfos['+allIndex+'].serverPath\":\"'+updatePathStr[i]+ '\",');
-				}
-				param=param+('\"authInfos['+allIndex+'].authCn\":\"修改\",');
-				param=param+('\"authInfos['+allIndex+'].authClass\":\"'+authClass+'\",');
-				allIndex++;
-			}
-		}
-		else if(updatePathStr!=null&&updateIdStr!=null)
-		{
-			var max=updatePathStr.length-1;
-			if(updatePathStr.length<updateIdStr.length)
-			{
-				max=updateIdStr.length-1;
-			}
-			for(var i=0;i<max;i++)
-			{
-				if(updatePathStr[i]!=null&&updatePathStr[i]!=""&&typeof(updatePathStr[i]) != "undefined")
-					{
-						param=param+('\"authInfos['+allIndex+'].serverPath\":\"'+updatePathStr[i]+ '\",');
-					}
-				if(updateIdStr[i]!=null&&updateIdStr[i]!=""&&typeof(updateIdStr[i]) != "undefined")
-					{
-						param=param+('\"authInfos['+allIndex+'].authId\":\"'+updateIdStr[i]+ '\",');
-					}
-				param=param+('\"authInfos['+allIndex+'].authCn\":\"修改\",');
-				param=param+('\"authInfos['+allIndex+'].authClass\":\"'+authClass+'\",');
-				allIndex++;
-			}
-		}
-		
-		//删除权限
-		/*var deletePathStr =null;
-		if(deletePaths!="")
-		{
-			deletePathStr = deletePaths.split(";");	
-		}
-		var deleteIdStr=null;
-		if(deleteIds!="")
-		{
-			deleteIdStr = deleteIds.split(";");
-		}
-		var authClass = treeData.name;*/
-		if(deletePathStr==null&&deleteIdStr!=null)
-		{
-			var max=deleteIdStr.length-1;
-			for(var i=0;i<max;i++)
-			{
-				if(deleteIdStr[i]!=null||deleteIdStr[i]!="")
-				{
-					param=param+('\"authInfos['+allIndex+'].authId\":\"'+deleteIdStr[i]+ '\",');
-				}
-				param=param+('\"authInfos['+allIndex+'].authCn\":\"删除\",');
-				param=param+('\"authInfos['+allIndex+'].authClass\":\"'+authClass+'\",');
-				allIndex++;
-			}
-		}
-		else if(deletePathStr!=null&&deleteIdStr==null)
-		{
-			var max=deletePathStr.length-1;
-			for(var i=0;i<max;i++)
-			{
-				if(deletePathStr[i]!=null||deletePathStr[i]!="")
-				{
-					param=param+('\"authInfos['+allIndex+'].serverPath\":\"'+deletePathStr[i]+ '\",');
-				}
-				param=param+('\"authInfos['+allIndex+'].authCn\":\"删除\",');
-				param=param+('\"authInfos['+allIndex+'].authClass\":\"'+authClass+'\",');
-				allIndex++;
-			}
-		}
-		else if(deletePathStr!=null&&deleteIdStr!=null)
-		{
-			var max=deletePathStr.length-1;
-			if(deletePathStr.length<deleteIdStr.length)
-			{
-				max=deleteIdStr.length-1;
-			}
-			for(var i=0;i<max;i++)
-			{
-				if(deletePathStr[i]!=null&&deletePathStr[i]!=""&&typeof(deletePathStr[i]) != "undefined")
-					{
-						param=param+('\"authInfos['+allIndex+'].serverPath\":\"'+deletePathStr[i]+ '\",');
-					}
-				if(deleteIdStr[i]!=null&&deleteIdStr[i]!=""&&typeof(deleteIdStr[i]) != "undefined")
-					{
-						param=param+('\"authInfos['+allIndex+'].authId\":\"'+deleteIdStr[i]+ '\",');
-					}
-				param=param+('\"authInfos['+allIndex+'].authCn\":\"删除\",');
-				param=param+('\"authInfos['+allIndex+'].authClass\":\"'+authClass+'\",');
-				allIndex++;
-			}
-		}
-		
-		
-		//报表权限
-		/*var reportPathStr =null;
-		if(reportPaths!="")
-		{
-			reportPathStr = reportPaths.split(";");	
-		}
-		var reportIdStr=null;
-		if(reportIds!="")
-		{
-			reportIdStr = reportIds.split(";");
-		}
-		var authClass = treeData.name;*/
-		if(reportPathStr==null&&reportIdStr!=null)
-		{
-			var max=reportIdStr.length-1;
-			
-			for(var i=0;i<max;i++)
-			{
-				if(reportIdStr[i]!=null||reportIdStr[i]!="")
-				{
-					param=param+('\"authInfos['+allIndex+'].authId\":\"'+reportIdStr[i]+ '\",');
-				}
-				param=param+('\"authInfos['+allIndex+'].authCn\":\"报表\",');
-				param=param+('\"authInfos['+allIndex+'].authClass\":\"'+authClass+'\",');
-				allIndex++;
-			}
-		}
-		else if(reportPathStr!=null&&reportIdStr==null)
-		{
-			var max=reportPathStr.length-1;
-			for(var i=0;i<max;i++)
-			{
-				if(reportPathStr[i]!=null||reportPathStr[i]!="")
-				{
-					param=param+('\"authInfos['+allIndex+'].serverPath\":\"'+reportPathStr[i]+ '\",');
-				}
-				param=param+('\"authInfos['+allIndex+'].authCn\":\"报表\",');
-				param=param+('\"authInfos['+allIndex+'].authClass\":\"'+authClass+'\",');
-				allIndex++;
-			}
-		}
-		else if(reportPathStr!=null&&reportIdStr!=null)
-		{
-			var max=reportPathStr.length-1;
-			if(reportPathStr.length<reportIdStr.length)
-			{
-				max=reportIdStr.length-1;
-			}
-			for(var i=0;i<max;i++)
-			{
-				if(reportPathStr[i]!=null&&reportPathStr[i]!=""&&typeof(reportPathStr[i]) != "undefined")
-					{
-						param=param+('\"authInfos['+allIndex+'].serverPath\":\"'+reportPathStr[i]+ '\",');
-					}
-				if(reportIdStr[i]!=null&&reportIdStr[i]!=""&&typeof(reportIdStr[i]) != "undefined")
-					{
-						param=param+('\"authInfos['+allIndex+'].authId\":\"'+reportIdStr[i]+ '\",');
-					}
-				param=param+('\"authInfos['+allIndex+'].authCn\":\"报表\",');
-				param=param+('\"authInfos['+allIndex+'].authClass\":\"'+authClass+'\",');
-				allIndex++;
-			}
-		}
-		
-		
-		
-		//param=param+('\"authInfos['+f+'].authCn\":\"'+ $("#"+id).attr("pnm") + '\",');
-		//param=param+('\"authInfos['+f+'].servletPath\":\"'+ val + '\",');
-		//param=param+('\"authInfos['+f+'].subAuthority\":\"'+ $("#"+id).attr("pem") + '\",');
-		
+		  }
 		return param;
 	}
 	
@@ -1058,12 +591,15 @@ function treeOnRightClick(event, treeId, treeNode) {
 			//$("#qx-area").css("display","block");
 			$("#url").removeAttr("disabled");
 			$(".updateDis").removeAttr("disabled");
+			$("#addInstallStep").removeAttr("disabled");
 			if(fistNode==0){
 				$(".add-input").val("");
 				$(".add-check").prop("checked",false);
 			}
 		}else{
 			$("#url").attr("disabled","disabled");
+			$("#addInstallStep").attr("disabled","disabled");
+			$("#grid1").html("");
 			//$("#qx-area").css("display","none");
 		}	
 		

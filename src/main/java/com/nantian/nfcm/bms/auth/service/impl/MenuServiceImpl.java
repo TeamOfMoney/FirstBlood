@@ -16,6 +16,8 @@ import com.nantian.nfcm.bms.auth.vo.MenuTreeNode;
 import com.nantian.nfcm.util.BaseConst;
 import com.nantian.nfcm.util.ServiceException;
 
+
+
 @SuppressWarnings("unchecked")
 @Service
 public class MenuServiceImpl implements MenuService
@@ -146,6 +148,54 @@ public class MenuServiceImpl implements MenuService
 					Long authRetId = authInfoRet.getAuthId();
 					
 					authRetIds.add(authRetId);
+					//deleteList.add(authInfoRet);
+				}
+				for(AuthInfo authInfo:authInfos)
+				{
+					//addList.add(authInfo);
+					Long authId=authInfo.getAuthId();
+					String authPath=authInfo.getServerPath();
+					if(authId==null&&(!"".equals(authPath)||authPath!=null))
+					{
+						addList.add(authInfo);
+					}
+					else
+					{
+						authIds.add(authId);
+					}
+				}
+				
+				//获取重复的id
+				List jiaoji=authIds;
+				jiaoji.retainAll(authRetIds);
+				//获取原有多余的id
+				List chaji = authRetIds;
+				chaji.removeAll(authIds);
+				
+				for(AuthInfo authInfo:authInfos)
+				{
+					if(jiaoji.contains(authInfo.getAuthId()))
+					{
+						updateList.add(authInfo);
+					}
+					
+				}
+				for(AuthInfo authInfo:authInfosRet)
+				{
+					if(chaji.contains(authInfo.getAuthId()))
+					{
+						deleteList.add(authInfo);
+					}
+				}
+				
+				
+				/*List<Long> authIds=new ArrayList<>();
+				List<Long> authRetIds=new ArrayList<>();
+				for(AuthInfo authInfoRet:authInfosRet)
+				{
+					Long authRetId = authInfoRet.getAuthId();
+					
+					authRetIds.add(authRetId);
 				}
 				for(AuthInfo authInfo:authInfos)
 				{
@@ -183,23 +233,12 @@ public class MenuServiceImpl implements MenuService
 					{
 						deleteList.add(authInfo);
 					}
-				}
+				}*/
 				
 			}
 			
 			
-			if(addList.size()>0)
-			{
-				for(AuthInfo authInfo:addList)
-				{
-					MenuAuth menuAuth = new MenuAuth();
-					menuAuth.setMenuId(menuTreeRet.getMenuId());
-					//先保存再获取id
-					AuthInfo authInfoTmp = authInfoDao.saveAndFlush(authInfo);
-					menuAuth.setAuthId(authInfoTmp.getAuthId());
-					menuAuthDao.saveAndFlush(menuAuth);
-				}
-			}
+			
 			if(deleteList.size()>0)
 			{
 				for(AuthInfo authInfo:deleteList)
@@ -210,6 +249,18 @@ public class MenuServiceImpl implements MenuService
 						menuAuthDao.delete(menuAuth);
 					}
 					authInfoDao.delete(authInfo);	
+				}
+			}
+			if(addList.size()>0)
+			{
+				for(AuthInfo authInfo:addList)
+				{
+					MenuAuth menuAuth = new MenuAuth();
+					menuAuth.setMenuId(menuTreeRet.getMenuId());
+					//先保存再获取id
+					AuthInfo authInfoTmp = authInfoDao.saveAndFlush(authInfo);
+					menuAuth.setAuthId(authInfoTmp.getAuthId());
+					menuAuthDao.saveAndFlush(menuAuth);
 				}
 			}
 			if(updateList.size()>0)

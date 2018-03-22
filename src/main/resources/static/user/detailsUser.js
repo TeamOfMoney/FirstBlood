@@ -37,6 +37,27 @@ var loadsoftDetInfo = function(data) {
 						roleNames = roleNames.substring(0, roleNames.length-1);
 						$("#roleNames").html(roleNames);
 					}
+					var userTypeDesc;
+					if(object.userType=='1')
+					{
+						userTypeDesc='客户经理';
+					}
+					else if(object.userType=='2')
+					{
+						userTypeDesc='申请分配';
+					}
+					else if(object.userType=='3')
+					{
+						userTypeDesc='审核';
+					}
+					else if(object.userType=='4')
+					{
+						userTypeDesc='二审人员';
+					}
+					else{
+						userTypeDesc=object.userType;
+					}
+					$("#userType").html(userTypeDesc);
 				}
 			else
 				{

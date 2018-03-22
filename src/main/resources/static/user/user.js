@@ -70,6 +70,7 @@ var loadData = function(){
 	headParam.push("sex");
 	headParam.push("mobilePhone");
 	headParam.push("email");
+	headParam.push("userType");
 	headParam.push("registerTime");
 	
 	var url = queryGridUrl;
@@ -92,7 +93,26 @@ var loadData = function(){
 	gridObj["pk"] = "userName";
 	gridObj["page"] = true;
 	gridObj["checked"]=false;
+	var userTypeFormat = function(val){
+		if(val=="1"){
+			return "客户经理";
+		}
+		else if(val=="2"){
+			return "申请分配";
+		}
+		else if(val=="3"){
+			return "审核";
+		}
+		else if(val=="4"){
+			return "二审人员";
+		}
+		else {
+			return val;
+		}
+	};
 	
+	var headFormat = {"userType":userTypeFormat};
+	gridObj["headFormat"] = headFormat;
 	var nTGridBean = new NTGridBean();
 	nTGridBean.init(gridObj);
 	nTGridBean.loadGrid();
@@ -453,6 +473,7 @@ var getAddParam = function(){
 	var addPassword1= $("#addPassword1").val();
 	var addEmail = $("#addEmail").val();
 	var addSex = $("#addSex").val();
+	var addUserType = $("#addUserType").val();
 	var array = new Array();// 定义数组
 	var arrayRoleName=new Array()
 	$("#multiselect_to").find("option").each(function(){
@@ -465,6 +486,14 @@ var getAddParam = function(){
 	}
 	else if(array.length<=0){
 		util.sysTips("请至少选择一种角色！","multiselect");
+		return ;
+	}
+	else if(addSex=='0'){
+		util.sysTips("性别不能为空！","addSex");
+		return ;
+	}
+	else if(addUserType=='0'){
+		util.sysTips("用户类型不能为空！","addUserType");
 		return ;
 	}
 	else{
@@ -499,6 +528,7 @@ var getAddParam = function(){
 		param=param+('\"mobilePhone\":\"'+addMobile+ '\",');
 		param=param+('\"email\":\"'+addEmail+ '\",');
 		param=param+('\"sex\":\"'+addSex+ '\",');
+		param=param+('\"userType\":\"'+addUserType+ '\",');
 		param=param+('\"orgId\":\"'+orgId+ '\",');
 		param=param+('\"orgName\":\"'+addOrgName+ '\",');
 		
@@ -539,6 +569,7 @@ var getEditParam = function(){
     var addMobile = $("#addMobile").val();
 	var addEmail = $("#addEmail").val();
 	var addSex = $("#addSex").val();
+	var addUserType = $("#addUserType").val();
 	var array = new Array();// 定义数组
 	var arrayRoleName=new Array()
 	$("#multiselect_to").find("option").each(function(){
@@ -547,6 +578,14 @@ var getEditParam = function(){
 	});
 	if(array.length<=0){
 		util.sysAlert("请至少选择一种角色！");
+		return ;
+	}
+	else if(addSex=='0'){
+		util.sysTips("性别不能为空！","addSex");
+		return ;
+	}
+	else if(addUserType=='0'){
+		util.sysTips("用户类型不能为空！","addUserType");
 		return ;
 	}
 	else{
@@ -602,6 +641,7 @@ var getEditParam = function(){
 			param=param+('\"mobilePhone\":\"'+addMobile+ '\",');
 			param=param+('\"email\":\"'+addEmail+ '\",');
 			param=param+('\"sex\":\"'+addSex+ '\",');
+			param=param+('\"userType\":\"'+addUserType+ '\",');
 			param=param+('\"orgId\":\"'+orgId+ '\",');
 			param=param+('\"orgName\":\"'+addOrgName+ '\",');
 			
@@ -626,6 +666,7 @@ var getEditParam = function(){
 		store_new['mobile']=addMobile;
 		store_new['email']=addEmail;
 		store_new['sex']=addSex;
+		store_new['userType']=addUserType;
 		store_new['roles']=array;
 		return param;
 	}
@@ -650,6 +691,7 @@ var dataFill = function(data){
 	
 	$("#addEmail").val(object.email);
 	$("#addSex").val(object.sex);
+	$("#addUserType").val(object.userType);
 	
 	var innerhtml = "";
 	for ( var i = 0; i < object.notOwnerRoles.length; i++) {
@@ -676,6 +718,7 @@ var dataFill = function(data){
 	store_old['mobile']=object.mobilePhone;
 	store_old['email']=object.email;
 	store_old['sex']=object.sex;
+	store_old['userType']=object.userType;
 	store_old['roles']=roles;
 };
 

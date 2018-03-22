@@ -74,6 +74,7 @@ CREATE TABLE user_info
   register_time VARCHAR(19),
   org_id        INT,
   org_path      VARCHAR(50),
+  user_type     VARCHAR(1),
   PRIMARY KEY (user_name)
 )
   ENGINE = InnoDB
