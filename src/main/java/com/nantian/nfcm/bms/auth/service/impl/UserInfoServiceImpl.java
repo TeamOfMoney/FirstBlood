@@ -212,6 +212,10 @@ public class UserInfoServiceImpl implements UserInfoService {
                 Predicate orgCode = criteriaBuilder.like(root.get("orgCode").as(String.class), userBean.getOrgCode()+"%");
                 predicates.add(orgCode);
             }
+            if (userBean.getUserType() != null && !userBean.getUserType().equals("")) {
+                Predicate userType = criteriaBuilder.equal(root.get("userType").as(String.class), userBean.getOrgCode());
+                predicates.add(userType);
+            }
             query.where(criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()])));
             return query.getRestriction();
         };

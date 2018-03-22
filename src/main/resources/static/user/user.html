@@ -81,6 +81,7 @@
 									<th><div>性别</div></th>
 									<th><div>电话</div></th>
 									<th><div>邮箱</div></th>
+									<th><div>用户类型</div></th>
 									<th><div>注册时间</div></th>
 									<th><div>操作</div></th>
 								</tr>
@@ -208,10 +209,20 @@
 									</div>	
 								</div>
 								<div class="col-sm-6">
-									<!-- <div class="form-group">
-										<label class="text-right" style="padding-left:37px;">性别：</label>
-										<input check="Sex"  name="sex" id="addSex" maxlength="1" />
-									</div>	 -->
+									<div class="form-group">
+										<label class="col-sm-4 control-label text-right" >用户类型<span style="color:red">*</span>：</label>
+										<!-- <input check="Sex"  name="sex" id="addSex" maxlength="1" /> -->
+										<div class="col-sm-8">
+										 <select  id="addUserType" name="userType" >
+			                                                <option class="opt" value="0">--请选择--</option>
+															<option class="opt" value="1">客户经理</option>
+															<option class="opt" value="2">申请分配</option>
+															<option class="opt" value="3">审核</option>
+															<option class="opt" value="4">报表统计</option>
+															
+			                                            </select>
+			                           </div>
+									</div>
 								</div>
 							 </div>
 							<div class="col-sm-12" style="margin-top:20px;">
