@@ -58,14 +58,14 @@ public class LoanApplicationService {
         LoanOnline loanOnline = new LoanOnline();
         loanOnline.setLoanId(loanApplicationRet.getLoanId());
         loanOnline.setCurProcessName(BaseConst.PROCESSNAME_DISTRIBUTION);
-        loanOnline.setCurProcessUser(BaseConst.PROCESSNAME_DISTRIBUTION);
+        loanOnline.setCurProcessUser("");
         loanOnline.setCurProcessStatus(BaseConst.PROCESS_INIT);
         LoanOnline loanOnlineRet = loanOnlineDao.save(loanOnline);
 
         //同时生成贷款流程当前记录和历史记录
         LoanJournal loanJournal = new LoanJournal();
         loanJournal.setLoanId(loanOnlineRet.getOnlineId());
-        loanJournal.setOnlineId(loanOnlineRet);
+        loanJournal.setLoanOnline(loanOnlineRet);
         loanJournal.setOrgId(loanBean.getOrgId());
         loanJournal.setOrgCode(loanBean.getOrgCode());
         loanJournal.setOrgName(loanBean.getOrgName());
@@ -80,7 +80,7 @@ public class LoanApplicationService {
         //提交时生成分配流程流水
         LoanJournal loanJournalDist = new LoanJournal();
         loanJournalDist.setLoanId(loanOnlineRet.getOnlineId());
-        loanJournalDist.setOnlineId(loanOnlineRet);
+        loanJournalDist.setLoanOnline(loanOnlineRet);
         loanJournalDist.setOrgId(loanBean.getOrgId());
         loanJournalDist.setOrgCode(loanBean.getOrgCode());
         loanJournalDist.setOrgName(loanBean.getOrgName());

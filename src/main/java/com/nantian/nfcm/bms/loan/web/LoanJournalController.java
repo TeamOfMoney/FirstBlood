@@ -24,7 +24,7 @@ public class LoanJournalController {
 
     @RequestMapping("/findByCondition")
     @ResponseBody
-    private ResultInfo findByCondition(HttpServletRequest request, int page, int size, LoanJournalBean loanJournalBean) throws Exception {
+    private ResultInfo findByCondition(int page, int size, LoanJournalBean loanJournalBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
         try {
             GridData<LoanJournalBean> gd = loanJournalService.findByCondition(page, size, loanJournalBean);

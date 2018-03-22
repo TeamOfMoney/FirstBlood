@@ -32,11 +32,11 @@ public class LoanJournal {
 
     @ManyToOne(targetEntity = LoanOnline.class,fetch = FetchType.LAZY)
     @JoinColumn(name = "online_id")
-    public LoanOnline getOnlineId() {
+    public LoanOnline getLoanOnline() {
         return loanOnline;
     }
 
-    public void setOnlineId(LoanOnline loanOnline) {
+    public void setLoanOnline(LoanOnline loanOnline) {
         this.loanOnline = loanOnline;
     }
 
