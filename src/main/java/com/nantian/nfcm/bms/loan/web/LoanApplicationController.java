@@ -21,7 +21,7 @@ public class LoanApplicationController {
 
     @RequestMapping("/addLoan")
     @ResponseBody
-    private ResultInfo addUser(LoanBean loanBean) throws Exception {
+    private ResultInfo addLoan(LoanBean loanBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
         try {
             LoanBean loan = loanApplicationService.addLoanApplication(loanBean);

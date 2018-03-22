@@ -199,7 +199,7 @@ CREATE TABLE loan_journal
   org_code       VARCHAR(30),
   org_name       VARCHAR(100),
   process_name   VARCHAR(32),
-  process_flag   VARCHAR(10),
+  process_flag   VARCHAR(20),
   process_result VARCHAR(2),
   process_user   VARCHAR(32),
   process_status VARCHAR(2),

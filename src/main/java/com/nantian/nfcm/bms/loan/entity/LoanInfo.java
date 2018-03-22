@@ -44,12 +44,28 @@ public class LoanInfo {
         this.spouseName = spouseName;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
     public String getCredentialNo() {
         return credentialNo;
     }
 
     public void setCredentialNo(String credentialNo) {
         this.credentialNo = credentialNo;
+    }
+
+    public String getBusinessTypes() {
+        return businessTypes;
+    }
+
+    public void setBusinessTypes(String businessTypes) {
+        this.businessTypes = businessTypes;
     }
 
     public String getAmount() {
@@ -60,12 +76,28 @@ public class LoanInfo {
         this.amount = amount;
     }
 
+    public String getTerm() {
+        return term;
+    }
+
+    public void setTerm(String term) {
+        this.term = term;
+    }
+
     public String getGuaranteeMethod() {
         return guaranteeMethod;
     }
 
     public void setGuaranteeMethod(String guaranteeMethod) {
         this.guaranteeMethod = guaranteeMethod;
+    }
+
+    public String getIsRenew() {
+        return isRenew;
+    }
+
+    public void setIsRenew(String isRenew) {
+        this.isRenew = isRenew;
     }
 
     public String getMarketer() {

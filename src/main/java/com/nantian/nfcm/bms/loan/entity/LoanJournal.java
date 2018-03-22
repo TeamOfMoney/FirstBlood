@@ -31,7 +31,7 @@ public class LoanJournal {
     }
 
     @ManyToOne(targetEntity = LoanOnline.class,fetch = FetchType.LAZY)
-    @JoinColumn(name = "loan_id")
+    @JoinColumn(name = "online_id")
     public LoanOnline getOnlineId() {
         return loanOnline;
     }

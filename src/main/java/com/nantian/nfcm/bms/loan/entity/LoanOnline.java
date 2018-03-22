@@ -12,6 +12,7 @@ public class LoanOnline {
     private String curProcessUser;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "online_id")
     public Long getOnlineId() {
         return onlineId;
