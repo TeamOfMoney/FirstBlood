@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!-- <meta name="renderer" content="webkit"> -->
+
+<title>菜单管理</title>
+  <script>var webPath = "..";</script>
+  <script src="../UI/common/loadCommonCss.js"></script>
+  
+  
+<style>
+     
+	#bizMenu {
+		width: 50px;
+		display: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+		padding: 5px;
+		z-index: 100;
+	}
+	
+	#bizMenu ul {
+		background: #DDD;
+		border-radius: 5px;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+		margin: 0;
+		padding: 0;
+	}
+	
+	#bizMenu ul li {
+		line-height: 30px;
+		border-bottom: 1px solid #F2F2F2;
+		text-align: center;
+		list-style: none;
+	}
+	
+	#bj-parent {
+		display: none
+	}
+	
+	#bj-child {
+		display: none
+	}
+     #alertmod_table_list_2 {
+            top: 900px !important;
+        }
+        .conditionForm{ 
+     	position:absolute; 
+    	background:#F7F7F7;
+    	display:none;
+      	border-bottom:solid #E3E4E6 1px;
+      	padding:10px;
+      	align:center;
+      	z-index:900;
+      	width:100%;
+     }
+    
+     /*只在屏幕宽度不大于 568 像素时应用*/
+	@media all and (max-width:700px) {
+	.menue {width:100%}
+	}
+    </style>  
+</head>
+
+<body>
+	<div class="page-main">
+		<div class="row page-heading" >
+			<div class="row page-heading-inner" >
+				<div class="col-xs-6 " id="nav_header" style="margin-left:10px;">
+					<ol class="list-inline" id="navContent">
+						<li ><a href="javascript:void(0);" onclick="window.parent.backMain();">主页</a></li> <span>/</span>
+						<li><a id="parentNavName">###</a></li><span>/</span>
+						<li><a id="thisNavName">###</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+        <div class="row page-body" >
+        	<div class="col-sm-12">
+        		<div class="panel-heading">
+				  <strong style="line-height:30px;">菜单管理</strong> 
+			 	</div>
+        		<hr/>
+        	</div>
+        	
+			<div class="wrapper wrapper-content border-bottom white-bg " style="height:80%;width:100%;padding:20px 0px 40px 0px">
+				<div class="container" style="width:100%;margin:0px">
+				  <div class="row" >
+					  	<div class="col-xs-3 menue" style="height:100%;" id="iscroll-tree">
+								<div class="ztree" id="sidebar1"></div>
+					    </div>
+					    <div class="col-xs-9 menue" style="height:100%;border:2px solid #F3F3F4;" >
+							
+							<div class="col-sm-12">
+								<div class="row">
+									 <div class="ibox float-e-margins">
+									 	<div class="ibox-content">
+	                                		<form method="get" class="form-horizontal" id="validation-form">
+	                                			<div class="row" >
+		                                			<div class="form-group">
+				                                        <label class="col-sm-3 control-label" style="padding-left:0px;padding-right:0px">父菜单名称：</label>
+				
+				                                        <div class="col-sm-3">
+				                                            <input type="text" disabled="disabled"  class="form-control cdmc" name="parentOrgName" id="parentOrgName"/>
+				                                        </div>
+				                                         <label class="col-sm-2 control-label" style="padding-left:0px;padding-right:0px">子菜单名称：</label>
+				                                        <div class="col-sm-3">
+				                                            <input type="text" disabled="disabled"  class="form-control cdmc" name="orgName" id="orgName"/>
+				                                        </div>
+				                                    </div>
+			                                    </div>
+			                                    <div class="hr-line-dashed"></div>
+			                                    <div class="row" >
+		                                			<div class="form-group">
+				                                        <label class="col-sm-3 control-label" style="padding-left:0px;padding-right:0px">菜单类型:</label>
+				                                        <div class="col-sm-3">
+				                                             <select  id="nodeType"
+															name="bizMenuTreeBean.defaultLogLevel" disabled="disabled">
+			                                                <option class="opt" value="4">--请选择--</option>
+															<option class="opt" value="0">菜单节点</option>
+															<option class="opt" value="1">可见菜单项</option>
+															<option class="opt" value="3">不可见菜单项</option>
+			                                            </select>
+				                                        </div>
+				                                         <label class="col-sm-2 control-label" style="padding-left:0px;padding-right:0px">URL:</label>
+				                                        <div class="col-sm-3">
+				                                            <input type="text" disabled="disabled"  class="form-control cdmc" name="url" id="url"/>
+				                                        </div>
+				                                    </div>
+			                                    </div>
+			                                    
+			                                    <div class="row" >
+		                                			<div class="form-group">
+				                                        <label class="col-sm-3 control-label" style="padding-left:0px;padding-right:0px">图片路径:</label>
+				
+				                                        <div class="col-sm-3">
+				                                             <input type="text" name="cd-imge" id="cd-imge" class="form-control cdmc" disabled="disabled"/>
+				                                        </div>
+				                                    </div>
+			                                    </div>
+			                                    
+	                                		</form>
+	                                	</div>
+									 </div>
+								</div>
+							</div>
+						<div class="col-sm-12">
+							<div class="row table-content" style="height:260px;">
+								<div class="fixed-table-content" >
+									<table  class="table table-bordered" id="table">
+										<thead class="fixed-thead">
+											<tr>
+												<th>序号</th>
+												<th><div>权限名称</div></th>
+												<th><div>服务路径</div></th>
+												<th><div></div></th>
+												
+											</tr>
+										</thead>
+										 <tbody id="grid1" >
+                                  	
+	                                        <tr>
+	                                        	<td>1</td> 
+												<td>查询</td> 
+												<td><input type="text"  disabled="disabled"  class="updateDis" id='query' name='query' value="" style="width:300px"/></td> 
+												<td><input type="text"  disabled="disabled"  class="updateDis" id='queryId' name='queryId' value="" style="display:none;"/></td> 
+												
+										     </tr>
+										     <tr>
+										    	 <td>2</td>
+												<td>添加</td> 
+												<td><input type="text"  disabled="disabled"  class="updateDis" id='add' name='add' value="" style="width:300px"/></td> 
+												<td><input type="text"  disabled="disabled"  class="updateDis" id='addId' name='addId' value="" style="display:none;" /></td> 
+										     </tr>
+										     <tr>
+										     	<td>3</td>
+												<td>修改</td> 
+												<td><input type="text"  disabled="disabled"  class="updateDis" id='update' name='update' value="" style="width:300px"/></td> 
+												<td><input type="text"  disabled="disabled"  class="updateDis" id='updateId' name='updateId' value="" style="display:none;"/></td> 
+										     </tr>
+										     <tr>
+										    	<td>4</td>
+												<td>删除</td> 
+												<td><input type="text"  disabled="disabled"  class="updateDis" id='delete' name='delete' value="" style="width:300px"/></td> 
+												<td><input type="text"  disabled="disabled"  class="updateDis" id='deleteId' name='deleteId' value="" style="display:none;"/></td> 
+										     </tr>
+										      <tr>
+										      	<td>5</td>
+												<td>报表</td> 
+												<td><input type="text"  disabled="disabled"  class="updateDis" id='report' name='report' value="" style="width:300px"/></td> 
+												<td><input type="text"  disabled="disabled"  class="updateDis" id='reportId' name='reportId' value="" style="display:none;"/></td> 
+										     </tr>
+										    
+									</tbody>
+								    </table>
+								</div>
+								
+				    		</div>
+				    		</div> 
+				    		<div class="col-sm-12">
+				    			<div class="row">
+									<div style="text-align: center;display:none" id="save-btn">
+										<button type="button" class="btn btn-primary"  style="" onclick="saveBtn()"
+											id="bc-button">保存</button>
+									</div>
+								</div>
+							</div>
+					    </div>
+				  </div>
+				 </div>
+			</div>
+			<div id="bizMenu">
+				<ul>
+					<li class="active" id="add-li" onclick="addData();"><a target="_blank">添加</a></li>
+					<li class="active" onclick="updateData();"><a target="_blank">编辑</a></li>
+					<li class="active" onclick="deleteData();"><a target="_blank">删除</a></li>
+				</ul>
+			</div>
+		</div> 		 
+	</div>
+  <script src="../UI/common/loadCommonJs.js"></script>
+  <script src="./menu.js"></script>
+	
+</body>
+
+</html>

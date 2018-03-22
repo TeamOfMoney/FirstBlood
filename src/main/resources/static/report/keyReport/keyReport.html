@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="" />
+  <meta name="author" content="ThemeBucket" />
+
+  <title>密钥信息统计表</title>
+  
+  <script>
+		var webPath = "../..";
+  </script>
+  <script src="../../UI/common/loadCommonCss.js"></script>
+  <style>
+  		.cross,.tick{margin-top:1px; margin-right:132px;}
+  </style>
+</head>
+
+<body>
+	<div class="page-main">
+		<div class="row page-heading" >
+			<div class="row page-heading-inner" >
+				<div class="col-xs-6 " id="nav_header" style="margin-left:10px;">
+					<ol class="list-inline" id="navContent">
+						<li><a href="javascript:void(0);" onclick="window.parent.backMain();">主页</a></li> <span>/</span>
+						<li><a id="parentNavName">###</a></li><span>/</span>
+						<li><a id="thisNavName">###</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		
+        <div class="row page-body" >
+        	<div class="col-sm-12">
+        		<div class="panel-heading">
+				   <strong style="line-height:30px;">密钥信息列表</strong> 
+		           <div class="panel-heading-button pull-right">
+				       <!-- 	<button type="button" class="btn" id="addBtn" title="新增"><i class="glyphicon glyphicon-plus" ></i></button>
+			       		<button type="button" class="btn" id="removeOfNumbersBtn" title="批量删除"><i class="glyphicon glyphicon-trash" ></i></button> -->
+				       	<button type="button" class="btn" id="updownarea"><i class="glyphicon glyphicon-chevron-down"></i></button>
+			 		</div>
+        		<hr/>
+        		</div>
+        	</div>
+        	
+        	<div class="col-sm-12" id="queryForm">
+        		<form id="queryGridForm">
+			        <div class="row queryFrom-body">
+		          	  	<div class="form-group text-center">
+	              			
+				            <label class="col-sm-5 control-label text-right">标签批次:&nbsp;</label> 
+				              	<input class="col-sm-2 " id="query_batchId" placeholder=" 请输入标签批次ID" />
+				            <!-- <label class="col-sm-2 control-label text-right">开始时间:&nbsp;</label> 
+				              	<input class="col-sm-2 " class="datepicker" id="query_startDate" placeholder=" 请输入开始时间" readonly/>
+				            <label class="col-sm-2 control-label text-right">结束时间:&nbsp;</label> 
+				              	<input class="col-sm-2 " class="datepicker" id="query_endDate" placeholder=" 请输入结束时间" readonly/> -->
+		              	</div>
+		          	</div>
+	          	</form>
+	          	
+	          	<div class="row queryForm-footer" style="margin-top:20px">
+	          	  	 <button type="button" class="btn" data-dismiss="modal" id="resetQueryForm"><i class="glyphicon glyphicon-repeat"></i>&nbsp;清空</button>
+	                 &nbsp;&nbsp;&nbsp;
+	                 <button type="button" class="btn" id="queryGridBtn"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
+	                  &nbsp;&nbsp;&nbsp;
+	                 <button type="button" class="btn" onclick="exportToExcel()"><i class="icon-file-alt"></i>&nbsp;导出EXCEL</button>
+	          	</div>
+	          	<hr/>
+          	</div>
+	        
+	        <div class="col-sm-12">
+				<div class="row table-content">
+					<div class="fixed-table-content">
+						<table  class="table table-bordered" id="table">
+							<thead class="fixed-thead">
+								<tr>
+									
+									<th><div>密钥ID</div></th>
+									<th><div>密钥</div></th>
+									<th><div>密钥类型</div></th>
+									<th><div>标签序列号</div></th>
+									<th><div>标签批次ID</div></th>
+									<!-- <th><div>密钥密文</div></th> -->
+									<th><div>初始化时间</div></th>
+									
+								</tr>
+							</thead>
+							<tbody id="dataList">
+								
+							</tbody>
+					    </table>
+					</div>
+					<div class="row table-foot">	
+						<div id="Pagination" class="pagination" ></div>
+					</div>
+	    		</div>
+   		 </div>
+  </div>
+    
+	<script src="../../UI/common/loadCommonJs.js"></script>
+	<script src="./keyReport.js"></script>
+</body>
+</html>

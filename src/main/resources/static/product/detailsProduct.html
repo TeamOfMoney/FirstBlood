@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+
+  <title>产品厂商管理</title>
+  
+  <script>
+		var webPath = "..";
+  </script>
+  <script src="../UI/common/loadCommonCss.js"></script>
+ <style>
+ 	.propertyName{font-weight:bold;width:50px}
+ </style>
+</head>
+
+<body>
+	<div class="page-main">
+		<div class="row page-heading" >
+			<div class="row page-heading-inner" >
+				<div class="col-xs-6 " id="nav_header" style="margin-left:10px;">
+					<ol class="list-inline" id="navContent">
+						<li><a href="javascript:void(0);"onclick="window.parent.backMain(); ">主页</a></li> <span>/</span>
+						<li><a id="parentNavName">###</a></li><span>/</span>
+						<li><a id="thisNavName">###</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		
+        <div class="row page-body" >
+        
+        	<div class="col-sm-12">
+        		<div class="panel-heading">
+				   <strong style="line-height:30px;">厂商详情</strong> 
+		           <div class="panel-heading-button pull-right">
+		           <button type="button" class="btn" id="addBtn" onclick="javascript:history.back();" title="返回"><i class="glyphicon glyphicon-share-alt" ></i></button>
+                    </div>
+			 	</div>
+        		<hr/>
+        	</div>
+        	<div class="row"  style="margin-left:25px;margin-right:20px">
+				<table class="table table-bordered noneSelect"  style=" margin:0 auto;position:relative;word-break: keep-all !important;width:100%;">
+					<tbody>
+						<tr>
+							<td class="propertyName">产品编号:</td>
+							<td ><span id="productNum"></span></td>
+							<td class="propertyName">产品名称：</td>
+							<td ><span id="productName"></span></td>
+						</tr>
+						<tr>
+							<td class="propertyName">生产许可证编号：</td>
+							<td><span id="qsNum"></span></td>
+							<td class="propertyName">产品标准号:</td>
+						    <td ><span id="gbNum"></span></td>
+						</tr>
+						
+						<tr>
+						    <td class="propertyName">产品厂商名称:</td>
+						    <td ><span id="firmName"></span></td>
+						    <td class="propertyName">产品类别:</td>
+						    <td ><span id="productType"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">产品工艺:</td>
+						    <td ><span id="productTech"></span></td>
+						    <td class="propertyName">保质期:</td>
+						    <td ><span id="shelfLife"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">产品规格:</td>
+						    <td ><span id="quantity"></span></td>
+						    <td class="propertyName">产品成分:</td>
+						    <td ><span id="ingredient"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">生产日期:</td>
+						    <td ><span id="productionDate"></span></td>
+						    <td class="propertyName">产品批号:</td>
+						    <td ><span id="qualityCode"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">质检结果:</td>
+						    <td ><span id="checkoutResult"></span></td>
+						    <td class="propertyName">质检报告编号:</td>
+						    <td ><span id="checkoutId"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">产品包装比例:</td>
+						    <td ><span id="proEnPname"></span></td>
+						    <td class="propertyName">产品介绍:</td>
+						    <td ><span id="proPinTro"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">产品备注:</td>
+						    <td ><span id="proNote"></span></td>
+						    <td class="propertyName">商品条码:</td>
+						    <td ><span id="commodityCodes"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">生产地:</td>
+						    <td ><span id="menufactureAddress"></span></td>
+						    <td class="propertyName">生产企业统一社会信用代码:</td>
+						    <td ><span id="institutionCode"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">责任人:</td>
+						    <td ><span id="dutyPerson"></span></td>
+						    <td class="propertyName">生产厂家电话:</td>
+						    <td ><span id="manufacturePhone"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+   		</div>
+  	</div>
+  
+	<script src="../UI/common/loadCommonJs.js"></script>
+	<script src="./detailsProduct.js"></script>
+	
+</body>
+</html>

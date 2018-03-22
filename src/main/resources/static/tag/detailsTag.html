@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+
+  <title>标签信息查询</title>
+  
+  <script>
+		var webPath = "..";
+  </script>
+  <script src="../UI/common/loadCommonCss.js"></script>
+ <style>
+ 	.propertyName{font-weight:bold;width:50px}
+ </style>
+</head>
+
+<body>
+	<div class="page-main">
+		<div class="row page-heading" >
+			<div class="row page-heading-inner" >
+				<div class="col-xs-6 " id="nav_header" style="margin-left:10px;">
+					<ol class="list-inline" id="navContent">
+						<li><a href="javascript:void(0);"onclick="window.parent.backMain(); ">主页</a></li> <span>/</span>
+						<li><a id="parentNavName">###</a></li><span>/</span>
+						<li><a id="thisNavName">###</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		
+        <div class="row page-body" >
+        
+        	<div class="col-sm-12">
+        		<div class="panel-heading">
+				   <strong style="line-height:30px;">标签详情</strong> 
+		           <div class="panel-heading-button pull-right">
+		           <button type="button" class="btn" id="addBtn" onclick="javascript:history.back();" title="返回"><i class="glyphicon glyphicon-share-alt" ></i></button>
+                    </div>
+			 	</div>
+        		<hr/>
+        	</div>
+        	<div class="row"  style="margin-left:25px;margin-right:20px">
+				<table class="table table-bordered noneSelect"  style=" margin:0 auto;position:relative;word-break: keep-all !important;width:100%;">
+					<tbody>
+						<tr>
+							<td class="propertyName">标签序列号:</td>
+							<td ><span id="tagNum"></span></td>
+							<td class="propertyName">标签SN序列号：</td>
+							<td ><span id="tagSn"></span></td>
+						</tr>
+						<tr>
+							<!-- <td class="propertyName">标签品牌：</td>
+							<td><span id="tagSp"></span></td> -->
+							<td class="propertyName">标签状态:</td>
+						    <td ><span id="tagState"></span></td>
+						    <td class="propertyName">产品厂商名称:</td>
+						    <td ><span id="firmName"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">产品名称:</td>
+						    <td ><span id="productName"></span></td>
+						    <td class="propertyName">产品序列:</td>
+						    <td ><span id="productSerial"></span></td>
+						    
+						</tr>
+						<tr>
+						    <td class="propertyName">标签初始化时间:</td>
+						    <td ><span id="tagInitTime"></span></td>
+						    <td class="propertyName">标签关联时间:</td>
+						    <td ><span id="tagAllocateTime"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">标签密钥:</td>
+						    <td ><span id="tagKey"></span></td>
+						    <td class="propertyName">标签密文:</td>
+						    <td ><span id="tagCiphertext"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">标签MAC:</td>
+						    <td ><span id="tagMac"></span></td>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+   		</div>
+  	</div>
+  
+	<script src="../UI/common/loadCommonJs.js"></script>
+	<script src="./detailsTag.js"></script>
+	
+</body>
+</html>

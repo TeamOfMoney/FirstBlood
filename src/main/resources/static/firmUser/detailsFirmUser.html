@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+
+  <title>厂商用户管理</title>
+  
+  <script>
+		var webPath = "..";
+  </script>
+  <script src="../UI/common/loadCommonCss.js"></script>
+ <style>
+ 	.propertyName{font-weight:bold;width:50px}
+ </style>
+</head>
+
+<body>
+	<div class="page-main">
+		<div class="row page-heading" >
+			<div class="row page-heading-inner" >
+				<div class="col-xs-6 " id="nav_header" style="margin-left:10px;">
+					<ol class="list-inline" id="navContent">
+						<li><a href="javascript:void(0);"onclick="window.parent.backMain(); ">主页</a></li> <span>/</span>
+						<li><a id="parentNavName">###</a></li><span>/</span>
+						<li><a id="thisNavName">###</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		
+        <div class="row page-body" >
+        
+        	<div class="col-sm-12">
+        		<div class="panel-heading">
+				   <strong style="line-height:30px;">厂商用户详情</strong> 
+		           <div class="panel-heading-button pull-right">
+		           <button type="button" class="btn" id="addBtn" onclick="javascript:history.back();" title="返回"><i class="glyphicon glyphicon-share-alt" ></i></button>
+                    </div>
+			 	</div>
+        		<hr/>
+        	</div>
+        	<div class="row"  style="margin-left:25px;margin-right:20px">
+				<table class="table table-bordered noneSelect"  style=" margin:0 auto;position:relative;word-break: keep-all !important;width:100%;">
+					<tbody>
+						<tr>
+							<td class="propertyName">厂商用户编号:</td>
+							<td ><span id="firmUsrId"></span></td>
+							
+							<td class="propertyName">厂商用户名：</td>
+							<td ><span id="firmUsername"></span></td>
+						</tr>
+						<tr>
+							<td class="propertyName">产品厂商名称:</td>
+							<td ><span id="firmName"></span></td>
+							<td class="propertyName">手机号码：</td>
+							<td><span id="mobile"></span></td>
+							 
+						</tr>
+						<tr>
+							<td class="propertyName">邮箱:</td>
+						    <td ><span id="email"></span></td>
+						    <td class="propertyName">注册时间:</td>
+						    <td ><span id="registerTime"></span></td>
+						    
+						</tr>
+					</tbody>
+				</table>
+			</div>
+   		</div>
+  	</div>
+  
+	<script src="../UI/common/loadCommonJs.js"></script>
+	<script src="./detailsFirmUser.js"></script>
+	
+</body>
+</html>

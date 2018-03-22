@@ -1,0 +1,21 @@
+@charset "utf-8";
+/* pagination */
+ .pagination{font-size:13px;display:inline;height:40px;float:right;margin:15px 0px 5px 0px;}    
+.pagination a{text-decoration:none;border:solid 1px #DDD;}
+
+ .pagination a, .pagination span{display:inline-block;float:left;padding:0.3em 0.5em;margin-right:5px;margin-bottom:5px;}
+.pagination .current{border:solid 1px #DDD;background:#DDD}
+.pagination  .pagenum{font-size:13px;}
+.pagination  .gotopage{width:30px; height:19px;}
+.pager .pagination .current.prev, .pagination .current.next,.pagination .current.first,.pagination .current.last{color:#999;border-color:#999;background:#fff;}
+
+/*跳转按钮及select标签css*/
+.pager{height:60px;width:90%;text-align:right;align:center;margin:0 5% 0 5%;}
+.goto{ height:40px;display:inline;float:right;margin:13px 0px 5px -5px;}
+.goto a{text-decoration:none;font-size:13px;border:solid 1px #DDD;padding:0.3em 0.5em;margin-right:5px;margin-bottom:5px;display:inline-block;}
+.goto span{font-size:13px;}
+.goto select{height:28px;width:80px;}
+
+
+/*table滚动展示*/
+.rolling{overflow-y: auto;margin-top:10px;height:440px;}

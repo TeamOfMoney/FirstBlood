@@ -1,0 +1,13 @@
+		.input_check_no {
+			border-color:#a94442;
+		}
+		.input_check_ok {
+			border-color:#67b168;
+		}
+
+
+.cross,.tick{
+      float:right;
+      margin-top: -20px;
+      margin-right: 83px;
+}

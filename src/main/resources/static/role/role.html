@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+
+  <title>角色管理</title>
+ 
+  <script>
+		var webPath = "..";
+  </script>
+  <script src="../UI/common/loadCommonCss.js"></script>
+  
+</head>
+
+<body>
+	<div class="page-main">
+		<div class="row page-heading" >
+			<div class="row page-heading-inner" >
+				<div class="col-xs-6 " id="nav_header" style="margin-left:10px;">
+					<ol class="list-inline" id="navContent">
+						<li><a id="parentNavName">###</a></li><span>/</span>
+						<li><a id="thisNavName">###</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		
+        <div class="row page-body" >
+        
+        	<div class="col-sm-12">
+        		<div class="panel-heading">
+				   <strong style="line-height:30px;">角色列表</strong>
+		           <div class="panel-heading-button pull-right">
+				       	<button type="button" class="btn" id="addBtn" title="新增"><i class="glyphicon glyphicon-plus" ></i></button>
+				       	<button type="button" class="btn" id="updownarea"><i class="glyphicon glyphicon-chevron-down"></i></button>
+	               </div>
+			 	</div>
+        		<hr/>
+        	</div>
+        	
+        	<div class="col-sm-12" id="queryForm" >
+        		<form id="queryGridForm">
+			        <div class="row queryFrom-body">
+		          	  	<div class="row text-center">
+		              		
+		              		<label class="col-sm-3 control-label text-right">角色名:&nbsp;</label> 
+				              	<input class="col-sm-2 " id="query_roleName" placeholder=" 请输入角色名" />
+				            <label class="col-sm-3 control-label text-right">角色描述:&nbsp;</label> 
+				              	<input class="col-sm-2 " id="query_roleDesc" placeholder=" 请输入角色描述" />
+		              	</div>
+		          	</div>
+	          	</form>
+	          	
+	          	<div class="row queryForm-footer" style="margin-top:20px">
+	          	  	 <button type="button" class="btn" data-dismiss="modal" id="resetQueryForm"><i class="glyphicon glyphicon-repeat"></i>&nbsp;清空</button>
+	                 &nbsp;&nbsp;&nbsp;
+	                 <button type="button" class="btn" id="queryGridBtn"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
+	          	</div>
+	          	<hr/>
+          	</div>
+	        
+	        <div class="col-sm-12" >
+					<div class="row table-content">
+						<div class="fixed-table-content">
+								<table  class="table table-bordered" id="table">
+									<thead class="fixed-thead">
+										<tr>
+											<th><div>角色名</div></th>
+											<th><div>角色描述</div></th>
+											<th><div>操作</div></th>
+										</tr>
+									</thead>
+									<tbody id="dataList">
+										
+									</tbody>
+							   </table>
+						</div>
+						<div class="row table-foot">
+							<div class="goto">
+								<a href="javascript:;" id="gotopage" >确定</a>
+								<select id ="setRownum">
+									<option value="10" >10</option>
+									<option value="20">20</option>
+									<option value="50">50</option>
+								</select>
+							</div>
+							<div id="Pagination" class="pagination" ></div>
+						</div>
+		    		</div>
+   			</div>
+   		</div>
+  </div>
+  
+  
+  
+    <!-- 增加 -->
+    
+	<div class="modal fade inmodal" id="addOrEditModal" tabindex="-1" role="dialog" aria-hidden="true"  >
+		<div class="modal-dialog">
+			<div class="modal-content animated bounceInRight">
+			     <div class="modal-header nt-model-head">
+			          <h5 id="action"></h5>	                                         
+			     </div>
+			     <div class="modal-body" style="height:380px;overflow-y:hidden;">
+		     		 <form role="form" id="addOrEditForm">
+			     		<div class="row">
+							  <div class="form-group">
+								  <label class="col-sm-4 control-label text-right" >角色名<span style="color:red">*</span>：</label>
+							   <div class="col-sm-8">
+							     <input type="text" check="required Chinese"  id="roleName" placeholder="请输入角色名！" maxlength="15">
+							   </div>
+							  </div>
+						</div>
+						<div class="row" style="padding-top:5px">
+							  <div class="form-group">
+								  <label class="col-sm-4 control-label text-right" >角色描述：</label>
+							     <div class="col-sm-6">
+							      <input type="text" class="form-control" id="roleDesc" placeholder="请输入角色描述!" maxlength="32">
+							 	 </div>
+							 </div>
+						</div>
+					 </form>
+					 <hr>
+					 <div><label for="exampleInputPassword1">权限配置</label></div>
+					 <div class="row-fluid" style="margin-top:4px;width:550px;">
+						 <div class="row-fluid">
+							 <div class="col-xs-5" style="width:500px;margin-left:70px">
+								 <div style="height:240px;overflow-y:auto;">
+									 <div id="authorityTree" class="ztree"></div>
+								 </div>	
+							 </div>
+						 </div>
+				     </div>
+			     </div>
+			     <div class="modal-footer text-center">
+			          <button type="button" class="btn btn-white btn-sm" data-dismiss="modal"><i></i>&nbsp;取消</button>
+			          <button type="button" class="btn btn-primary btn-sm" id="addOrEditSaveBtn"><i class="fa fa-check"></i>&nbsp;保存</button>
+			     </div>
+			 </div>
+		</div>
+	</div>
+	 <!--增加 END-->
+	
+	
+	<script src="../UI/common/loadCommonJs.js"></script>
+	
+	<script src="./role.js"></script>
+	
+</body>
+</html>

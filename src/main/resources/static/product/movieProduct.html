@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+
+  <title>产品厂商管理</title>
+  
+  <script>
+		var webPath = "..";
+  </script>
+  <script src="../UI/common/loadCommonCss.js"></script>
+ <style>
+ 	.propertyName{font-weight:bold;width:50px}
+ </style>
+</head>
+
+<body>
+	<div class="page-main">
+		<div class="row page-heading" >
+			<div class="row page-heading-inner" >
+				<div class="col-xs-6 " id="nav_header" style="margin-left:10px;">
+					<ol class="list-inline" id="navContent">
+						<li><a href="javascript:void(0);"onclick="window.parent.backMain(); ">主页</a></li> <span>/</span>
+						<li><a id="parentNavName">###</a></li><span>/</span>
+						<li><a id="thisNavName">###</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		
+        <div class="row page-body" >
+        
+        	<div class="col-sm-12">
+        		<div class="panel-heading">
+				   <strong style="line-height:30px;">产品视频信息</strong> 
+		           <div class="panel-heading-button pull-right">
+		           <button type="button" class="btn" id="addBtn" onclick="javascript:history.back();" title="返回"><i class="glyphicon glyphicon-share-alt" ></i></button>
+                    </div>
+			 	</div>
+        		<hr/>
+        	</div>
+        	<!-- <div class="row"  style="margin-left:25px;margin-right:20px">
+				<table class="table table-bordered noneSelect"  style=" margin:0 auto;position:relative;word-break: keep-all !important;width:100%;">
+					<tbody>
+						<tr>
+							<td class="propertyName">产品编号:</td>
+							<td ><span id="productNum"></span></td>
+							<td class="propertyName">产品名称：</td>
+							<td ><span id="productName"></span></td>
+						</tr>
+						<tr>
+							<td class="propertyName">生产许可证编号：</td>
+							<td><span id="qsNum"></span></td>
+							<td class="propertyName">产品标准号:</td>
+						    <td ><span id="gbNum"></span></td>
+						</tr>
+						
+						<tr>
+						    <td class="propertyName">产品厂商名称:</td>
+						    <td ><span id="firmName"></span></td>
+						    <td class="propertyName">产品种类:</td>
+						    <td ><span id="productType"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">产品工艺:</td>
+						    <td ><span id="productTech"></span></td>
+						    <td class="propertyName">保质期:</td>
+						    <td ><span id="shelfLife"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">净含量:</td>
+						    <td ><span id="quantity"></span></td>
+						    <td class="propertyName">配料表:</td>
+						    <td ><span id="ingredient"></span></td>
+						</tr>
+						<tr>
+						    <td class="propertyName">生产日期:</td>
+						    <td ><span id="productionDate"></span></td>
+						    
+						</tr>
+					</tbody>
+				</table>
+			</div> -->
+			
+			<div class="row"  style="margin-left:25px;margin-right:20px">
+			     
+			     <div class="modal-body" style="height:400px;overflow-y:auto">
+		     		<form role="form" id="movieForm">
+							<div class="col-sm-12" style="padding-top:10px">
+								<div class="col-sm-12">
+									<input  type="file" multiple class="file-loading" name="productMovies" id="productMovies" /> 
+								</div>
+						</div>
+					 </form>
+			     </div>
+			     <div class="modal-footer text-center" id="showUpdloadedFileDiv" style="display:none" >
+			          <!-- <button type="button" class="btn btn-white btn-sm" data-dismiss="modal"><i></i>&nbsp;取消</button> -->
+			          <button type="button" class="btn btn-primary" id="showUpdloadedFileBtn" >&nbsp;查看所有视频</button>
+			     </div>
+			     </div>
+			 
+   		</div>
+  	</div>
+  
+	<script src="../UI/common/loadCommonJs.js"></script>
+	<script src="./movieProduct.js"></script>
+	
+</body>
+</html>

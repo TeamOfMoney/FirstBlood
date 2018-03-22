@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="" />
+  <meta name="author" content="ThemeBucket" />
+
+  <title>厂商信息统计</title>
+  
+  <script>
+		var webPath = "../..";
+  </script>
+  <script src="../../UI/common/loadCommonCss.js"></script>
+  <style>
+  		.cross,.tick{margin-top:1px; margin-right:132px;}
+  </style>
+</head>
+
+<body>
+	<div class="page-main">
+		<div class="row page-heading" >
+			<div class="row page-heading-inner" >
+				<div class="col-xs-6 " id="nav_header" style="margin-left:10px;">
+					<ol class="list-inline" id="navContent">
+						<li><a href="javascript:void(0);" onclick="window.parent.backMain();">主页</a></li> <span>/</span>
+						<li><a id="parentNavName">###</a></li><span>/</span>
+						<li><a id="thisNavName">###</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		
+        <div class="row page-body" >
+        	<div class="col-sm-12">
+        		<div class="panel-heading">
+				   <strong style="line-height:30px;">产品厂商列表</strong> 
+		           <div class="panel-heading-button pull-right">
+				       	<!--<button type="button" class="btn" id="addBtn" title="新增"><i class="glyphicon glyphicon-plus" ></i></button>
+			       		 <button type="button" class="btn" id="removeOfNumbersBtn" title="批量删除"><i class="glyphicon glyphicon-trash" ></i></button> -->
+				       	<button type="button" class="btn" id="updownarea"><i class="glyphicon glyphicon-chevron-down"></i></button>
+			 		</div>
+        		<hr/>
+        		</div>
+        	</div>
+        	
+        	<div class="col-sm-12" id="queryForm">
+        		<form id="queryGridForm">
+			        <div class="row queryFrom-body">
+		          	  	<div class="form-group text-center">
+	              			
+				            <label class="col-sm-3 control-label text-right">产品厂商编号:&nbsp;</label> 
+				              	<input class="col-sm-2 " id="query_firmNum" placeholder=" 请输入产品厂商编号" />
+				            <label class="col-sm-3 control-label text-right">产品厂商名称:&nbsp;</label> 
+				              	<input class="col-sm-2 " id="query_firmName" placeholder=" 请输入产品厂商名称" />
+		              	</div>
+		          	</div>
+	          	</form>
+	          	
+	          	<div class="row queryForm-footer" style="margin-top:20px">
+	          	  	 <button type="button" class="btn" data-dismiss="modal" id="resetQueryForm"><i class="glyphicon glyphicon-repeat"></i>&nbsp;清空</button>
+	                 &nbsp;&nbsp;&nbsp;
+	                 <button type="button" class="btn" id="queryGridBtn"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
+	                  &nbsp;&nbsp;&nbsp;
+	                 <button type="button" class="btn" onclick="exportToExcel()"><i class="icon-file-alt"></i>&nbsp;导出EXCEL</button>
+	          	</div>
+	          	<hr/>
+          	</div>
+	        
+	        <div class="col-sm-12">
+				<div class="row table-content">
+					<div class="fixed-table-content">
+						<table  class="table table-bordered" id="table">
+							<thead class="fixed-thead">
+								<tr>
+									
+									<th><div>产品厂商编号</div></th>
+									<th><div>产品厂商名称</div></th>
+									<th><div>联系人</div></th>
+									<th><div>联系电话</div></th>
+									<th><div>手机号码</div></th>
+									<th><div>传真</div></th>
+									<th><div>邮箱</div></th>
+									<th><div>地址</div></th>
+									<th><div>成立日期</div></th>
+									<th><div>备注</div></th>
+									
+								</tr>
+							</thead>
+							<tbody id="dataList">
+								
+							</tbody>
+					    </table>
+					</div>
+					<div class="row table-foot">	
+						<div id="Pagination" class="pagination" ></div>
+					</div>
+	    		</div>
+   		 </div>
+  </div>
+    
+	<script src="../../UI/common/loadCommonJs.js"></script>
+	<script src="./firmReport.js"></script>
+</body>
+</html>
