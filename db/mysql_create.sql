@@ -171,7 +171,7 @@ CREATE TABLE org_info (
 CREATE TABLE loan_application
 (
   loan_id           INT NOT NULL AUTO_INCREMENT,
-  loan_journal      VARCHAR(32),
+  load_journal      VARCHAR(32),
   org_id            INT,
   org_code          VARCHAR(30),
   org_name          VARCHAR(100),
@@ -181,9 +181,6 @@ CREATE TABLE loan_application
   examine_time      VARCHAR(20),
   return_time       VARCHAR(20),
   detail            VARCHAR(4000),
-  process_name      VARCHAR(32),
-  process_status    VARCHAR(2),
-  process_user      VARCHAR(32),
   PRIMARY KEY (loan_id)
 )
   ENGINE = InnoDB
@@ -195,16 +192,18 @@ CREATE TABLE loan_application
 CREATE TABLE loan_journal
 (
   id             INT NOT NULL AUTO_INCREMENT,
+  online_id      INT,
   loan_id        INT,
+  org_id         INT,
+  org_code       VARCHAR(30),
+  org_name       VARCHAR(100),
   process_name   VARCHAR(32),
   process_flag   VARCHAR(10),
   process_result VARCHAR(2),
   process_user   VARCHAR(32),
   process_status VARCHAR(2),
   init_time      VARCHAR(20),
-  finish_time    CHAR(10),
-  last_id        INT,
-  next_id        INT,
+  finish_time    VARCHAR(20),
   PRIMARY KEY (id)
 )
   ENGINE = InnoDB
@@ -215,12 +214,12 @@ CREATE TABLE loan_journal
 /*==============================================================*/
 CREATE TABLE loan_online
 (
-  id             INT NOT NULL AUTO_INCREMENT,
-  loan_id        INT,
-  process_name   VARCHAR(32),
-  process_status VARCHAR(2),
-  process_user   VARCHAR(32),
-  PRIMARY KEY (id)
+  online_id          INT NOT NULL AUTO_INCREMENT,
+  loan_id            INT,
+  cur_process_name   VARCHAR(32),
+  cur_process_status VARCHAR(2),
+  cur_process_user   VARCHAR(32),
+  PRIMARY KEY (online_id)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
