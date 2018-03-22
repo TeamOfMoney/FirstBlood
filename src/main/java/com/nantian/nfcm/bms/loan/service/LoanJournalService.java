@@ -121,6 +121,9 @@ public class LoanJournalService {
             LoanJournal loanJournalReview = new LoanJournal();
             loanJournalReview.setLoanId(loanId);
             loanJournalReview.setLoanOnline(loanOnline);
+            loanJournal.setOrgId(loanJournal.getOrgId());
+            loanJournal.setOrgCode(loanJournal.getOrgCode());
+            loanJournal.setOrgName(loanJournal.getOrgName());
             loanJournalReview.setInitTime(DateUtil.getCurrentTime("yyyy-MM-dd"));
             loanJournalReview.setProcessFlag(BaseConst.PROCESSFLAG_REVIEW);
             loanJournalReview.setProcessName(BaseConst.PROCESSNAME_REVIEW);
@@ -156,6 +159,9 @@ public class LoanJournalService {
         LoanJournal loanJournal2Review = new LoanJournal();
         loanJournal2Review.setLoanId(loanId);
         loanJournal2Review.setLoanOnline(loanOnline);
+        loanJournal.setOrgId(loanJournal.getOrgId());
+        loanJournal.setOrgCode(loanJournal.getOrgCode());
+        loanJournal.setOrgName(loanJournal.getOrgName());
         loanJournal2Review.setInitTime(DateUtil.getCurrentTime("yyyy-MM-dd"));
         loanJournal2Review.setProcessFlag(BaseConst.PROCESSFLAG_2REVIEW);
         loanJournal2Review.setProcessName(BaseConst.PROCESSNAME_2REVIEW);
@@ -190,6 +196,9 @@ public class LoanJournalService {
         LoanJournal loanJournalResubmit = new LoanJournal();
         loanJournalResubmit.setLoanId(loanId);
         loanJournalResubmit.setLoanOnline(loanOnline);
+        loanJournal.setOrgId(loanJournal.getOrgId());
+        loanJournal.setOrgCode(loanJournal.getOrgCode());
+        loanJournal.setOrgName(loanJournal.getOrgName());
         loanJournalResubmit.setInitTime(DateUtil.getCurrentTime("yyyy-MM-dd"));
         loanJournalResubmit.setProcessFlag(BaseConst.PROCESSFLAG_RESUBMIT);
         loanJournalResubmit.setProcessName(BaseConst.PROCESSNAME_RESUBMIT);

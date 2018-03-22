@@ -75,7 +75,7 @@ public class LoanApplicationService {
 
         //同时生成贷款流程当前记录和历史记录
         LoanJournal loanJournal = new LoanJournal();
-        loanJournal.setLoanId(loanOnlineRet.getOnlineId());
+        loanJournal.setLoanId(loanApplicationRet.getLoanId());
         loanJournal.setLoanOnline(loanOnlineRet);
         loanJournal.setOrgId(loanBean.getOrgId());
         loanJournal.setOrgCode(loanBean.getOrgCode());
@@ -90,7 +90,7 @@ public class LoanApplicationService {
 
         //提交时生成分配流程流水
         LoanJournal loanJournalDist = new LoanJournal();
-        loanJournalDist.setLoanId(loanOnlineRet.getOnlineId());
+        loanJournalDist.setLoanId(loanApplicationRet.getLoanId());
         loanJournalDist.setLoanOnline(loanOnlineRet);
         loanJournalDist.setOrgId(loanBean.getOrgId());
         loanJournalDist.setOrgCode(loanBean.getOrgCode());
