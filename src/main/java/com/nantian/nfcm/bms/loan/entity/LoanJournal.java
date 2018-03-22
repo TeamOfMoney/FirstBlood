@@ -6,7 +6,11 @@ import javax.persistence.*;
 @Table(name = "loan_journal")
 public class LoanJournal {
     private Long id;
-    private LoanApplication loanId;
+    private LoanOnline loanOnline;
+    private Long loanId;
+    private Long orgId;
+    private String orgCode;
+    private String orgName;
     private String processName;
     private String processFlag;
     private String processResult;
@@ -14,10 +18,9 @@ public class LoanJournal {
     private String processStatus;
     private String initTime;
     private String finishTime;
-    private Long lastId;
-    private Long nextId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public Long getId() {
         return id;
@@ -27,14 +30,54 @@ public class LoanJournal {
         this.id = id;
     }
 
-    @ManyToOne(targetEntity = LoanApplication.class,fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = LoanOnline.class,fetch = FetchType.LAZY)
     @JoinColumn(name = "loan_id")
-    public LoanApplication getLoanId() {
+    public LoanOnline getOnlineId() {
+        return loanOnline;
+    }
+
+    public void setOnlineId(LoanOnline loanOnline) {
+        this.loanOnline = loanOnline;
+    }
+
+    @Basic
+    @Column(name = "loan_id")
+    public Long getLoanId() {
         return loanId;
     }
 
-    public void setLoanId(LoanApplication loanId) {
+    public void setLoanId(Long loanId) {
         this.loanId = loanId;
+    }
+
+    @Basic
+    @Column(name = "org_id")
+    public Long getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(Long orgId) {
+        this.orgId = orgId;
+    }
+
+    @Basic
+    @Column(name = "org_code")
+    public String getOrgCode() {
+        return orgCode;
+    }
+
+    public void setOrgCode(String orgCode) {
+        this.orgCode = orgCode;
+    }
+
+    @Basic
+    @Column(name = "org_name")
+    public String getOrgName() {
+        return orgName;
+    }
+
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
     }
 
     @Basic
@@ -105,25 +148,5 @@ public class LoanJournal {
 
     public void setFinishTime(String finishTime) {
         this.finishTime = finishTime;
-    }
-
-    @Basic
-    @Column(name = "last_id")
-    public Long getLastId() {
-        return lastId;
-    }
-
-    public void setLastId(Long lastId) {
-        this.lastId = lastId;
-    }
-
-    @Basic
-    @Column(name = "next_id")
-    public Long getNextId() {
-        return nextId;
-    }
-
-    public void setNextId(Long nextId) {
-        this.nextId = nextId;
     }
 }

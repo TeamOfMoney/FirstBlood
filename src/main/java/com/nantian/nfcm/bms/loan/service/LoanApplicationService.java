@@ -4,9 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nantian.nfcm.bms.loan.dao.LoanApplicationDao;
 import com.nantian.nfcm.bms.loan.dao.LoanJournalDao;
+import com.nantian.nfcm.bms.loan.dao.LoanOnlineDao;
 import com.nantian.nfcm.bms.loan.entity.LoanApplication;
 import com.nantian.nfcm.bms.loan.entity.LoanInfo;
 import com.nantian.nfcm.bms.loan.entity.LoanJournal;
+import com.nantian.nfcm.bms.loan.entity.LoanOnline;
 import com.nantian.nfcm.bms.loan.vo.LoanBean;
 import com.nantian.nfcm.util.BaseConst;
 import com.nantian.nfcm.util.DateUtil;
@@ -19,12 +21,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class LoanApplicationService {
     private LoanApplicationDao loanApplicationDao;
     private LoanJournalDao loanJournalDao;
+    private LoanOnlineDao loanOnlineDao;
 
     @Autowired
     public LoanApplicationService(LoanApplicationDao loanApplicationDao,
-                                  LoanJournalDao loanJournalDao) {
+                                  LoanJournalDao loanJournalDao,LoanOnlineDao loanOnlineDao) {
         this.loanApplicationDao = loanApplicationDao;
         this.loanJournalDao = loanJournalDao;
+        this.loanOnlineDao = loanOnlineDao;
     }
 
     public LoanApplication findById(Long loanId) throws ServiceException {
@@ -46,9 +50,18 @@ public class LoanApplicationService {
             throw new ServiceException("贷款申请详细信息错误");
         }
         LoanBean loanBeanRet = loanApplicationDao.save(loanBean);
+
+        //生成贷款流程当前流水
+        LoanOnline loanOnline = new LoanOnline();
+        loanOnline.setLoanId(loanBeanRet.getLoanId());
+        loanOnline.setCurProcessName(BaseConst.PROCESSNAME_DISTRIBUTION);
+        loanOnline.setCurProcessUser(BaseConst.PROCESSNAME_DISTRIBUTION);
+        loanOnline.setCurProcessStatus(BaseConst.PROCESS_INIT);
+        LoanOnline loanOnlineRet = loanOnlineDao.save(loanOnline);
+
         //同时生成贷款流程当前记录和历史记录
         LoanJournal loanJournal = new LoanJournal();
-        loanJournal.setLoanId(loanBeanRet);
+        loanJournal.setLoanId(loanOnlineRet.getOnlineId());
         loanJournal.setInitTime(DateUtil.getCurrentTime("yyyy-MM-dd"));
         loanJournal.setFinishTime(DateUtil.getCurrentTime("yyyy-MM-dd"));
         loanJournal.setProcessFlag(BaseConst.PROCESSFLAG_SUBMIT);
@@ -59,7 +72,7 @@ public class LoanApplicationService {
 
         //提交时生成分配流程流水
         LoanJournal loanJournalDist = new LoanJournal();
-        loanJournalDist.setLoanId(loanBeanRet);
+        loanJournalDist.setLoanId(loanOnlineRet.getOnlineId());
         loanJournalDist.setInitTime(DateUtil.getCurrentTime("yyyy-MM-dd"));
         loanJournalDist.setProcessFlag(BaseConst.PROCESSFLAG_DISTRIBUTION);
         loanJournalDist.setProcessName(BaseConst.PROCESSNAME_DISTRIBUTION);

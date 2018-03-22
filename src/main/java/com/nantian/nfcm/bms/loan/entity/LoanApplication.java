@@ -16,11 +16,9 @@ public class LoanApplication {
     private String examineTime;
     private String returnTime;
     private String detail;
-    private String processName;
-    private String processStatus;
-    private String processUser;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "loan_id")
     public Long getLoanId() {
         return loanId;
@@ -128,34 +126,5 @@ public class LoanApplication {
 
     public void setDetail(String detail) {
         this.detail = detail;
-    }
-
-    @Basic
-    @Column(name = "process_name")
-    public String getProcessName() {
-        return processName;
-    }
-
-    public void setProcessName(String processName) {
-        this.processName = processName;
-    }
-
-    @Basic
-    @Column(name = "process_status")
-    public String getProcessStatus() {
-        return processStatus;
-    }
-
-    public void setProcessStatus(String processStatus) {
-        this.processStatus = processStatus;
-    }
-    @Basic
-    @Column(name = "process_user")
-    public String getProcessUser() {
-        return processUser;
-    }
-
-    public void setProcessUser(String processUser) {
-        this.processUser = processUser;
     }
 }

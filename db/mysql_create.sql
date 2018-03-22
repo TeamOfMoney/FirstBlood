@@ -171,7 +171,7 @@ CREATE TABLE org_info (
 CREATE TABLE loan_application
 (
   loan_id           INT NOT NULL AUTO_INCREMENT,
-  load_journal      VARCHAR(32),
+  loan_journal      VARCHAR(32),
   org_id            INT,
   org_code          VARCHAR(30),
   org_name          VARCHAR(100),
