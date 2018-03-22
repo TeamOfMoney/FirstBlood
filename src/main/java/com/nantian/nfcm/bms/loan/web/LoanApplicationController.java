@@ -50,4 +50,20 @@ public class LoanApplicationController {
         }
         return resultInfo;
     }
+
+    @RequestMapping("/findById")
+    @ResponseBody
+    private ResultInfo findById(LoanBean loanBean) throws Exception {
+        ResultInfo resultInfo = new ResultInfo();
+        try {
+            LoanBean loan = loanApplicationService.findById(loanBean.getLoanId());
+            resultInfo.setSuccess("true");
+            resultInfo.setData(loan);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            resultInfo.setSuccess("false");
+            resultInfo.setData(e.getMessage());
+        }
+        return resultInfo;
+    }
 }

@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+
 @Service
 public class LoanApplicationService {
     private LoanApplicationDao loanApplicationDao;
@@ -26,14 +28,23 @@ public class LoanApplicationService {
 
     @Autowired
     public LoanApplicationService(LoanApplicationDao loanApplicationDao,
-                                  LoanJournalDao loanJournalDao,LoanOnlineDao loanOnlineDao) {
+                                  LoanJournalDao loanJournalDao, LoanOnlineDao loanOnlineDao) {
         this.loanApplicationDao = loanApplicationDao;
         this.loanJournalDao = loanJournalDao;
         this.loanOnlineDao = loanOnlineDao;
     }
 
-    public LoanApplication findById(Long loanId) throws ServiceException {
-        return loanApplicationDao.findOne(loanId);
+    public LoanBean findById(Long loanId) throws ServiceException {
+        LoanApplication loanApplication = loanApplicationDao.findOne(loanId);
+        LoanBean loanBean = po2vo(loanApplication);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            LoanInfo loanInfo = mapper.readValue(loanApplication.getDetail(), LoanInfo.class);
+            loanBean.setLoanInfo(loanInfo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return loanBean;
     }
 
     @Transactional
@@ -93,10 +104,10 @@ public class LoanApplicationService {
     }
 
     @Transactional
-    public LoanBean updateLoanApplication(LoanBean loanBean) throws ServiceException{
+    public LoanBean updateLoanApplication(LoanBean loanBean) throws ServiceException {
         Long loanId = loanBean.getLoanId();
         LoanApplication loanApplication = loanApplicationDao.findOne(loanId);
-        if(loanApplication==null){
+        if (loanApplication == null) {
             throw new ServiceException("贷款申请信息不存在");
         }
         LoanInfo loanInfo = loanBean.getLoanInfo();
@@ -111,15 +122,15 @@ public class LoanApplicationService {
         return loanBean;
     }
 
-    private LoanApplication vo2po(LoanBean loanBean){
+    private LoanApplication vo2po(LoanBean loanBean) {
         LoanApplication loanApplication = new LoanApplication();
-        BeanUtils.copyProperties(loanBean,loanApplication);
+        BeanUtils.copyProperties(loanBean, loanApplication);
         return loanApplication;
     }
 
-    private LoanBean po2vo(LoanApplication loanApplication){
+    private LoanBean po2vo(LoanApplication loanApplication) {
         LoanBean loanBean = new LoanBean();
-        BeanUtils.copyProperties(loanApplication,loanBean);
+        BeanUtils.copyProperties(loanApplication, loanBean);
         return loanBean;
     }
 }
