@@ -1,4 +1,4 @@
-var querDetialUrl = "../loanApp/findById.action";
+var querDetialUrl = "../loan/findById.action";
 
 /*-------------------------页面加載------------------------------*/
 var loadsoftDetInfo = function(data) {

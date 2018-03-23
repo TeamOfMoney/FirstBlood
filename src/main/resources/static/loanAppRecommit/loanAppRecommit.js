@@ -236,9 +236,9 @@ var editDataFill=function(pk){
 var editBtn = function(btn){
 	var pk = getPk(btn);
 	nowOperate = "edit";
-	$("#action").html('编辑贷款申请');
+	$("#action").html('贷款申请补件');
 	showModel();
-	$("#addFirmNum").attr("disabled",true);
+	//$("#addFirmNum").attr("disabled",true);
 	editDataFill(pk);
 	
 };
@@ -411,15 +411,45 @@ var getAddParam = function(){
 	var addSpouseName = $("#addSpouseName").val();
 	var addSex = $("#addSex").val();
     var addCredentialNo = $("#addCredentialNo").val();
-    var addBusinessTypes = $("#addBusinessTypes").val();
-    var addAmount = $("#addAmount").val();
+    //var addBusinessTypes = $("#addBusinessTypes").val();
+	var addBusinessTypes = $("input[name='businessTypes']:checked").val();
+	var addAmount = $("#addAmount").val();
 	var addTerm = $("#addTerm").val();
-	var addGuaranteeMethod = $("#addGuaranteeMethod").val();
-	var addIsRenew = $("#addIsRenew").val();
+	var addGuaranteeMethod = $("input[name='guaranteeMethod']:checked").val();
+	var addIsRenew = $("input[name='isRenew']:checked").val();
 	var addMarketer = $("#addMarketer").val();
 	var addMarketerPost = $("#addMarketerPost").val();
 	var addOperator = $("#addOperator").val();
 	var addOperatorPost = $("#addOperatorPost").val();
+	var addSyfRemark1;
+	var addSyfRemark2;
+	var addXfdkRemark;
+	var addJydkRemark1;
+	var addJydkRemark2;
+	var addNhxexydkRemark;
+	var addEsfajRemark;
+	if(addBusinessTypes=='1')
+	{
+		addSyfRemark1 = $("#addSyfRemark1").val();
+		addSyfRemark2 = $("#addSyfRemark2").val();
+	}
+	else if(addBusinessTypes=='2')
+	{
+		addXfdkRemark=$("#addXfdkRemark").val();
+	
+	}else if(addBusinessTypes=='3')
+	{
+		addXfdkRemark=$("#addJydkRemark1").val();
+		addXfdkRemark=$("#addJydkRemark2").val();
+	
+	}else if(addBusinessTypes=='4')
+	{
+		addXfdkRemark=$("#addNhxexydkRemark").val();
+	
+	}else if(addBusinessTypes=='5')
+	{
+		addXfdkRemark=$("#addEsfajRemark").val();
+	}
 	//参数需要传递到loanBean的loanInfo中
 	var param='{';
 	param=param+('\"operator\":\"'+loginUserName+ '\",');
@@ -432,6 +462,28 @@ var getAddParam = function(){
 	param=param+('\"sex\":\"'+addSex+ '\",');
 	param=param+('\"credentialNo\":\"'+addCredentialNo+ '\",');
 	param=param+('\"businessTypes\":\"'+addBusinessTypes+ '\",');
+	if(addBusinessTypes=='1')
+	{
+		param=param+('\"syfRemark1\":\"'+addSyfRemark1+ '\",');
+		param=param+('\"syfRemark2\":\"'+addSyfRemark2+ '\",');
+	}
+	else if(addBusinessTypes=='2')
+	{
+		param=param+('\"xfdkRemark\":\"'+addXfdkRemark+ '\",');
+	
+	}else if(addBusinessTypes=='3')
+	{
+		param=param+('\"jydkRemark1\":\"'+addJydkRemark1+ '\",');
+		param=param+('\"jydkRemark2\":\"'+addJydkRemark2+ '\",');
+	
+	}else if(addBusinessTypes=='4')
+	{
+		param=param+('\"nhxexydkRemark\":\"'+addNhxexydkRemark+ '\",');
+	
+	}else if(addBusinessTypes=='5')
+	{
+		param=param+('\"esfajRemark\":\"'+addEsfajRemark+ '\",');
+	}
 	param=param+('\"amount\":\"'+addAmount+ '\",');
 	param=param+('\"term\":\"'+addTerm+ '\",');
 	param=param+('\"guaranteeMethod\":\"'+addGuaranteeMethod+ '\",');
@@ -451,40 +503,116 @@ var getAddParam = function(){
  * @return
  */
 var getEditParam = function(){
-	var addFirmNum = $("#addFirmNum").val();
-	var addFirmName = $("#addFirmName").val();
-	var addContact = $("#addContact").val();
-    var addTelephone = $("#addTelephone").val();
-    var addMobile = $("#addMobile").val();
-    var addFax = $("#addFax").val();
-	var addEmail = $("#addEmail").val();
-	var addAddress = $("#addAddress").val();
-	var addFirmDate = $("#addFirmDate").val();
-	var addRemark = $("#addRemark").val();
-	var param='{'
-	param=param+('\"firmNum\":\"'+addFirmNum+ '\",');
-	param=param+('\"firmName\":\"'+addFirmName+ '\",');
-	param=param+('\"contact\":\"'+addContact+ '\",');
-	param=param+('\"telephone\":\"'+addTelephone+ '\",');
-	param=param+('\"mobilePhone\":\"'+addMobile+ '\",');
-	param=param+('\"fax\":\"'+addFax+ '\",');
-	param=param+('\"email\":\"'+addEmail+ '\",');
-	param=param+('\"address\":\"'+addAddress+ '\",');
-	param=param+('\"firmDate\":\"'+addFirmDate+ '\",');
-	param=param+('\"remark\":\"'+addRemark+ '\"');
+	var addBorrowerName = $("#addBorrowerName").val();
+	var addSpouseName = $("#addSpouseName").val();
+	var addSex = $("#addSex").val();
+    var addCredentialNo = $("#addCredentialNo").val();
+    //var addBusinessTypes = $("#addBusinessTypes").val();
+	var addBusinessTypes = $("input[name='businessTypes']:checked").val();
+	var addAmount = $("#addAmount").val();
+	var addTerm = $("#addTerm").val();
+	var addGuaranteeMethod = $("input[name='guaranteeMethod']:checked").val();
+	var addIsRenew = $("input[name='isRenew']:checked").val();
+	var addMarketer = $("#addMarketer").val();
+	var addMarketerPost = $("#addMarketerPost").val();
+	var addOperator = $("#addOperator").val();
+	var addOperatorPost = $("#addOperatorPost").val();
+	var addSyfRemark1;
+	var addSyfRemark2;
+	var addXfdkRemark;
+	var addJydkRemark1;
+	var addJydkRemark2;
+	var addNhxexydkRemark;
+	var addEsfajRemark;
+	if(addBusinessTypes=='1')
+	{
+		addSyfRemark1 = $("#addSyfRemark1").val();
+		addSyfRemark2 = $("#addSyfRemark2").val();
+	}
+	else if(addBusinessTypes=='2')
+	{
+		addXfdkRemark=$("#addXfdkRemark").val();
+	
+	}else if(addBusinessTypes=='3')
+	{
+		addXfdkRemark=$("#addJydkRemark1").val();
+		addXfdkRemark=$("#addJydkRemark2").val();
+	
+	}else if(addBusinessTypes=='4')
+	{
+		addXfdkRemark=$("#addNhxexydkRemark").val();
+	
+	}else if(addBusinessTypes=='5')
+	{
+		addXfdkRemark=$("#addEsfajRemark").val();
+	}
+	//参数需要传递到loanBean的loanInfo中
+	var param='{';
+	param=param+('\"operator\":\"'+loginUserName+ '\",');
+	param=param+('\"orgId\":\"'+orgId+ '\",');
+	param=param+('\"orgName\":\"'+orgName+ '\",');
+	param=param+('\"orgCode\":\"'+orgCode+ '\",');
+	param=param+('{\"loanInfo\":[{');
+	param=param+('\"borrowerName\":\"'+addBorrowerName+ '\",');
+	param=param+('\"spouseName\":\"'+addSpouseName+ '\",');
+	param=param+('\"sex\":\"'+addSex+ '\",');
+	param=param+('\"credentialNo\":\"'+addCredentialNo+ '\",');
+	param=param+('\"businessTypes\":\"'+addBusinessTypes+ '\",');
+	if(addBusinessTypes=='1')
+	{
+		param=param+('\"syfRemark1\":\"'+addSyfRemark1+ '\",');
+		param=param+('\"syfRemark2\":\"'+addSyfRemark2+ '\",');
+	}
+	else if(addBusinessTypes=='2')
+	{
+		addXfdkRemark=$("#addXfdkRemark").val();
+		param=param+('\"xfdkRemark\":\"'+addXfdkRemark+ '\",');
+	
+	}else if(addBusinessTypes=='3')
+	{
+		param=param+('\"jydkRemark1\":\"'+addJydkRemark1+ '\",');
+		param=param+('\"jydkRemark2\":\"'+addJydkRemark2+ '\",');
+	
+	}else if(addBusinessTypes=='4')
+	{
+		param=param+('\"nhxexydkRemark\":\"'+addNhxexydkRemark+ '\",');
+	
+	}else if(addBusinessTypes=='5')
+	{
+		param=param+('\"esfajRemark\":\"'+addEsfajRemark+ '\",');
+	}
+	param=param+('\"amount\":\"'+addAmount+ '\",');
+	param=param+('\"term\":\"'+addTerm+ '\",');
+	param=param+('\"guaranteeMethod\":\"'+addGuaranteeMethod+ '\",');
+	param=param+('\"isRenew\":\"'+addIsRenew+ '\",');
+	param=param+('\"marketer\":\"'+addMarketer+ '\",');
+	param=param+('\"marketerPost\":\"'+addMarketerPost+ '\",');
+	param=param+('\"operator\":\"'+addOperator+ '\",');
+	param=param+('\"operatorPost\":\"'+addOperatorPost+ '\"}]');
 	//param = param.substring(0, param.length - 1);
 	param += '}';
 	param=str2Json(param);
 				
-	store_new['firmName']=addFirmName;
-	store_new['contact']=addContact;
-	store_new['telephone']=addTelephone;
-	store_new['mobile']=addMobile;
-	store_new['email']=addEmail;
-	store_new['fax']=addFax;
-	store_new['address']=addAddress;
-	store_new['firmDate']=addFirmDate;
-	store_new['remark']=addRemark;
+	store_new['borrowerName']=addBorrowerName;
+	store_new['spouseName']=addSpouseName;
+	store_new['sex']=addSex;
+	store_new['credentialNo']=addCredentialNo;
+	store_new['businessType']=addBusinessTypes;
+	store_new['syfRemark1']=addSyfRemark1;
+	store_new['syfRemark2']=addSyfRemark2;
+	store_new['xfdkRemark']=addXfdkRemark;
+	store_new['jydkRemark1']=addJydkRemark1;
+	store_new['jydkRemark2']=addJydkRemark2;
+	store_new['nhxexydkRemark']=addNhxexydkRemark;
+	store_new['esfajRemark']=addEsfajRemark;
+	store_new['amount']=addAmount;
+	store_new['term']=addTerm;
+	store_new['guaranteeMethod']=addGuaranteeMethod;
+	store_new['isRenew']=addIsRenew;
+	store_new['marketer']=addMarketer;
+	store_new['marketerPost']=addMarketerPost;
+	store_new['operator']=addOperator;
+	store_new['operatorPost']=addOperatorPost;
 	return param;
 };
 
@@ -495,30 +623,114 @@ var getEditParam = function(){
  */
 var update_old_data;
 var dataFill = function(data){
-	var roles=[];
-	var object = util.str2Json(data).data;
+	
+	var object = util.str2Json(data).data.loanInfo;
 	update_old_data=object;
 	
-	$("#addFirmNum").val(object.firmNum);
-	$("#addFirmName").val(object.firmName);
-	$("#addContact").val(object.contact);
-    $("#addTelephone").val(object.telephone);
-    $("#addMobile").val(object.mobilePhone);
-    $("#addFax").val(object.fax);
-	$("#addEmail").val(object.email);
-	$("#addAddress").val(object.address);
-	$("#addFirmDate").val(object.firmDate);
-	$("#addRemark").val(object.remark);
+	$("#addBorrowerName").val(object.borrowerName);
+	$("#addSpouseName").val(object.spouseName);
+	$("#addSex").val(object.sex);
+    $("#addCredentialNo").val(object.credentialNo);
+    $("#addBusinessTypes").val(object.businessType);
+    var businessTypeValue = object.businessType
+    //$('input[type="radio"]:checked').parent('label').addClass('active');
+   // $('input[name="addBusinessTypes"]:checked').parent('label').addClass('active');
+    $("input[name='addBusinessTypes']").each(function(i){  
+        if($(this).val()==businessTypeValue)  
+        {  
+            $(this).parent('label').addClass('active');  
+        }  
+    });
+    if(businessTypeValue=='1')
+	{
+    	$("#syfRe").show();
+		$("#xfkdRe").hide();
+		$("#jydkRe").hide();
+		$("#nhxexydkRe").hide();
+		$("#esfajRe").hide();
+		$("#addSyfRemark1").val(object.syfRemark1);
+		$("#addSyfRemark2").val(object.syfRemark2);
+	}
+	else if(businessTypeValue=='2')
+	{
+		$("#syfRe").hide();
+		$("#xfkdRe").show();
+		$("#jydkRe").hide();
+		$("#nhxexydkRe").hide();
+		$("#esfajRe").hide();
+		$("#addXfdkRemark").val(object.xfdkRemark);
 	
-	store_old['firmName']=object.firmName;
-	store_old['contact']=object.contact;
-	store_old['telephone']=object.telephone;
-	store_old['mobile']=object.mobile;
-	store_old['email']=object.email;
-	store_old['fax']=object.fax;
-	store_old['address']=object.address;
-	store_old['firmDate']=object.firmDate;
-	store_old['remark']=object.remark;
+	}else if(businessTypeValue=='3')
+	{
+		$("#syfRe").hide();
+		$("#xfkdRe").hide();
+		$("#jydkRe").show();
+		$("#nhxexydkRe").hide();
+		$("#esfajRe").hide();
+		$("#addJydkRemark1").val(object.jydkRemark1);
+		$("#addJydkRemark2").val(object.jydkRemark2);
+	
+	}else if(businessTypeValue=='4')
+	{
+		$("#syfRe").hide();
+		$("#xfkdRe").hide();
+		$("#jydkRe").hide();
+		$("#nhxexydkRe").show();
+		$("#esfajRe").hide();
+		$("#addNhxexydkRemark").val(object.nhxexydkRemark);
+	
+	}else if(businessTypeValue=='5')
+	{
+		$("#syfRe").hide();
+		$("#xfkdRe").hide();
+		$("#jydkRe").hide();
+		$("#nhxexydkRe").hide();
+		$("#esfajRe").show();
+		$("#addEsfajRemark").val(object.esfajRemark);
+	}
+    
+    
+    $("#addAmount").val(object.amount);
+	$("#addTerm").val(object.term);
+	//$("#addGuaranteeMethod").val(object.guaranteeMethod);
+	$("input[name='guaranteeMethod']").each(function(i){  
+        if($(this).val()==object.guaranteeMethod)  
+        {  
+            $(this).parent('label').addClass('active');  
+        }  
+    });
+	//$("#addIsRenew").val(object.isRenew);
+	$("input[name='isRenew']").each(function(i){  
+        if($(this).val()==object.isRenew)  
+        {  
+            $(this).parent('label').addClass('active');  
+        }  
+    });
+	$("#addMarketer").val(object.marketer);
+	$("#addMarketerPost").val(object.marketerPost);
+	$("#addOperator").val(object.operator);
+	$("#addOperatorPost").val(object.operatorPost);
+	
+	store_old['borrowerName']=object.borrowerName;
+	store_old['spouseName']=object.spouseName;
+	store_old['sex']=object.sex;
+	store_old['credentialNo']=object.credentialNo;
+	store_old['businessType']=object.businessType;
+	store_old['syfRemark1']=object.syfRemark1;
+	store_old['syfRemark2']=object.syfRemark2;
+	store_old['xfdkRemark']=object.xfdkRemark;
+	store_old['jydkRemark1']=object.jydkRemark1;
+	store_old['jydkRemark2']=object.jydkRemark2;
+	store_old['nhxexydkRemark']=object.nhxexydkRemark;
+	store_old['esfajRemark']=object.esfajRemark;
+	store_old['amount']=object.amount;
+	store_old['term']=object.term;
+	store_old['guaranteeMethod']=object.guaranteeMethod;
+	store_old['isRenew']=object.isRenew;
+	store_old['marketer']=object.marketer;
+	store_old['marketerPost']=object.marketerPost;
+	store_old['operator']=object.operator;
+	store_old['operatorPost']=object.operatorPost;
 };
 
 

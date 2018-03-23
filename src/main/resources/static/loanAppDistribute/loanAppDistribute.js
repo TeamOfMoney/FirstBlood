@@ -7,7 +7,7 @@ var orgId;
 /*
  * 用户列表显示
  */
-var queryGridUrl = "../loanApp/findByCondition.action";
+var queryGridUrl = "../loanJournal/findByCondition.action";
 
 var addDataUrl = "../loanApp/addApplication.action";
 var editDataUrl = "../firm/updateFirm.action";
@@ -24,14 +24,15 @@ var nowOperate;
  */
 var loadData = function(){
 	var headParam = [];
+	headParam.push("id");
 	headParam.push("loanId");
-	headParam.push("orgCode");
-	headParam.push("orgName");
-	headParam.push("operator");
+	headParam.push("processName");
+	headParam.push("processFlag");
+	headParam.push("processResult");
+	headParam.push("processUser");
+	headParam.push("processStatus");
 	headParam.push("initTime");
-	headParam.push("distriutionTime");
-	headParam.push("examineTime");
-	headParam.push("returnTime");
+	headParam.push("finishTime");
 	
 	var url = queryGridUrl;
 	
@@ -54,7 +55,7 @@ var loadData = function(){
 	gridObj["pk"] = "pk";
 	gridObj["loanId"] = "loanId";
 	gridObj["page"] = true;
-	gridObj["checked"]=false;
+	//gridObj["checked"]=false;
 	
 	var nTGridBean = new NTGridBean();
 	nTGridBean.init(gridObj);
@@ -125,7 +126,7 @@ var addOrEditCompleteFun = function(){
 
 var user = function(btn){
 	var loanId = getLoanId(btn);
-	var url = "./loanAppDisributeUsers.html?loanId=" + loanId;
+	var url = "./loanAppDistributeUsers.html?loanId=" + loanId;
 	window.location.href = encodeURI(url);
 };
 
@@ -215,7 +216,7 @@ $(function(){
 	$("#upload").click(function(){
 		$("#upload_form").submit();
 	});
-	//loadData();	
+	loadData();	
 	$('input:radio[name="businessTypes"]').change( function(){
 		var item = $("input[name='businessTypes']:checked").val();
 		//切换时清除备注内容
