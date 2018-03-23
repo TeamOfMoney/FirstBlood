@@ -120,3 +120,24 @@ INSERT INTO `bms_param` VALUES ('productImageCountLimit', '10', '产品图片限
 INSERT INTO `bms_param` VALUES ('productVideoCountLimit', '2', '产品视频限制数量');
 
 
+/*贷款申请管理相关页面及权限*/
+INSERT INTO `menu_tree` VALUES ('8', '1', '贷款申请管理', 'icon-file-text', '0', '', null);
+INSERT INTO `menu_tree` VALUES ('9', '8', '贷款申请与查询', '', '1', '/nfcm/loanAppCommit/loanAppCommit.html', null);
+INSERT INTO `menu_tree` VALUES ('10', '8', '贷款进件处理', '', '1', '/nfcm/loanAppDistribute/loanAppDistribute.html', null);
+INSERT INTO `menu_tree` VALUES ('11', '8', '贷款审批处理', '', '1', '/nfcm/loanAppExamine/loanAppExamine.html', null);
+
+INSERT INTO `auth_info` VALUES ('1030', '款申请与查询', '贷款申请提交', '/loan/addLoan.action');
+INSERT INTO `auth_info` VALUES ('1031', '贷款进件处理', '分配审批人员', '/loanJournal/findByCondition.action');
+INSERT INTO `auth_info` VALUES ('1032', '贷款审批处理', '审批贷款申请', '/loanApp/updateExamine.action');
+INSERT INTO `auth_info` VALUES ('1033', '款申请与查询', '查询流水信息', '/loanJournal/findByCondition.action');
+INSERT INTO `auth_info` VALUES ('1034', '款申请与查询', '查询单个申请信息', '/loan/findById.action');
+INSERT INTO `auth_info` VALUES ('1035', '贷款进件处理', '查询人员', '/user/findByCondition.action');
+
+
+INSERT INTO `menu_auth` VALUES ('288', '9', '1030');
+INSERT INTO `menu_auth` VALUES ('289', '10', '1031');
+INSERT INTO `menu_auth` VALUES ('290', '11', '1032');
+INSERT INTO `menu_auth` VALUES ('291', '9', '1033');
+INSERT INTO `menu_auth` VALUES ('292', '9', '1034');
+INSERT INTO `menu_auth` VALUES ('293', '10', '1035');
+
