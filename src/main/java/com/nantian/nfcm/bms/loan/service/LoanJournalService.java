@@ -1,6 +1,7 @@
 package com.nantian.nfcm.bms.loan.service;
 
 import com.nantian.nfcm.bms.auth.dao.UserInfoDao;
+import com.nantian.nfcm.bms.auth.entity.UserInfo;
 import com.nantian.nfcm.bms.loan.dao.LoanApplicationDao;
 import com.nantian.nfcm.bms.loan.dao.LoanJournalDao;
 import com.nantian.nfcm.bms.loan.dao.LoanOnlineDao;
@@ -30,13 +31,15 @@ public class LoanJournalService {
     private LoanJournalDao loanJournalDao;
     private LoanOnlineDao loanOnlineDao;
     private LoanApplicationDao loanApplicationDao;
+    private UserInfoDao userInfoDao;
 
     @Autowired
     public LoanJournalService(LoanJournalDao loanJournalDao,LoanOnlineDao loanOnlineDao,
-                              LoanApplicationDao loanApplicationDao) {
+                              LoanApplicationDao loanApplicationDao,UserInfoDao userInfoDao) {
         this.loanJournalDao = loanJournalDao;
         this.loanOnlineDao = loanOnlineDao;
         this.loanApplicationDao = loanApplicationDao;
+        this.userInfoDao = userInfoDao;
     }
 
     /**
@@ -166,7 +169,9 @@ public class LoanJournalService {
         loanJournal2Review.setProcessFlag(BaseConst.PROCESSFLAG_2REVIEW);
         loanJournal2Review.setProcessName(BaseConst.PROCESSNAME_2REVIEW);
         loanJournal2Review.setProcessStatus(BaseConst.PROCESS_INIT);
-        loanJournal2Review.setProcessUser(loanJournalBean.getProcessUser());
+        UserInfo userInfo = userInfoDao.findFirstByUserType("4");
+
+        loanJournal2Review.setProcessUser(userInfo.getUserName());
         loanJournalDao.save(loanJournal2Review);
 
         //更新贷款申请表中的当前流水状态

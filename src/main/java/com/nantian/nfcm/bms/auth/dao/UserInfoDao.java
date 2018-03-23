@@ -5,5 +5,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import com.nantian.nfcm.bms.auth.entity.UserInfo;
 
+import java.util.List;
+
 public interface UserInfoDao extends JpaRepository<UserInfo, String>,JpaSpecificationExecutor<UserInfo>{
+    public  UserInfo findFirstByUserType(String userType);
 }
