@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface UserInfoDao extends JpaRepository<UserInfo, String>,JpaSpecificationExecutor<UserInfo>{
     public  UserInfo findFirstByUserType(String userType);
+    
+    public  List<UserInfo> findByUserType(String userType);
 }

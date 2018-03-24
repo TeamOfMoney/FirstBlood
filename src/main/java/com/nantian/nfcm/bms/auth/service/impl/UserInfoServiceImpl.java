@@ -377,5 +377,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 		}
 	}
     
+	
+	public List queryReviewUserOptions() throws ServiceException {
+		List<UserInfo> reviewUserList = userInfoDao.findByUserType("3");
+		return reviewUserList;
+	}
 
 }

@@ -4,6 +4,8 @@ import com.nantian.nfcm.util.ServiceException;
 import com.nantian.nfcm.util.vo.GridData;
 import com.nantian.nfcm.util.vo.LoginBean;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 import com.nantian.nfcm.bms.auth.entity.UserInfo;
@@ -74,4 +76,6 @@ public interface UserInfoService {
 	 */
 	public UserBean updateUserSelf(UserBean userBean,String userName) throws ServiceException;
 	
+	
+	public List queryReviewUserOptions() throws ServiceException ;
 }

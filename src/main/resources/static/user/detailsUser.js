@@ -48,11 +48,11 @@ var loadsoftDetInfo = function(data) {
 					}
 					else if(object.userType=='3')
 					{
-						userTypeDesc='审核';
+						userTypeDesc='审查';
 					}
 					else if(object.userType=='4')
 					{
-						userTypeDesc='二审人员';
+						userTypeDesc='二审';
 					}
 					else{
 						userTypeDesc=object.userType;

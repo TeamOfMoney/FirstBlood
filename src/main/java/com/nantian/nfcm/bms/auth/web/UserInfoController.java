@@ -8,10 +8,11 @@ import com.nantian.nfcm.util.vo.LoginBean;
 import com.nantian.nfcm.util.vo.ResultInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -160,4 +161,29 @@ public class UserInfoController {
 		}
 		return resultInfo;
 	}
+    
+    /**
+     * 删除厂商信息
+     * @param firmInfo
+     * @return ResultInfo
+     * @throws Exception
+     */
+    @RequestMapping("/queryReviewUserOptions")
+    @ResponseBody
+    private ResultInfo queryReviewUserOptions() throws Exception {
+        ResultInfo resultInfo = new ResultInfo();
+        try {
+            List reviewUserList= userInfoService.queryReviewUserOptions();
+        	/*UserBean userBean =new UserBean();
+        	userBean.setUserType("3");
+            GridData<UserBean> gd= userInfoService.findByCondition(0, 0, userBean,null);*/
+            resultInfo.setSuccess("true");
+            resultInfo.setData(reviewUserList);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            resultInfo.setSuccess("false");
+            resultInfo.setData(e.getMessage());
+        }
+        return resultInfo;
+    }
 }
