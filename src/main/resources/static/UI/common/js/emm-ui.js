@@ -46,6 +46,7 @@ var NTGridBean = function (){
 	var defaultBtns ;
 	var operateBtns = [];
 	var pk ;
+	var columnValue;
 	var page;
 	var loadComplete;
 	var checkboxSingle;
@@ -76,6 +77,7 @@ var NTGridBean = function (){
 		defaultBtns = gridObj.defaultBtns;
 		operateBtns = gridObj.operateBtns;
 		pk = gridObj.pk;
+		columnValue=gridObj.columnValue;
 		page = gridObj.page;
 		if(gridObj.loadComplete!=null){
 			loadComplete = gridObj.loadComplete;
@@ -214,7 +216,7 @@ var NTGridBean = function (){
 		var allOprateBtns = getAllOperateBtns();
 		var tbodyStr = "";
 		$(data).each(function(index,ele){
-			var tr = "<tr pk='"+ele[pk]+"'  style='border:solid red 1px'>";
+			var tr = "<tr pk='"+ele[pk]+"' columnValue='"+ele[columnValue]+"'  style='border:solid red 1px'>";
 			if(checked==true)
 			tr = tr+"<td style='width:30px;'><div class='checker'><span><input type='checkbox' class='uniform emmCheckbox'/></span></div></td>";
 			

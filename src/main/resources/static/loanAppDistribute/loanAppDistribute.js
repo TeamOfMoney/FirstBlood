@@ -13,6 +13,8 @@ var addDataUrl = "../loanApp/addApplication.action";
 var editDataUrl = "../firm/updateFirm.action";
 var removeDataUrl = "../firm/delFirm.action";
 
+var reviewUserOptionUrl = "../user/queryReviewUserOptions.action";
+
 /*
  *查询用户资料 
  */
@@ -24,24 +26,32 @@ var nowOperate;
  */
 var loadData = function(){
 	var headParam = [];
-	headParam.push("id");
+	//headParam.push("id");
 	headParam.push("loanId");
-	headParam.push("processName");
-	headParam.push("processFlag");
-	headParam.push("processResult");
-	headParam.push("processUser");
-	headParam.push("processStatus");
 	headParam.push("initTime");
+	//业务种类
+	headParam.push("");
+	//申贷金额
+	headParam.push("");
+	//贷款期限
+	headParam.push("");
+	//处理进度
+	headParam.push("curProcessName");
+	//处理人
+	headParam.push("curProcessUser");
+	//处理人批复意见
+	headParam.push("processResult");
+	//进度更新日期
 	headParam.push("finishTime");
 	
 	var url = queryGridUrl;
 	
 	var defaultBtns = {"viewBtn":"hidden","editBtn":"hidden","removeBtn":"hidden"};
 	var operateBtns = [];
-	var userBtn = {'btnName':'userBtn','text':'<button class="btn btn-sm btn-success" onclick="user(this)" title="分配审核人员">' +
+	/*var userBtn = {'btnName':'userBtn','text':'<button class="btn btn-sm btn-success" onclick="user(this)" title="分配审核人员">' +
 			' <i class="glyphicon glyphicon-user"></i>' +
 			'</button>'};
-	operateBtns.push(userBtn);
+	operateBtns.push(userBtn);*/
 	
 	
 	var querParam = getQueryGridParam();
@@ -52,7 +62,7 @@ var loadData = function(){
 	gridObj["queryParam"] = querParam;
 	gridObj["defaultBtns"] = defaultBtns;
 	gridObj["operateBtns"] = operateBtns;
-	gridObj["pk"] = "pk";
+	gridObj["pk"] = "id";
 	gridObj["loanId"] = "loanId";
 	gridObj["page"] = true;
 	//gridObj["checked"]=false;
@@ -125,7 +135,7 @@ var addOrEditCompleteFun = function(){
 };
 
 var user = function(btn){
-	var loanId = getLoanId(btn);
+	var loanId = getPk(btn);
 	var url = "./loanAppDistributeUsers.html?loanId=" + loanId;
 	window.location.href = encodeURI(url);
 };
@@ -270,6 +280,10 @@ $(function(){
 		
 		}
 	});
+	loadLoginUserInfo();
+	reviewUserOption_query();
+	
+	
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -289,6 +303,20 @@ function loadLoginUserInfo() {
 	});
 };
 
+function reviewUserOption_query() {
+	var param=[];
+	var selectObj = {};
+	selectObj["url"] = reviewUserOptionUrl;
+	selectObj["id"] = 'query_reviewUser';
+	selectObj["param"] = param;
+	selectObj["valueParam"] = 'userName';
+	selectObj["htmlParam"] = 'userName';
+	selectObj["defaultSelectedValue"] = null;
+	var selectOption = new SelectOption();
+	selectOption.clear('query_reviewUser');
+	selectOption.loadOption(selectObj);
+};
+
 
 /**
  * 详情
@@ -299,7 +327,73 @@ var viewBtn = function(btn){
 	window.location.href = encodeURI(url);
 };
 
+var saveBtn=function(){
+	//var param = getRemoveDataOfNumbersParam();
+	var param = getDistributeDataOfNumbersParam();
+	if(param!=undefined){
+		//removeDataOfNumbers(param);
+		var util = new NT.utilObj.util();
+		util.emmAjax({
+			url : '../loanJournal/updateLoanJournalDistribution.action',
+			data: param,
+			success : function(data) {
+				var obj = eval('(' + data + ')');
+				if(obj.success="true")
+				{
+					util.sysAlert("分配成功！");
+					loadData();	
+				}
+			}
+		});
+	}
+};
 
+/**
+ * 获得批量分配的参数
+ * @return
+ */
+var getDistributeDataOfNumbersParam = function(){
+	var checkboxs = $("#table").find("tbody").find("input[type='checkbox']");
+	var pks = new Array();
+	
+	$(checkboxs).each(function(index,ele){
+		if($(this).is(":checked")){
+			var pk = getPk($(this).parent());
+			pks.push(pk);
+		}
+	});
+	
+	if(pks.length>0){
+		
+		var reviewUser = $("#query_reviewUser").val();
+		if(reviewUser!='')
+		{
+			var param="{";
+			param=param+('\"curProcessUser\":\"'+loginUserName+'\",');
+			param=param+('\"processUser\":\"'+reviewUser+'\",');
+			
+			for(var i=0;i<pks.length;i++)
+				{
+					param=param+('\"ids['+i+']\":\"'+pks[i]+'\",');
+				}
+			param = param.substring(0, param.length - 1);
+			param += '}';
+			//alert(param);
+			param=util.str2Json(param);
+			//var param = {"paramNames":pks};
+			return param;
+		}
+		else
+		{
+			util.sysTips("请选择审查人员！ ","query_reviewUser");
+		}
+		
+		
+	}
+	else{
+		util.sysTips("请选择需要分配的数据！ ","selectremove");
+	}
+};
 /**
  * 获得查询列表参数
  */
@@ -308,7 +402,7 @@ var getQueryGridParam = function(){
 	//var QName = $("#query_firmName").val();
 	var param = {
 		'processStatus' : '0',
-		'processName':'分配'
+		'curProcessName':'分配'
 		//'firmName' : QName
 	};
 	return param;

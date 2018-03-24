@@ -1,4 +1,4 @@
-var querDetialUrl = "../loanApp/findById.action";
+var querDetialUrl = "../loan/findById.action";
 
 /*-------------------------页面加載------------------------------*/
 var loadsoftDetInfo = function(data) {
@@ -235,23 +235,26 @@ $("#returnBtn").click(function(){
 
 function approve(result){
 	var approveOpinion=$("#remove_opinion").val();
+	var processUser = getUrlParam('loginUserName');
 	if(result=="REFUSE")
 	{
 		//退件
 		if(approveOpinion=="")
 		{
-			util.sysAlert("审批意见不能为空！");
+			util.sysAlert("审查意见不能为空！");
 		}
 		else
 		{
-			var loanId = getUrlParam('loanId');
+			var id = getUrlParam('id');
 			util.confirmView(function(){
 				util.emmAjax({
-					url : '../loanApp/approveApplication.action',
+					url : '../loanJournal/updateLoanJournalRefuse.action',
 					type : 'post',
 					data : {
-						'loanId':loanId,
-						'processResult':approveOpinion
+						'id':id,
+						'processResult':approveOpinion,
+						'processUser':processUser
+						
 					},
 					cache : false,
 					dataType : 'text',
@@ -259,7 +262,7 @@ function approve(result){
 						var obj =str2Json(data);
 						if(obj.success=='true')
 						{
-							util.msg("审核完成");
+							util.sysAlert("审查完成");
 							window.location.href = "./loanAppExamine.html";
 						}
 						else{
@@ -278,14 +281,15 @@ function approve(result){
 		}
 		else
 		{
-			var loanId = getUrlParam('loanId');
+			var id = getUrlParam('id');
 			util.confirmView(function(){
 				util.emmAjax({
-					url : '../loanApp/approveApplication.action',
+					url : '../loanJournal/updateLoanJournalResubmit.action',
 					type : 'post',
 					data : {
-						'loanId':loanId,
-						'processResult':approveOpinion
+						'id':id,
+						'processResult':approveOpinion,
+						'processUser':processUser
 					},
 					cache : false,
 					dataType : 'text',
@@ -293,7 +297,7 @@ function approve(result){
 						var obj =str2Json(data);
 						if(obj.success=='true')
 						{
-							util.msg("审核完成");
+							util.sysAlert("审查完成");
 							window.location.href = "./loanAppExamine.html";
 						}
 						else{
@@ -306,14 +310,15 @@ function approve(result){
 	}else if(result=="REVIEW")
 	{
 		//审核
-		var loanId = getUrlParam('loanId');
+		var id = getUrlParam('id');
 		util.confirmView(function(){
 			util.emmAjax({
-				url : '../loanApp/approveApplication.action',
+				url : '../loanJournal/updateLoanJournalReview.action',
 				type : 'post',
 				data : {
-					'loanId':loanId,
-					'processResult':approveOpinion
+					'id':id,
+					'processResult':approveOpinion,
+					'processUser':processUser
 				},
 				cache : false,
 				dataType : 'text',
@@ -321,7 +326,7 @@ function approve(result){
 					var obj =str2Json(data);
 					if(obj.success=='true')
 					{
-						util.msg("审核完成");
+						util.sysAlert("审查完成");
 						window.location.href = "./loanAppExamine.html";
 					}
 					else{
@@ -333,14 +338,15 @@ function approve(result){
 	}else if(result=="2REVIEW")
 	{
 		//二审
-		var loanId = getUrlParam('loanId');
+		var id = getUrlParam('id');
 		util.confirmView(function(){
 			util.emmAjax({
-				url : '../loanApp/approveApplication.action',
+				url : '../loanJournal/updateLoanJournal2Review.action',
 				type : 'post',
 				data : {
-					'loanId':loanId,
-					'processResult':approveOpinion
+					'id':id,
+					'processResult':approveOpinion,
+					'processUser':processUser
 				},
 				cache : false,
 				dataType : 'text',
@@ -348,8 +354,12 @@ function approve(result){
 					var obj =str2Json(data);
 					if(obj.success=='true')
 					{
-						util.msg("审核完成");
-						window.location.href = "./loanAppExamine.html";
+						window.setTimeout(function(){
+							util.sysAlert("审查完成");
+							window.location.href = "./loanAppExamine.html";
+						 
+						 },3000);
+						
 					}
 					else{
 						util.sysAlert(obj.data);
@@ -361,3 +371,11 @@ function approve(result){
 	
 	
 }
+
+/**
+ *将json字符串转化为json对象
+ */
+function str2Json(jsonStr){
+	var json = eval("(" + jsonStr + ")"); 
+	return json;
+};

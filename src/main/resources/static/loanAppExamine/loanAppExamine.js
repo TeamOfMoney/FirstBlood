@@ -7,7 +7,7 @@ var orgId;
 /*
  * 用户列表显示
  */
-var queryGridUrl = "../loanApp/findByCondition.action";
+var queryGridUrl = "../loanJournal/findByCondition.action";
 
 var addDataUrl = "../loanApp/addApplication.action";
 var editDataUrl = "../firm/updateFirm.action";
@@ -16,7 +16,7 @@ var removeDataUrl = "../firm/delFirm.action";
 /*
  *查询用户资料 
  */
-var querDetialUrl = "../loanApp/findById.action";
+var querDetialUrl = "../loan/findById.action";
 
 var nowOperate;
 /**
@@ -24,14 +24,23 @@ var nowOperate;
  */
 var loadData = function(){
 	var headParam = [];
+	//headParam.push("id");
 	headParam.push("loanId");
-	headParam.push("orgCode");
-	headParam.push("orgName");
-	headParam.push("operator");
 	headParam.push("initTime");
-	headParam.push("distriutionTime");
-	headParam.push("examineTime");
-	headParam.push("returnTime");
+	//业务种类
+	headParam.push("");
+	//申贷金额
+	headParam.push("");
+	//贷款期限
+	headParam.push("");
+	//处理进度
+	headParam.push("curProcessName");
+	//处理人
+	headParam.push("curProcessUser");
+	//处理人批复意见
+	headParam.push("processResult");
+	//进度更新日期
+	headParam.push("finishTime");
 	
 	var url = queryGridUrl;
 	
@@ -46,8 +55,9 @@ var loadData = function(){
 	gridObj["queryParam"] = querParam;
 	gridObj["defaultBtns"] = defaultBtns;
 	gridObj["operateBtns"] = operateBtns;
-	gridObj["pk"] = "pk";
-	gridObj["loanId"] = "loanId";
+	gridObj["pk"] = "id";
+	//如果需要获取列表中其余字段值
+	gridObj["columnValue"] = "loanId";
 	gridObj["page"] = true;
 	gridObj["checked"]=false;
 	
@@ -67,9 +77,9 @@ var getPk = function(btn){
 /**
  * 获得loanId
  */
-var getLoanId = function(btn){
-	var loanId = $(btn).parent().parent().parent().attr("loanId");
-	return loanId;
+var getColumn = function(btn){
+	var columnValue = $(btn).parent().parent().parent().attr("columnValue");
+	return columnValue;
 };
 
 
@@ -121,6 +131,9 @@ $(function(){
 		$("#upload_form").submit();
 	});
 	//loadData();	
+	//查询条件：当前用户需要从后台获取
+	getLoginInfoAndLoadData();
+	//loadLoginUserInfo();
 	$('input:radio[name="businessTypes"]').change( function(){
 		var item = $("input[name='businessTypes']:checked").val();
 		//切换时清除备注内容
@@ -193,13 +206,29 @@ function loadLoginUserInfo() {
 	});
 };
 
-
+function getLoginInfoAndLoadData() {
+	var util = new NT.utilObj.util();
+	util.emmAjax({
+		url : '../login/getLoginUserInfo.action',
+		success : function(data) {
+			var obj = eval('(' + data + ')');
+			loginUserName = obj.data.userName;
+			orgCode = obj.data.orgCode;
+			orgPath = obj.data.orgPath;
+			orgName = obj.data.orgName;
+			orgId = obj.data.orgId;
+			loadData();
+			
+		}
+	});
+};
 /**
  * 详情
  */
 var viewBtn = function(btn){
-	var loanId = getLoanId(btn);
-	var url = "./detailsLoanAppExamine.html?loanId=" + loanId;
+	var id = getPk(btn);
+	var loanId = getColumn(btn)
+	var url = "./detailsLoanAppExamine.html?id=" + id+"&loanId="+loanId+"&loginUserName="+loginUserName;
 	window.location.href = encodeURI(url);
 };
 
@@ -212,7 +241,8 @@ var getQueryGridParam = function(){
 	//var QName = $("#query_firmName").val();
 	var param = {
 		'processStatus' : '0',
-		'processName':'审核'
+		'curProcessName':'审核',
+		'processUser' : loginUserName
 		//'firmName' : QName
 	};
 	return param;
