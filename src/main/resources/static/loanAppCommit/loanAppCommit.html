@@ -108,7 +108,7 @@
   
     <!-- 增加 -->
 	<div class="modal fade inmodal" id="addOrEditModal" tabindex="-1" role="dialog" aria-hidden="true"  >
-		<div class="modal-dialog" style="width: 900px;">
+		<div class="modal-dialog" style="width: 950px;">
 			<div class="modal-content animated bounceInRight">
 			     <div class="modal-header nt-model-head">
 			          <h5 id="action"></h5>	                                         
@@ -119,16 +119,16 @@
 							 <div class="col-sm-12" >
 								<div class="col-sm-6">
 									<div class="form-group" >
-										<label class="col-sm-6 control-label text-right" >贷款人姓名<span style="color:red">*</span>：</label>
-										 <div class="col-sm-6">
+										<label class="col-sm-5 control-label text-right" >贷款人姓名<span style="color:red">*</span>：</label>
+										 <div class="col-sm-7">
 										<input check="required EnOrChinese"  name="borrowerName" id="addBorrowerName" maxlength="32" />	
 										</div>
 									</div>	
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group" >
-										<label class="col-sm-6 control-label text-right" >配偶姓名<span style="color:red">*</span>： </label>
-										 <div class="col-sm-6">
+										<label class="col-sm-5 control-label text-right" >配偶姓名<span style="color:red">*</span>： </label>
+										 <div class="col-sm-7">
 										<input check="required EnOrChinese"  name="spouseName" id="addSpouseName" maxlength="32" />
 										</div>
 									</div>		
@@ -138,9 +138,9 @@
 							 <div class="col-sm-12" style="padding-top:10px">
 							 	<div class="col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label text-right" >性别<span style="color:red">*</span>：</label>
+										<label class="col-sm-5 control-label text-right" >性别<span style="color:red">*</span>：</label>
 										<!-- <input check="Sex"  name="sex" id="addSex" maxlength="1" /> -->
-										<div class="col-sm-6">
+										<div class="col-sm-7">
 										 	<select  id="addSex" name="sex" >
 			                                                <option class="opt" value="0">--请选择--</option>
 															<option class="opt" value="男">男</option>
@@ -151,16 +151,16 @@
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group" >
-										<label class="col-sm-6 control-label text-right" >证件号码<span style="color:red">*</span> ：</label>
-										 <div class="col-sm-6">
-										<input  check="required" name="credentialNo" id="addCredentialNo" maxlength="20" />
+										<label class="col-sm-5 control-label text-right" >证件号码<span style="color:red">*</span> ：</label>
+										 <div class="col-sm-7">
+										<input  check="required IDCard2" name="credentialNo" id="addCredentialNo" maxlength="18" />
 										
 										</div>
 									</div>	
 								</div>
 							 </div>
 							 <div class="col-sm-12" style="padding-top:10px">
-								<div class="col-sm-12">
+								<div class="col-sm-10">
 									<div class="form-group">
 										<label class="col-sm-3 control-label text-right" >业务类型 <span style="color:red">*</span>：</label>
 										 <div class="col-sm-9">
@@ -189,8 +189,8 @@
 							 <div class="col-sm-12" style="padding-top:10px;display:none" id="syfRe" >
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label text-right" >备注1：</label>
-										 <div class="col-sm-6">
+										<label class="col-sm-5 control-label text-right" >备注1：</label>
+										 <div class="col-sm-7">
 											<!--  <input check=""  name="syfRemark1" id="addSyfRemark1" maxlength="13" />-->	
 											<select  id="addSyfRemark1" name="syfRemark1" >
 			                                                <option class="opt" value="0">--请选择--</option>
@@ -202,8 +202,8 @@
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label text-right" >备注2：</label>
-										 <div class="col-sm-6">
+										<label class="col-sm-5 control-label text-right" >备注2：</label>
+										 <div class="col-sm-7">
 											<input check=""  name="syfRemark2" id="addSyfRemark2" placeholder=" 请输入楼盘名称" maxlength="32" />	
 										</div>
 									</div>	
@@ -212,8 +212,8 @@
 							 <div class="col-sm-12" style="padding-top:10px;display:none" id="xfkdRe">
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label text-right" >备注：</label>
-										 <div class="col-sm-6">
+										<label class="col-sm-5 control-label text-right" >备注：</label>
+										 <div class="col-sm-7">
 											<!--  <input check=""  name="syfRemark1" id="addSyfRemark1" maxlength="13" />-->	
 											<select  id="addXfdkRemark" name="xfdkRemark" >
 			                                                <option class="opt" value="0">--请选择--</option>
@@ -227,8 +227,8 @@
 							 <div class="col-sm-12" style="padding-top:10px;display:none" id="jydkRe">
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label text-right" >备注1：</label>
-										 <div class="col-sm-6">
+										<label class="col-sm-5 control-label text-right" >备注1：</label>
+										 <div class="col-sm-7">
 											<!--  <input check=""  name="syfRemark1" id="addSyfRemark1" maxlength="13" />-->	
 											<select  id="addJydkRemark1" name="jydkRemark1" >
 			                                                <option class="opt" value="0">--请选择--</option>
@@ -243,8 +243,8 @@
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label text-right" >备注2：</label>
-										 <div class="col-sm-6">
+										<label class="col-sm-5 control-label text-right" >备注2：</label>
+										 <div class="col-sm-7">
 											<input check=""  name="jydkRemark2" id="addJydkRemark2" placeholder=" 请输入推荐机构" maxlength="32" />	
 										</div>
 									</div>	
@@ -253,8 +253,8 @@
 							 <div class="col-sm-12" style="padding-top:10px;display:none" id="nhxexydkRe">
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label text-right" >备注：</label>
-										 <div class="col-sm-6">
+										<label class="col-sm-5 control-label text-right" >备注：</label>
+										 <div class="col-sm-7">
 											<!--  <input check=""  name="syfRemark1" id="addSyfRemark1" maxlength="13" />-->	
 											<select  id="addNhxexydkRemark" name="nhxexydkRemark" >
 			                                                <option class="opt" value="0">--请选择--</option>
@@ -268,8 +268,8 @@
 							 <div class="col-sm-12" style="padding-top:10px;display:none" id="esfajRe">
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label text-right" >备注：</label>
-										 <div class="col-sm-6">
+										<label class="col-sm-5 control-label text-right" >备注：</label>
+										 <div class="col-sm-7">
 											<!--  <input check=""  name="syfRemark1" id="addSyfRemark1" maxlength="13" />-->	
 											<select  id="addEsfajRemark" name="esfajRemark" >
 			                                                <option class="opt" value="0">--请选择中介机构--</option>
@@ -283,17 +283,17 @@
 							 <div class="col-sm-12" style="padding-top:10px">
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label text-right" >申贷金额（万元）<span style="color:red">*</span>：</label>
-										 <div class="col-sm-6">
-										<input check="required"  name="amount" id="addAmount" maxlength="13" />
+										<label class="col-sm-5 control-label text-right" >申贷金额（万元）<span style="color:red">*</span>：</label>
+										 <div class="col-sm-7">
+										<input check="required Number"  name="amount" id="addAmount" maxlength="13" />
 										</div>
 									</div>	
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label text-right" >申贷期限（月）<span style="color:red">*</span>：</label>
-										 <div class="col-sm-6">
-										<input check="required "  name="term" id="addTerm" maxlength="30" />
+										<label class="col-sm-5 control-label text-right" >申贷期限（月）<span style="color:red">*</span>：</label>
+										 <div class="col-sm-7">
+										<input check="required Number"  name="term" id="addTerm" maxlength="30" />
 										</div>
 										
 									</div>	
@@ -301,7 +301,7 @@
 							 </div>
 							
 							 <div class="col-sm-12" style="padding-top:10px">
-								<div class="col-sm-12">
+								<div class="col-sm-10">
 									<div class="form-group">
 										<label class="col-sm-3 control-label text-right" >担保方式<span style="color:red">*</span>： </label>
 										 <div class="col-sm-9">
@@ -325,7 +325,7 @@
 								</div>
 							 </div>
 							 <div class="col-sm-12" style="padding-top:10px">
-								<div class="col-sm-12">
+								<div class="col-sm-10">
 									<div class="form-group">
 										<label class="col-sm-3 control-label text-right" >是否续贷<span style="color:red">*</span>：</label>
 										<div class="col-sm-9">
@@ -358,17 +358,17 @@
 								
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label text-right" >营销人姓名<span style="color:red">*</span>： </label>
-										 <div class="col-sm-6">
-										<input check="required" name="marketer" id="addMarketer" maxlength="32" />
+										<label class="col-sm-5 control-label text-right" >营销人姓名<span style="color:red">*</span>： </label>
+										 <div class="col-sm-7">
+										<input check="required EnOrChinese" name="marketer" id="addMarketer" maxlength="32" />
 										</div>
 									</div>		
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label text-right" >营销人岗位<span style="color:red">*</span>：</label>
+										<label class="col-sm-5 control-label text-right" >营销人岗位<span style="color:red">*</span>：</label>
 										<!-- <input check="Sex"  name="sex" id="addSex" maxlength="1" /> -->
-										<div class="col-sm-6">
+										<div class="col-sm-7">
 										 	<select  id="addMarketerPost" name="marketerPost" >
 			                                                <option class="opt" value="0">--请选择营销人岗位--</option>
 															<option class="opt" value="1">白龙基社</option>
@@ -439,17 +439,17 @@
 								
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label text-right" >经办人姓名<span style="color:red">*</span>： </label>
-										 <div class="col-sm-6">
-										<input check="required" name="operator" id="addOperator" maxlength="32" />
+										<label class="col-sm-5 control-label text-right" >经办人姓名<span style="color:red">*</span>： </label>
+										 <div class="col-sm-7">
+										<input check="required EnOrChinese" name="operator" id="addOperator" maxlength="32" />
 										</div>
 									</div>		
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label text-right" >经办人岗位<span style="color:red">*</span>：</label>
+										<label class="col-sm-5 control-label text-right" >经办人岗位<span style="color:red">*</span>：</label>
 										<!-- <input check="Sex"  name="sex" id="addSex" maxlength="1" /> -->
-										<div class="col-sm-6">
+										<div class="col-sm-7">
 										 	<select  id="addOperatorPost" name="operatorPost" >
 			                                                <option class="opt" value="0">--请选择经办人岗位--</option>
 															<option class="opt" value="1">白龙基社</option>

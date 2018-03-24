@@ -10,7 +10,7 @@ var orgId;
 var queryGridUrl = "../loanJournal/findByCondition.action";
 
 var addDataUrl = "../loan/addLoan.action";
-var editDataUrl = "../firm/updateFirm.action";
+var editDataUrl = "../loan/updateLoan.action";
 var removeDataUrl = "../firm/delFirm.action";
 
 /*
@@ -454,6 +454,7 @@ var getAddParam = function(){
 	var addBorrowerName = $("#addBorrowerName").val();
 	var addSpouseName = $("#addSpouseName").val();
 	var addSex = $("#addSex").val();
+	
     var addCredentialNo = $("#addCredentialNo").val();
     //var addBusinessTypes = $("#addBusinessTypes").val();
 	var addBusinessTypes = $("input[name='businessTypes']:checked").val();
@@ -479,119 +480,148 @@ var getAddParam = function(){
 	var addJydkRemark2;
 	var addNhxexydkRemark;
 	var addEsfajRemark;
-	if(addBusinessTypes=='1')
-	{
-		addSyfRemark1 = $("#addSyfRemark1").val();
-		addSyfRemark2 = $("#addSyfRemark2").val();
+	if(addSex=='0'){
+		util.sysTips("性别不能为空！","addSex");
+		return ;
 	}
-	else if(addBusinessTypes=='2')
+	else if(typeof(addBusinessTypes)=="undefined")
 	{
-		addXfdkRemark=$("#addXfdkRemark").val();
-	
-	}else if(addBusinessTypes=='3')
-	{
-		addXfdkRemark=$("#addJydkRemark1").val();
-		addXfdkRemark=$("#addJydkRemark2").val();
-	
-	}else if(addBusinessTypes=='4')
-	{
-		addXfdkRemark=$("#addNhxexydkRemark").val();
-	
-	}else if(addBusinessTypes=='5')
-	{
-		addXfdkRemark=$("#addEsfajRemark").val();
+		util.sysTips("业务类型不能为空！","addBusinessTypes");
+		return ;
 	}
-	//参数需要传递到loanBean的loanInfo中
-	/*var param='{';
-	param=param+('\"operator\":\"'+loginUserName+ '\",');
-	param=param+('\"orgId\":\"'+orgId+ '\",');
-	param=param+('\"orgName\":\"'+orgName+ '\",');
-	param=param+('\"orgCode\":\"'+orgCode+ '\",');
-	param=param+('\"loanInfo\":[{');
-	param=param+('\"borrowerName\":\"'+addBorrowerName+ '\",');
-	param=param+('\"spouseName\":\"'+addSpouseName+ '\",');
-	param=param+('\"sex\":\"'+addSex+ '\",');
-	param=param+('\"credentialNo\":\"'+addCredentialNo+ '\",');
-	param=param+('\"businessTypes\":\"'+addBusinessTypes+ '\",');
-	if(addBusinessTypes=='1')
+	else if(typeof(addGuaranteeMethod)=="undefined")
 	{
-		param=param+('\"syfRemark1\":\"'+addSyfRemark1+ '\",');
-		param=param+('\"syfRemark2\":\"'+addSyfRemark2+ '\",');
+		util.sysTips("担保方式不能为空！","addGuaranteeMethod");
+		return ;
 	}
-	else if(addBusinessTypes=='2')
+	else if(typeof(addIsRenew)=="undefined")
 	{
-		addXfdkRemark=$("#addXfdkRemark").val();
-		param=param+('\"xfdkRemark\":\"'+addXfdkRemark+ '\",');
-	
-	}else if(addBusinessTypes=='3')
-	{
-		param=param+('\"jydkRemark1\":\"'+addJydkRemark1+ '\",');
-		param=param+('\"jydkRemark2\":\"'+addJydkRemark2+ '\",');
-	
-	}else if(addBusinessTypes=='4')
-	{
-		param=param+('\"nhxexydkRemark\":\"'+addNhxexydkRemark+ '\",');
-	
-	}else if(addBusinessTypes=='5')
-	{
-		param=param+('\"esfajRemark\":\"'+addEsfajRemark+ '\",');
+		util.sysTips("是否续贷不能为空！","addIsRenew");
+		return ;
 	}
-	param=param+('\"amount\":\"'+addAmount+ '\",');
-	param=param+('\"term\":\"'+addTerm+ '\",');
-	param=param+('\"guaranteeMethod\":\"'+addGuaranteeMethod+ '\",');
-	param=param+('\"isRenew\":\"'+addIsRenew+ '\",');
-	param=param+('\"marketer\":\"'+addMarketer+ '\",');
-	param=param+('\"marketerPost\":\"'+addMarketerPost+ '\",');
-	param=param+('\"operator\":\"'+addOperator+ '\",');
-	param=param+('\"operatorPost\":\"'+addOperatorPost+ '\"}]');
-	//param = param.substring(0, param.length - 1);
-	param += '}';*/
-	var param='{';
-	param=param+('\"operator\":\"'+loginUserName+ '\",');
-	param=param+('\"orgId\":\"'+orgId+ '\",');
-	param=param+('\"orgName\":\"'+orgName+ '\",');
-	param=param+('\"orgCode\":\"'+orgCode+ '\",');
-	//param=param+('\"loanInfo\":[{');
-	param=param+('\"loanInfo.borrowerName\":\"'+addBorrowerName+ '\",');
-	param=param+('\"loanInfo.spouseName\":\"'+addSpouseName+ '\",');
-	param=param+('\"loanInfo.sex\":\"'+addSex+ '\",');
-	param=param+('\"loanInfo.credentialNo\":\"'+addCredentialNo+ '\",');
-	param=param+('\"loanInfo.businessTypes\":\"'+addBusinessTypes+ '\",');
-	if(addBusinessTypes=='1')
-	{
-		param=param+('\"loanInfo.syfRemark1\":\"'+addSyfRemark1+ '\",');
-		param=param+('\"loanInfo.syfRemark2\":\"'+addSyfRemark2+ '\",');
+	else if(addMarketerPost=='0'){
+		util.sysTips("营销人岗位不能为空！","addMarketerPost");
+		return ;
 	}
-	else if(addBusinessTypes=='2')
-	{
-		param=param+('\"loanInfo.xfdkRemark\":\"'+addXfdkRemark+ '\",');
-	
-	}else if(addBusinessTypes=='3')
-	{
-		param=param+('\"loanInfo.jydkRemark1\":\"'+addJydkRemark1+ '\",');
-		param=param+('\"loanInfo.jydkRemark2\":\"'+addJydkRemark2+ '\",');
-	
-	}else if(addBusinessTypes=='4')
-	{
-		param=param+('\"loanInfo.nhxexydkRemark\":\"'+addNhxexydkRemark+ '\",');
-	
-	}else if(addBusinessTypes=='5')
-	{
-		param=param+('\"loanInfo.esfajRemark\":\"'+addEsfajRemark+ '\",');
+	else if(addOperatorPost=='0'){
+		util.sysTips("经办人岗位不能为空！","addOperatorPost");
+		return ;
 	}
-	param=param+('\"loanInfo.amount\":\"'+addAmount+ '\",');
-	param=param+('\"loanInfo.term\":\"'+addTerm+ '\",');
-	param=param+('\"loanInfo.guaranteeMethod\":\"'+addGuaranteeMethod+ '\",');
-	param=param+('\"loanInfo.isRenew\":\"'+addIsRenew+ '\",');
-	param=param+('\"loanInfo.marketer\":\"'+addMarketer+ '\",');
-	param=param+('\"loanInfo.marketerPost\":\"'+addMarketerPost+ '\",');
-	param=param+('\"loanInfo.operator\":\"'+addOperator+ '\",');
-	param=param+('\"loanInfo.operatorPost\":\"'+addOperatorPost+ '\"');
-	//param = param.substring(0, param.length - 1);
-	param += '}';
-	//alert(param);
-	param=str2Json(param);
-	return param;
+	else
+	{
+		if(addBusinessTypes=='1')
+		{
+			addSyfRemark1 = $("#addSyfRemark1").val();
+			addSyfRemark2 = $("#addSyfRemark2").val();
+		}
+		else if(addBusinessTypes=='2')
+		{
+			addXfdkRemark=$("#addXfdkRemark").val();
+		
+		}else if(addBusinessTypes=='3')
+		{
+			addJydkRemark1=$("#addJydkRemark1").val();
+			addJydkRemark2=$("#addJydkRemark2").val();
+		}else if(addBusinessTypes=='4')
+		{
+			addNhxexydkRemark=$("#addNhxexydkRemark").val();
+			
+		}else if(addBusinessTypes=='5')
+		{
+			addEsfajRemark=$("#addEsfajRemark").val();
+		}
+		//参数需要传递到loanBean的loanInfo中
+		/*var param='{';
+		param=param+('\"operator\":\"'+loginUserName+ '\",');
+		param=param+('\"orgId\":\"'+orgId+ '\",');
+		param=param+('\"orgName\":\"'+orgName+ '\",');
+		param=param+('\"orgCode\":\"'+orgCode+ '\",');
+		param=param+('\"loanInfo\":[{');
+		param=param+('\"borrowerName\":\"'+addBorrowerName+ '\",');
+		param=param+('\"spouseName\":\"'+addSpouseName+ '\",');
+		param=param+('\"sex\":\"'+addSex+ '\",');
+		param=param+('\"credentialNo\":\"'+addCredentialNo+ '\",');
+		param=param+('\"businessTypes\":\"'+addBusinessTypes+ '\",');
+		if(addBusinessTypes=='1')
+		{
+			param=param+('\"syfRemark1\":\"'+addSyfRemark1+ '\",');
+			param=param+('\"syfRemark2\":\"'+addSyfRemark2+ '\",');
+		}
+		else if(addBusinessTypes=='2')
+		{
+			addXfdkRemark=$("#addXfdkRemark").val();
+			param=param+('\"xfdkRemark\":\"'+addXfdkRemark+ '\",');
+		
+		}else if(addBusinessTypes=='3')
+		{
+			param=param+('\"jydkRemark1\":\"'+addJydkRemark1+ '\",');
+			param=param+('\"jydkRemark2\":\"'+addJydkRemark2+ '\",');
+		
+		}else if(addBusinessTypes=='4')
+		{
+			param=param+('\"nhxexydkRemark\":\"'+addNhxexydkRemark+ '\",');
+		
+		}else if(addBusinessTypes=='5')
+		{
+			param=param+('\"esfajRemark\":\"'+addEsfajRemark+ '\",');
+		}
+		param=param+('\"amount\":\"'+addAmount+ '\",');
+		param=param+('\"term\":\"'+addTerm+ '\",');
+		param=param+('\"guaranteeMethod\":\"'+addGuaranteeMethod+ '\",');
+		param=param+('\"isRenew\":\"'+addIsRenew+ '\",');
+		param=param+('\"marketer\":\"'+addMarketer+ '\",');
+		param=param+('\"marketerPost\":\"'+addMarketerPost+ '\",');
+		param=param+('\"operator\":\"'+addOperator+ '\",');
+		param=param+('\"operatorPost\":\"'+addOperatorPost+ '\"}]');
+		//param = param.substring(0, param.length - 1);
+		param += '}';*/
+		var param='{';
+		param=param+('\"operator\":\"'+loginUserName+ '\",');
+		param=param+('\"orgId\":\"'+orgId+ '\",');
+		param=param+('\"orgName\":\"'+orgName+ '\",');
+		param=param+('\"orgCode\":\"'+orgCode+ '\",');
+		//param=param+('\"loanInfo\":[{');
+		param=param+('\"loanInfo.borrowerName\":\"'+addBorrowerName+ '\",');
+		param=param+('\"loanInfo.spouseName\":\"'+addSpouseName+ '\",');
+		param=param+('\"loanInfo.sex\":\"'+addSex+ '\",');
+		param=param+('\"loanInfo.credentialNo\":\"'+addCredentialNo+ '\",');
+		param=param+('\"loanInfo.businessTypes\":\"'+addBusinessTypes+ '\",');
+		if(addBusinessTypes=='1')
+		{
+			param=param+('\"loanInfo.syfRemark1\":\"'+addSyfRemark1+ '\",');
+			param=param+('\"loanInfo.syfRemark2\":\"'+addSyfRemark2+ '\",');
+		}
+		else if(addBusinessTypes=='2')
+		{
+			param=param+('\"loanInfo.xfdkRemark\":\"'+addXfdkRemark+ '\",');
+		
+		}else if(addBusinessTypes=='3')
+		{
+			param=param+('\"loanInfo.jydkRemark1\":\"'+addJydkRemark1+ '\",');
+			param=param+('\"loanInfo.jydkRemark2\":\"'+addJydkRemark2+ '\",');
+		
+		}else if(addBusinessTypes=='4')
+		{
+			param=param+('\"loanInfo.nhxexydkRemark\":\"'+addNhxexydkRemark+ '\",');
+		
+		}else if(addBusinessTypes=='5')
+		{
+			param=param+('\"loanInfo.esfajRemark\":\"'+addEsfajRemark+ '\",');
+		}
+		param=param+('\"loanInfo.amount\":\"'+addAmount+ '\",');
+		param=param+('\"loanInfo.term\":\"'+addTerm+ '\",');
+		param=param+('\"loanInfo.guaranteeMethod\":\"'+addGuaranteeMethod+ '\",');
+		param=param+('\"loanInfo.isRenew\":\"'+addIsRenew+ '\",');
+		param=param+('\"loanInfo.marketer\":\"'+addMarketer+ '\",');
+		param=param+('\"loanInfo.marketerPost\":\"'+addMarketerPost+ '\",');
+		param=param+('\"loanInfo.operator\":\"'+addOperator+ '\",');
+		param=param+('\"loanInfo.operatorPost\":\"'+addOperatorPost+ '\"');
+		//param = param.substring(0, param.length - 1);
+		param += '}';
+		//alert(param);
+		param=str2Json(param);
+		return param;
+	}
 };
 
 /**
@@ -605,6 +635,7 @@ var getEditParam = function(){
     var addCredentialNo = $("#addCredentialNo").val();
     //var addBusinessTypes = $("#addBusinessTypes").val();
 	var addBusinessTypes = $("input[name='businessTypes']:checked").val();
+	
 	var addAmount = $("#addAmount").val();
 	var addTerm = $("#addTerm").val();
 	var addGuaranteeMethod = $("input[name='guaranteeMethod']:checked").val();
@@ -620,95 +651,126 @@ var getEditParam = function(){
 	var addJydkRemark2;
 	var addNhxexydkRemark;
 	var addEsfajRemark;
-	if(addBusinessTypes=='1')
-	{
-		addSyfRemark1 = $("#addSyfRemark1").val();
-		addSyfRemark2 = $("#addSyfRemark2").val();
+	
+	if(addSex=='0'){
+		util.sysTips("性别不能为空！","addSex");
+		return ;
 	}
-	else if(addBusinessTypes=='2')
+	else if(typeof(addBusinessTypes)=="undefined")
 	{
-		addXfdkRemark=$("#addXfdkRemark").val();
-	
-	}else if(addBusinessTypes=='3')
-	{
-		addXfdkRemark=$("#addJydkRemark1").val();
-		addXfdkRemark=$("#addJydkRemark2").val();
-	
-	}else if(addBusinessTypes=='4')
-	{
-		addXfdkRemark=$("#addNhxexydkRemark").val();
-	
-	}else if(addBusinessTypes=='5')
-	{
-		addXfdkRemark=$("#addEsfajRemark").val();
+		util.sysTips("业务类型不能为空！","addBusinessTypes");
+		return ;
 	}
-	//参数需要传递到loanBean的loanInfo中
-	var param='{';
-	param=param+('\"operator\":\"'+loginUserName+ '\",');
-	param=param+('\"orgId\":\"'+orgId+ '\",');
-	param=param+('\"orgName\":\"'+orgName+ '\",');
-	param=param+('\"orgCode\":\"'+orgCode+ '\",');
-	//param=param+('\"loanInfo\":[{');
-	param=param+('\"loanInfo.borrowerName\":\"'+addBorrowerName+ '\",');
-	param=param+('\"loanInfo.spouseName\":\"'+addSpouseName+ '\",');
-	param=param+('\"loanInfo.sex\":\"'+addSex+ '\",');
-	param=param+('\"loanInfo.credentialNo\":\"'+addCredentialNo+ '\",');
-	param=param+('\"loanInfo.businessTypes\":\"'+addBusinessTypes+ '\",');
-	if(addBusinessTypes=='1')
+	else if(typeof(addGuaranteeMethod)=="undefined")
 	{
-		param=param+('\"loanInfo.syfRemark1\":\"'+addSyfRemark1+ '\",');
-		param=param+('\"loanInfo.syfRemark2\":\"'+addSyfRemark2+ '\",');
+		util.sysTips("担保方式不能为空！","addGuaranteeMethod");
+		return ;
 	}
-	else if(addBusinessTypes=='2')
+	else if(typeof(addIsRenew)=="undefined")
 	{
-		param=param+('\"loanInfo.xfdkRemark\":\"'+addXfdkRemark+ '\",');
-	
-	}else if(addBusinessTypes=='3')
-	{
-		param=param+('\"loanInfo.jydkRemark1\":\"'+addJydkRemark1+ '\",');
-		param=param+('\"loanInfo.jydkRemark2\":\"'+addJydkRemark2+ '\",');
-	
-	}else if(addBusinessTypes=='4')
-	{
-		param=param+('\"loanInfo.nhxexydkRemark\":\"'+addNhxexydkRemark+ '\",');
-	
-	}else if(addBusinessTypes=='5')
-	{
-		param=param+('\"loanInfo.esfajRemark\":\"'+addEsfajRemark+ '\",');
+		util.sysTips("是否续贷不能为空！","addIsRenew");
+		return ;
 	}
-	param=param+('\"loanInfo.amount\":\"'+addAmount+ '\",');
-	param=param+('\"loanInfo.term\":\"'+addTerm+ '\",');
-	param=param+('\"loanInfo.guaranteeMethod\":\"'+addGuaranteeMethod+ '\",');
-	param=param+('\"loanInfo.isRenew\":\"'+addIsRenew+ '\",');
-	param=param+('\"loanInfo.marketer\":\"'+addMarketer+ '\",');
-	param=param+('\"loanInfo.marketerPost\":\"'+addMarketerPost+ '\",');
-	param=param+('\"loanInfo.operator\":\"'+addOperator+ '\",');
-	param=param+('\"loanInfo.operatorPost\":\"'+addOperatorPost+ '\"');
-	//param = param.substring(0, param.length - 1);
-	param += '}';
-	param=str2Json(param);
-				
-	store_new['borrowerName']=addBorrowerName;
-	store_new['spouseName']=addSpouseName;
-	store_new['sex']=addSex;
-	store_new['credentialNo']=addCredentialNo;
-	store_new['businessType']=addBusinessTypes;
-	store_new['syfRemark1']=addSyfRemark1;
-	store_new['syfRemark2']=addSyfRemark2;
-	store_new['xfdkRemark']=addXfdkRemark;
-	store_new['jydkRemark1']=addJydkRemark1;
-	store_new['jydkRemark2']=addJydkRemark2;
-	store_new['nhxexydkRemark']=addNhxexydkRemark;
-	store_new['esfajRemark']=addEsfajRemark;
-	store_new['amount']=addAmount;
-	store_new['term']=addTerm;
-	store_new['guaranteeMethod']=addGuaranteeMethod;
-	store_new['isRenew']=addIsRenew;
-	store_new['marketer']=addMarketer;
-	store_new['marketerPost']=addMarketerPost;
-	store_new['operator']=addOperator;
-	store_new['operatorPost']=addOperatorPost;
-	return param;
+	else if(addMarketerPost=='0'){
+		util.sysTips("营销人岗位不能为空！","addMarketerPost");
+		return ;
+	}
+	else if(addOperatorPost=='0'){
+		util.sysTips("经办人岗位不能为空！","addOperatorPost");
+		return ;
+	}
+	else
+	{
+		if(addBusinessTypes=='1')
+		{
+			addSyfRemark1 = $("#addSyfRemark1").val();
+			addSyfRemark2 = $("#addSyfRemark2").val();
+		}
+		else if(addBusinessTypes=='2')
+		{
+			addXfdkRemark=$("#addXfdkRemark").val();
+		
+		}else if(addBusinessTypes=='3')
+		{
+			addJydkRemark1=$("#addJydkRemark1").val();
+			addJydkRemark2=$("#addJydkRemark2").val();
+		}else if(addBusinessTypes=='4')
+		{
+			addNhxexydkRemark=$("#addNhxexydkRemark").val();
+			
+		}else if(addBusinessTypes=='5')
+		{
+			addEsfajRemark=$("#addEsfajRemark").val();
+		}
+		
+		var param='{';
+		param=param+('\"operator\":\"'+loginUserName+ '\",');
+		param=param+('\"orgId\":\"'+orgId+ '\",');
+		param=param+('\"orgName\":\"'+orgName+ '\",');
+		param=param+('\"orgCode\":\"'+orgCode+ '\",');
+		//param=param+('\"loanInfo\":[{');
+		param=param+('\"loanInfo.borrowerName\":\"'+addBorrowerName+ '\",');
+		param=param+('\"loanInfo.spouseName\":\"'+addSpouseName+ '\",');
+		param=param+('\"loanInfo.sex\":\"'+addSex+ '\",');
+		param=param+('\"loanInfo.credentialNo\":\"'+addCredentialNo+ '\",');
+		param=param+('\"loanInfo.businessTypes\":\"'+addBusinessTypes+ '\",');
+		if(addBusinessTypes=='1')
+		{
+			param=param+('\"loanInfo.syfRemark1\":\"'+addSyfRemark1+ '\",');
+			param=param+('\"loanInfo.syfRemark2\":\"'+addSyfRemark2+ '\",');
+		}
+		else if(addBusinessTypes=='2')
+		{
+			param=param+('\"loanInfo.xfdkRemark\":\"'+addXfdkRemark+ '\",');
+		
+		}else if(addBusinessTypes=='3')
+		{
+			param=param+('\"loanInfo.jydkRemark1\":\"'+addJydkRemark1+ '\",');
+			param=param+('\"loanInfo.jydkRemark2\":\"'+addJydkRemark2+ '\",');
+		
+		}else if(addBusinessTypes=='4')
+		{
+			param=param+('\"loanInfo.nhxexydkRemark\":\"'+addNhxexydkRemark+ '\",');
+		
+		}else if(addBusinessTypes=='5')
+		{
+			param=param+('\"loanInfo.esfajRemark\":\"'+addEsfajRemark+ '\",');
+		}
+		param=param+('\"loanInfo.amount\":\"'+addAmount+ '\",');
+		param=param+('\"loanInfo.term\":\"'+addTerm+ '\",');
+		param=param+('\"loanInfo.guaranteeMethod\":\"'+addGuaranteeMethod+ '\",');
+		param=param+('\"loanInfo.isRenew\":\"'+addIsRenew+ '\",');
+		param=param+('\"loanInfo.marketer\":\"'+addMarketer+ '\",');
+		param=param+('\"loanInfo.marketerPost\":\"'+addMarketerPost+ '\",');
+		param=param+('\"loanInfo.operator\":\"'+addOperator+ '\",');
+		param=param+('\"loanInfo.operatorPost\":\"'+addOperatorPost+ '\"');
+		//param = param.substring(0, param.length - 1);
+		param += '}';
+		//alert(param);
+		param=str2Json(param);
+		store_new['borrowerName']=addBorrowerName;
+		store_new['spouseName']=addSpouseName;
+		store_new['sex']=addSex;
+		store_new['credentialNo']=addCredentialNo;
+		store_new['businessType']=addBusinessTypes;
+		store_new['syfRemark1']=addSyfRemark1;
+		store_new['syfRemark2']=addSyfRemark2;
+		store_new['xfdkRemark']=addXfdkRemark;
+		store_new['jydkRemark1']=addJydkRemark1;
+		store_new['jydkRemark2']=addJydkRemark2;
+		store_new['nhxexydkRemark']=addNhxexydkRemark;
+		store_new['esfajRemark']=addEsfajRemark;
+		store_new['amount']=addAmount;
+		store_new['term']=addTerm;
+		store_new['guaranteeMethod']=addGuaranteeMethod;
+		store_new['isRenew']=addIsRenew;
+		store_new['marketer']=addMarketer;
+		store_new['marketerPost']=addMarketerPost;
+		store_new['operator']=addOperator;
+		store_new['operatorPost']=addOperatorPost;
+		return param;
+	}
+	
 };
 
 /**
@@ -733,6 +795,7 @@ var dataFill = function(data){
     $("input[name='businessTypes']").each(function(i){  
         if($(this).val()==businessTypeValue)  
         {  
+        	$(this).attr('checked','checked');
             $(this).parent('label').addClass('active');  
         }  
     });
@@ -791,6 +854,7 @@ var dataFill = function(data){
 	$("input[name='guaranteeMethod']").each(function(i){  
         if($(this).val()==object.guaranteeMethod)  
         {  
+        	$(this).attr('checked','checked');
             $(this).parent('label').addClass('active');  
         }  
     });
@@ -798,6 +862,7 @@ var dataFill = function(data){
 	$("input[name='isRenew']").each(function(i){  
         if($(this).val()==object.isRenew)  
         {  
+        	$(this).attr('checked','checked');
             $(this).parent('label').addClass('active');  
         }  
     });
