@@ -51,6 +51,7 @@ INSERT INTO `auth_info` VALUES ('148', '人员管理', '查询', '/org/queryOrgI
 INSERT INTO `auth_info` VALUES ('150', '贷款申请与查询', '贷款申请提交', '/loan/addLoan.action');
 INSERT INTO `auth_info` VALUES ('151', '贷款申请与查询', '查询流水信息', '/loanJournal/findByCondition.action');
 INSERT INTO `auth_info` VALUES ('152', '贷款申请与查询', '查询单个申请信息', '/loan/findById.action');
+INSERT INTO `auth_info` VALUES ('153', '贷款申请与查询', '贷款信息修改', '/loan/updateLoan.action');
 INSERT INTO `auth_info` VALUES ('160', '贷款进件处理', '查询流水信息', '/loanJournal/findByCondition.action');
 INSERT INTO `auth_info` VALUES ('161', '贷款进件处理', '查询人员', '/user/findByCondition.action');
 INSERT INTO `auth_info` VALUES ('162', '贷款进件处理', '查询审核人员下拉列表', '/user/queryReviewUserOptions.action');
@@ -121,6 +122,7 @@ INSERT INTO `menu_auth` VALUES ('49', '13', '181');
 INSERT INTO `menu_auth` VALUES ('50', '13', '182');
 INSERT INTO `menu_auth` VALUES ('51', '13', '183');
 INSERT INTO `menu_auth` VALUES ('52', '13', '184');
+INSERT INTO `menu_auth` VALUES ('53', '10', '153');
 
 
 /* 初始化role_info */
